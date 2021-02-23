@@ -43,7 +43,7 @@ public class SearchHomePageElements {
         //a[@title='Dresses']/preceding::a[@title='Tops'], //a[@title='Tops']
 //     womenMenuTshirsOption = driver.findElement(By.xpath("//ul[contains(@class,'submenu')]/li//a[@title='T-shirts']"));//
 //        //a[@title='Dresses']/preceding::a[@title='T-shirts']
-//     womenMenuBlousesOption = driver.findElement(By.xpath("//ul[contains(@class,'submenu')]/li//a[@title='Blouses']"));//
+//     womenMenuBlousesOption = driver.findElement(By.xpath("//ul[contains(@class,'submenu')]/li//a[@title='Blouses']"));///
      womenMenuTshirsOption = subMenuTops("T-shirts");
      womenMenuBlousesOption = subMenuTops("Blouses");
 
