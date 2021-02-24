@@ -64,11 +64,11 @@ public class SearchHomePageElements {
     }
 
     public WebElement subMenuWomenDresses (String titleTwo) {
-        return driver.findElement(By.xpath("//a[@title='Women']/following-sibling::ul[contains(@class,'submenu')]//a[@title=' "+ titleTwo +" ']"));
+        return driver.findElement(By.xpath("//a[@title='Women']/following-sibling::ul[contains(@class,'submenu')]//a[@title='"+titleTwo+"']"));
     }
 
     public WebElement subMenuDresses (String titleThree) {
-        return driver.findElement(By.xpath("//ul[contains(@class,'submenu')]/li/a[@title='"+ titleThree +"']"));
+        return driver.findElement(By.xpath("//ul[contains(@class,'submenu')]/li/a[@title='"+titleThree+"']"));
     }
 
     public SearchHomePageElements clickOnSearchButton () {
