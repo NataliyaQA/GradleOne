@@ -10,19 +10,9 @@ import static org.testng.Assert.assertEquals;
 
 //9 tests created
 
-public class MenuTest {
-    public WebDriver getDriver() {
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        //driver.manage().window().maximize();
-        driver.get("http://automationpractice.com/");
-        return driver;
-    }
-
+public class MenuTest extends AbstractClass{
     @Test // re-written
     public void mainMenuWomenTopsTshirts() {
-        WebDriver driver = getDriver();
-
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
@@ -41,8 +31,6 @@ public class MenuTest {
 
     @Test
     public void mainMenuWomenTopsBlouses() {
-        WebDriver driver = getDriver();
-
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
@@ -60,8 +48,6 @@ public class MenuTest {
 
     @Test
     public void mainMenuWomenDressesCasualDresses() {
-        WebDriver driver = getDriver();
-
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
@@ -79,8 +65,6 @@ public class MenuTest {
 
     @Test
     public void mainMenuWomenDressesEveningDresses() {
-        WebDriver driver = getDriver();
-
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
@@ -98,8 +82,6 @@ public class MenuTest {
 
     @Test
     public void mainMenuWomenDressesSummerDresses() {
-        WebDriver driver = getDriver();
-
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
@@ -117,8 +99,6 @@ public class MenuTest {
 
     @Test
     public void mainMenuDressesCasualDresses() {
-        WebDriver driver = getDriver();
-
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
@@ -136,8 +116,6 @@ public class MenuTest {
 
     @Test
     public void mainMenuDressesEveningDresses() {
-        WebDriver driver = getDriver();
-
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
@@ -155,8 +133,6 @@ public class MenuTest {
 
     @Test
     public void mainMenuDressesSummerDresses() {
-        WebDriver driver = getDriver();
-
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
@@ -174,8 +150,6 @@ public class MenuTest {
 
     @Test
     public void mainMenuTshirts() {
-        WebDriver driver = getDriver();
-
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {

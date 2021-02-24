@@ -9,46 +9,6 @@ import org.openqa.selenium.interactions.Actions;
 public class BannersPage {
     public WebDriver driver;
 
-    /**
-     * method for search all elements by xPath, getText, getCurrentUrl and for definitions of variables
-     * @param driver search for elements
-     */
-    public BannersPage(WebDriver driver) {
-        this.driver = driver;
-
-        // firstBanner = driver.findElement(By.xpath("//*[@id=\"homeslider\"]/li[2]/a/img")); //1st Carrousel Banner
-        //firstBanner = driver.findElement(By.xpath("//*[@id=\"homeslider\"]//img[@src='http://automationpractice.com/modules/homeslider/images/sample-1.jpg']"));
-        firstBanner = driver.findElement(By.xpath("//img[contains(@src,\"sample-1.jpg\")]\n"));
-        //firstBannerButton = driver.findElement(By.xpath("//*[@id=\"homeslider\"]/li[2]/div/p[2]/button")); //1t banner button
-        //firstBannerButton = driver.findElement(By.xpath("//button[contains(.,\"Shop now !\")]")); //1t banner button - doesn't work
-        firstBannerButton = driver.findElement(By.xpath("//img[contains(@src,'sample-1.jpg')]/ancestor::li[@class='homeslider-container']/div//button\n")); //1t banner button
-
-        secondBanner = driver.findElement(By.xpath("//img[contains(@src,\"sample-2.jpg\")]\n")); //2d Carrousel Banner
-        secondBannerButton = driver.findElement(By.xpath("//img[contains(@src,'sample-2.jpg')]/ancestor::li[@class='homeslider-container']/div//button\n")); //2d banner button
-
-        thirdBanner = driver.findElement(By.xpath("//img[contains(@src,\"sample-3.jpg\")]\n")); //3d Carrousel Banner
-        thirdBannerButton = driver.findElement(By.xpath("//img[contains(@src,'sample-3.jpg')]/ancestor::li[@class='homeslider-container']/div//button\n")); //3d banner button
-
-        //rightArrowButton = driver.findElement(By.xpath("//*[@id=\"homepage-slider\"]/div/div[2]/div/a[2]")); //right arrow button
-        rightArrowButton = driver.findElement(By.xpath("//a[@class='bx-next']")); //right arrow button
-        leftArrowButton = driver.findElement(By.xpath("//a[@class='bx-prev']")); //left arrow button
-
-        buttonNameOne = firstBannerButton.getText(); //get name of 1st button
-        buttonNameTwo = secondBannerButton.getText(); //get name of 2d button
-        buttonNameThree = thirdBannerButton.getText(); //get name of 3d button
-
-        staticBannerOne = driver.findElement(By.xpath("//img[contains(@src,'img1')]"));
-        staticBannerTwo = driver.findElement(By.xpath("//img[contains(@src,'img2')]"));
-        staticBannerThree = driver.findElement(By.xpath("//img[contains(@src,'img3')]"));
-        staticBannerFour = driver.findElement(By.xpath("//img[contains(@src,'img4')]"));
-        staticBannerFive = driver.findElement(By.xpath("//img[contains(@src,'img5')]"));
-        staticBannerSix = driver.findElement(By.xpath("//img[contains(@src,'img6')]"));
-        staticBannerSeven = driver.findElement(By.xpath("//img[contains(@src,'img7')]"));
-        staticBannerTop = driver.findElement(By.xpath("//img[@class='img-responsive']"));
-
-        currentUrl = driver.getCurrentUrl(); //get URL after redirection
-    }
-
     WebElement firstBanner;
     WebElement secondBanner;
     WebElement thirdBanner;
@@ -73,6 +33,41 @@ public class BannersPage {
 
     String expectedUrl = "https://www.prestashop.com/en?utm_source=v16_homeslider";
     String currentUrl;
+
+    /**
+     * method for search all elements by xPath, getText, getCurrentUrl and for definitions of variables
+     * @param driver search for elements
+     */
+    public BannersPage(WebDriver driver) {
+        this.driver = driver;
+
+        firstBanner = driver.findElement(By.xpath("//img[contains(@src,\"sample-1.jpg\")]\n"));
+        firstBannerButton = driver.findElement(By.xpath("//img[contains(@src,'sample-1.jpg')]/ancestor::li[@class='homeslider-container']/div//button\n")); //1t banner button
+
+        secondBanner = driver.findElement(By.xpath("//img[contains(@src,\"sample-2.jpg\")]\n")); //2d Carrousel Banner
+        secondBannerButton = driver.findElement(By.xpath("//img[contains(@src,'sample-2.jpg')]/ancestor::li[@class='homeslider-container']/div//button\n")); //2d banner button
+
+        thirdBanner = driver.findElement(By.xpath("//img[contains(@src,\"sample-3.jpg\")]\n")); //3d Carrousel Banner
+        thirdBannerButton = driver.findElement(By.xpath("//img[contains(@src,'sample-3.jpg')]/ancestor::li[@class='homeslider-container']/div//button\n")); //3d banner button
+
+        rightArrowButton = driver.findElement(By.xpath("//a[@class='bx-next']")); //right arrow button
+        leftArrowButton = driver.findElement(By.xpath("//a[@class='bx-prev']")); //left arrow button
+
+        buttonNameOne = firstBannerButton.getText(); //get name of 1st button
+        buttonNameTwo = secondBannerButton.getText(); //get name of 2d button
+        buttonNameThree = thirdBannerButton.getText(); //get name of 3d button
+
+        staticBannerOne = driver.findElement(By.xpath("//img[contains(@src,'img1')]"));
+        staticBannerTwo = driver.findElement(By.xpath("//img[contains(@src,'img2')]"));
+        staticBannerThree = driver.findElement(By.xpath("//img[contains(@src,'img3')]"));
+        staticBannerFour = driver.findElement(By.xpath("//img[contains(@src,'img4')]"));
+        staticBannerFive = driver.findElement(By.xpath("//img[contains(@src,'img5')]"));
+        staticBannerSix = driver.findElement(By.xpath("//img[contains(@src,'img6')]"));
+        staticBannerSeven = driver.findElement(By.xpath("//img[contains(@src,'img7')]"));
+        staticBannerTop = driver.findElement(By.xpath("//img[@class='img-responsive']"));
+
+        currentUrl = driver.getCurrentUrl(); //get URL after redirection
+    }
 
     /**
      * method for element hover

@@ -40,32 +40,35 @@ public class SearchHomePageElements {
 
      womenButton = driver.findElement(By.xpath("//a[@title='Women']/parent::li")); //
      womenMenuTopsSubMenu = driver.findElement(By.xpath("//a[@title='Women']/following::a[@title='Tops']")); //
-        //a[@title='Dresses']/preceding::a[@title='Tops'], //a[@title='Tops']
-//     womenMenuTshirsOption = driver.findElement(By.xpath("//ul[contains(@class,'submenu')]/li//a[@title='T-shirts']"));//
-//        //a[@title='Dresses']/preceding::a[@title='T-shirts']
-//     womenMenuBlousesOption = driver.findElement(By.xpath("//ul[contains(@class,'submenu')]/li//a[@title='Blouses']"));///
-     womenMenuTshirsOption = subMenuTops("T-shirts");
-     womenMenuBlousesOption = subMenuTops("Blouses");
+     womenMenuTshirsOption = subMenuWomenTops("T-shirts");
+     womenMenuBlousesOption = subMenuWomenTops("Blouses");
 
      womenMenuDressesSubMenu = driver.findElement(By.xpath("//ul[contains(@class,'submenu')]/li/a[@title='Dresses']")); //
-        //a[@title='Dresses']/preceding::a[@title='Dresses'],
-        //a[@title='Women']/following::ul[contains(@class,'submenu')]//a[@title='Dresses']
-     casualDressesOption = driver.findElement(By.xpath("//a[@title='Women']/following-sibling::ul[contains(@class,'submenu')]//a[@title='Casual Dresses']"));//
-     eveningDressesOption = driver.findElement(By.xpath("//a[@title='Women']/following-sibling::ul[contains(@class,'submenu')]//a[@title='Evening Dresses']"));//
-     summerDressesOption = driver.findElement(By.xpath("//a[@title='Women']/following-sibling::ul[contains(@class,'submenu')]//a[@title='Summer Dresses']"));//
+     casualDressesOption = subMenuWomenDresses("Casual Dresses");
+     eveningDressesOption = subMenuWomenDresses("Evening Dresses");
+     summerDressesOption = subMenuWomenDresses("Summer Dresses");
+
 
      dressesButton = driver.findElement(By.xpath("//ul[contains(@class,'sf-menu')]/li/a[@title='Dresses']"));//
-     dressesCasualDressesOption = driver.findElement(By.xpath("//a[@title='Dresses']/following::ul[contains(@class,'submenu')]//a[@title='Casual Dresses']")); //
-     dressesEveningDressesOption = driver.findElement(By.xpath("//a[@title='Dresses']/following::ul[contains(@class,'submenu')]//a[@title='Evening Dresses']")); //
-     dressesSummerDressesOption = driver.findElement(By.xpath("//a[@title='Dresses']/following::ul[contains(@class,'submenu')]//a[@title='Summer Dresses']")); //
+     dressesCasualDressesOption = subMenuDresses("Casual Dresses");
+     dressesEveningDressesOption = subMenuDresses("Evening Dresses");
+     dressesSummerDressesOption = subMenuDresses("Summer Dresses");
 
      tShirtsButton = driver.findElement(By.xpath("//ul[contains(@class,'sf-menu')]/li/a[@title='T-shirts']"));//
 
      actualTitle = driver.getTitle();
     }
 
-    public WebElement subMenuTops (String title){
-        return driver.findElement(By.xpath("//ul[contains(@class,'submenu')]/li//a[@title='" + title + "']"));
+    public WebElement subMenuWomenTops (String titleOne){
+        return driver.findElement(By.xpath("//ul[contains(@class,'submenu')]/li//a[@title='"+titleOne+"']"));
+    }
+
+    public WebElement subMenuWomenDresses (String titleTwo) {
+        return driver.findElement(By.xpath("//a[@title='Women']/following-sibling::ul[contains(@class,'submenu')]//a[@title=' "+ titleTwo +" ']"));
+    }
+
+    public WebElement subMenuDresses (String titleThree) {
+        return driver.findElement(By.xpath("//ul[contains(@class,'submenu')]/li/a[@title='"+ titleThree +"']"));
     }
 
     public SearchHomePageElements clickOnSearchButton () {
