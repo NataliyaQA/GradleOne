@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 import pageObjects.AboutUsPage;
 import static org.testng.Assert.assertEquals;
 
-public class PagesUrlN extends AbstractClass{
+public class PagesUrlN extends BaseTestClass {
 
     @Test
     public void AboutUsLinkUrl() {

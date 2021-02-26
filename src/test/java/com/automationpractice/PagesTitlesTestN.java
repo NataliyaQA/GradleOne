@@ -5,7 +5,7 @@ import pageObjects.AboutUsPage;
 
 import static org.testng.Assert.assertEquals;
 
-public class PagesTitlesTestN extends AbstractClass{
+public class PagesTitlesTestN extends BaseTestClass {
 
     @Test
     public void AboutUsPageTitle() {

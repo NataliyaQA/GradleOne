@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 //6 tests created
 
-public class AvailabilityOfTheButtons extends AbstractClass {
+public class AvailabilityOfTheButtons extends BaseTestClass {
 
     @Test
     public void availableSearchButton(){

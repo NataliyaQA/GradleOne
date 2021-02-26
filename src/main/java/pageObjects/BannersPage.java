@@ -25,6 +25,7 @@ public class BannersPage {
     WebElement staticBannerSix;
     WebElement staticBannerSeven;
     WebElement staticBannerTop;
+    WebElement logo;
 
     String buttonNameOne;
     String buttonNameTwo;
@@ -57,16 +58,27 @@ public class BannersPage {
         buttonNameTwo = secondBannerButton.getText(); //get name of 2d button
         buttonNameThree = thirdBannerButton.getText(); //get name of 3d button
 
-        staticBannerOne = driver.findElement(By.xpath("//img[contains(@src,'img1')]"));
-        staticBannerTwo = driver.findElement(By.xpath("//img[contains(@src,'img2')]"));
-        staticBannerThree = driver.findElement(By.xpath("//img[contains(@src,'img3')]"));
-        staticBannerFour = driver.findElement(By.xpath("//img[contains(@src,'img4')]"));
-        staticBannerFive = driver.findElement(By.xpath("//img[contains(@src,'img5')]"));
-        staticBannerSix = driver.findElement(By.xpath("//img[contains(@src,'img6')]"));
-        staticBannerSeven = driver.findElement(By.xpath("//img[contains(@src,'img7')]"));
-        staticBannerTop = driver.findElement(By.xpath("//img[@class='img-responsive']"));
+        staticBannerOne = staticBanner("img1");
+        staticBannerTwo = staticBanner("img2");
+        staticBannerThree = staticBanner("img3");
+        staticBannerFour = staticBanner("img4");
+        staticBannerFive = staticBanner("img5");
+        staticBannerSix = staticBanner("img6");
+        staticBannerSeven = staticBanner("img7");
+        staticBannerTop = staticBanner("img-responsive");
+
+        logo = driver.findElement(By.xpath("//*[@id=\"header_logo\"]/a/img"));
 
         currentUrl = driver.getCurrentUrl(); //get URL after redirection
+    }
+
+    /**
+     * method for static banner search
+     * @param titleOne
+     * @return static banner
+     */
+    public WebElement staticBanner(String titleOne) {
+        return driver.findElement(By.xpath("//img[contains(@src,'" + titleOne + "')]"));
     }
 
     /**
@@ -166,6 +178,77 @@ public class BannersPage {
         clickAction(leftArrowButton);
         return this;
     }
+    /**
+     * method click on the static banner 1
+     * @return instance of page (this)
+     */
+    public BannersPage clickOnStaticBannerOne() {
+        clickAction(staticBannerOne);
+        return this;
+    }
+
+    /**
+     * method click on the static banner 2
+     * @return instance of page (this)
+     */
+    public BannersPage clickOnStaticBannerTwo() {
+        clickAction(staticBannerTwo);
+        return this;
+    }
+
+    /**
+     * method click on the static banner 3
+     * @return instance of page (this)
+     */
+    public BannersPage clickOnStaticBannerThree() {
+        clickAction(staticBannerThree);
+        return this;
+    }
+
+    /**
+     * method click on the static banner 4
+     * @return instance of page (this)
+     */
+    public BannersPage clickOnStaticBannerFour() {
+        clickAction(staticBannerFour);
+        return this;
+    }
+
+    /**
+     * method click on the static banner 5
+     * @return instance of page (this)
+     */
+    public BannersPage clickOnStaticBannerFive() {
+        clickAction(staticBannerFive);
+        return this;
+    }
+
+    /**
+     * method click on the static banner 6
+     * @return instance of page (this)
+     */
+    public BannersPage clickOnStaticBannerSix() {
+        clickAction(staticBannerSix);
+        return this;
+    }
+
+    /**
+     * method click on the static banner 7
+     * @return instance of page (this)
+     */
+    public BannersPage clickOnStaticBannerSeven() {
+        clickAction(staticBannerSeven);
+        return this;
+    }
+
+    /**
+     * method click on the static banner 7
+     * @return instance of page (this)
+     */
+    public BannersPage clickOnStaticLogo() {
+        clickAction(logo);
+        return this;
+    }
 
     /**
      * method for getting actual name of button on the 1st banner
@@ -214,6 +297,8 @@ public class BannersPage {
     public String getExpectedUrl() {
         return expectedUrl;
     }
+
+
 }
 
 

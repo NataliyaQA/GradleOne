@@ -30,6 +30,7 @@ public class SearchHomePageElements {
     WebElement tShirtsButton;
 
     String expectedHomePageTitle = "My Store";
+    String expectedWomenPageTitle = "Women - My Store";
     String actualTitle;
 
     public SearchHomePageElements(WebDriver driver) {
@@ -59,16 +60,16 @@ public class SearchHomePageElements {
      actualTitle = driver.getTitle();
     }
 
-    public WebElement subMenuWomenTops (String titleOne){
-        return driver.findElement(By.xpath("//ul[contains(@class,'submenu')]/li//a[@title='"+titleOne+"']"));
+    public WebElement subMenuWomenTops(String titleOne) {
+        return driver.findElement(By.xpath("//ul[contains(@class,'submenu')]/li//a[@title='" + titleOne + "']"));
     }
 
-    public WebElement subMenuWomenDresses (String titleTwo) {
-        return driver.findElement(By.xpath("//a[@title='Women']/following-sibling::ul[contains(@class,'submenu')]//a[@title='"+titleTwo+"']"));
+    public WebElement subMenuWomenDresses(String titleTwo) {
+        return driver.findElement(By.xpath("//a[@title='Women']/following-sibling::ul[contains(@class,'submenu')]//a[@title='" + titleTwo + "']"));
     }
 
-    public WebElement subMenuDresses (String titleThree) {
-        return driver.findElement(By.xpath("//ul[contains(@class,'submenu')]/li/a[@title='"+titleThree+"']"));
+    public WebElement subMenuDresses(String titleThree) {
+        return driver.findElement(By.xpath("//ul[contains(@class,'submenu')]/li/a[@title='" + titleThree + "']"));
     }
 
     public SearchHomePageElements clickOnSearchButton () {
@@ -96,6 +97,10 @@ public class SearchHomePageElements {
 
     public SearchHomePageElements hoverDresses () {
         hoverOverElement(dressesButton);
+        return this;
+    }
+    public SearchHomePageElements clickOnWomenMenuButton() {
+        womenButton.click();
         return this;
     }
 
@@ -139,6 +144,11 @@ public class SearchHomePageElements {
         return this;
     }
 
+    public SearchHomePageElements clickOnDressesButton() {
+        dressesButton.click();
+        return this;
+    }
+
     public SearchHomePageElements clickOnTshirtsButton () {
         tShirtsButton.click();
         return this;
@@ -152,4 +162,7 @@ public class SearchHomePageElements {
         return expectedHomePageTitle;
     }
 
+    public String getExpectedWomenPageTitle() {
+        return expectedWomenPageTitle;
+    }
 }
