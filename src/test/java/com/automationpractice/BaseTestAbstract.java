@@ -9,7 +9,7 @@ import wrapper.Wrapper;
 
 import java.util.concurrent.TimeUnit;
 
-public class BaseTestClass {
+public class BaseTestAbstract {
     public WebDriver driver = Wrapper.getDriver();
 
     @BeforeMethod

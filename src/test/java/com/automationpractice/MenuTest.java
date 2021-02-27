@@ -8,7 +8,11 @@ import static org.testng.Assert.assertEquals;
 
 //9 tests created
 
-public class MenuTest extends BaseTestClass {
+public class MenuTest extends BaseTestAbstract {
+
+    /**
+     * Check redirection and link of T-Shirt page via T-Shirt submenu of Women menu
+     */
     @Test // re-written
     public void mainMenuWomenTopsTshirts() {
         try {
@@ -27,6 +31,9 @@ public class MenuTest extends BaseTestClass {
         System.out.print("'T-Short' page is opened from 'Women'");
     }
 
+    /**
+     * Check redirection and link of Blouses page via Top submenu of Women menu
+     */
     @Test
     public void mainMenuWomenTopsBlouses() {
         try {
@@ -44,6 +51,9 @@ public class MenuTest extends BaseTestClass {
         System.out.print("'Blouses' page is opened from 'Women'");
     }
 
+    /**
+     * Check redirection and link of CasualDresses page via Dresses submenu of Women menu
+     */
     @Test
     public void mainMenuWomenDressesCasualDresses() {
         try {
@@ -61,6 +71,9 @@ public class MenuTest extends BaseTestClass {
         System.out.print("'Casual Dresses' page is opened from 'Women'");
     }
 
+    /**
+     * Check redirection and link of EveningDresses page via Dresses submenu of Women menu
+     */
     @Test
     public void mainMenuWomenDressesEveningDresses() {
         try {
@@ -78,6 +91,9 @@ public class MenuTest extends BaseTestClass {
         System.out.print("'Evening Dresses' page is opened from 'Women'");
     }
 
+    /**
+     * Check redirection and link of SummerDresses page via Dresses submenu of Women menu
+     */
     @Test
     public void mainMenuWomenDressesSummerDresses() {
         try {
@@ -95,6 +111,9 @@ public class MenuTest extends BaseTestClass {
         System.out.print("'Summer Dresses' page is opened from 'Women'");
     }
 
+    /**
+     * Check redirection and link of CasualDresses page via Dresses menu
+     */
     @Test
     public void mainMenuDressesCasualDresses() {
         try {
@@ -112,6 +131,9 @@ public class MenuTest extends BaseTestClass {
         System.out.print("'Casual Dresses' page is opened from 'Dresses'");
     }
 
+    /**
+     * Check redirection and link of EveningDresses page via Dresses menu
+     */
     @Test
     public void mainMenuDressesEveningDresses() {
         try {
@@ -129,6 +151,9 @@ public class MenuTest extends BaseTestClass {
         System.out.print("'Evening Dresses' page is opened from 'Dresses'");
     }
 
+    /**
+     * Check redirection and link of SummerDresses page via Dresses menu
+     */
     @Test
     public void mainMenuDressesSummerDresses() {
         try {
@@ -146,6 +171,9 @@ public class MenuTest extends BaseTestClass {
         System.out.print("'Evening Dresses' page is opened from 'Dresses'");
     }
 
+    /**
+     * Check redirection and link of T-Shirts page via T-Shirts menu
+     */
     @Test
     public void mainMenuTshirts() {
         try {

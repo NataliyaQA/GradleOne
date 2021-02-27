@@ -8,7 +8,7 @@ import static org.testng.Assert.assertTrue;
 
 //3 tests
 
-public class AddProductToTheCart extends BaseTestClass {
+public class AddProductToTheCart extends BaseTestAbstract {
 
     String buttonAddToCart = "Add to cart";
 

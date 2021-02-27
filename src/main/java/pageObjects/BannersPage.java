@@ -25,7 +25,6 @@ public class BannersPage {
     WebElement staticBannerSix;
     WebElement staticBannerSeven;
     WebElement staticBannerTop;
-    WebElement logo;
 
     String buttonNameOne;
     String buttonNameTwo;
@@ -66,8 +65,6 @@ public class BannersPage {
         staticBannerSix = staticBanner("img6");
         staticBannerSeven = staticBanner("img7");
         staticBannerTop = staticBanner("img-responsive");
-
-        logo = driver.findElement(By.xpath("//*[@id=\"header_logo\"]/a/img"));
 
         currentUrl = driver.getCurrentUrl(); //get URL after redirection
     }
@@ -238,15 +235,6 @@ public class BannersPage {
      */
     public BannersPage clickOnStaticBannerSeven() {
         clickAction(staticBannerSeven);
-        return this;
-    }
-
-    /**
-     * method click on the static banner 7
-     * @return instance of page (this)
-     */
-    public BannersPage clickOnStaticLogo() {
-        clickAction(logo);
         return this;
     }
 

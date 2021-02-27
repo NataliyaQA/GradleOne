@@ -7,15 +7,6 @@ import org.openqa.selenium.WebElement;
 public class AboutUsPage {
     public WebDriver driver;
 
-    public AboutUsPage(WebDriver driver) {
-        this.driver = driver;
-
-        aboutUsLink = driver.findElement(By.linkText("About us"));
-        actualTitle = driver.getTitle(); //get title of About Us page
-        actualLinkName = aboutUsLink.getText(); //get name of link
-        actualUrl = driver.getCurrentUrl(); //get URL for further comparison
-    }
-
     WebElement aboutUsLink;
     String expectedLinkName = "About us";
     String actualLinkName;
@@ -23,6 +14,16 @@ public class AboutUsPage {
     String actualTitle;
     String expectedUrl = "http://automationpractice.com/index.php?id_cms=4&controller=cms";
     String actualUrl;
+
+    public AboutUsPage(WebDriver driver) {
+        this.driver = driver;
+
+        aboutUsLink = driver.findElement(By.linkText("About us"));
+
+        actualTitle = driver.getTitle();         //get title of About Us page
+        actualLinkName = aboutUsLink.getText();  //get name of link
+        actualUrl = driver.getCurrentUrl();      //get URL for further comparison
+    }
 
     public AboutUsPage clickAboutUsLink() {
         aboutUsLink.click();
@@ -41,7 +42,7 @@ public class AboutUsPage {
         return expectedLinkName;
     }
 
-    public String getActualLinkName () {
+    public String getActualLinkName() {
         return actualLinkName;
     }
 
