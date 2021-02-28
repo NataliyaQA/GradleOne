@@ -194,7 +194,7 @@ public class OpenCloseMainPagesUrlTest extends BaseTestAbstract {
         new AboutUsPage(driver).clickAboutUsLink();
 
         String actualUrl = new AboutUsPage(driver).getActualUrl();
-        String expectedUrl = new AboutUsPage(driver).getExpectedUrl();
+        String expectedUrl = new AboutUsPage(driver).expectedUrl();
 
         assertEquals(actualUrl, expectedUrl);
         System.out.println("Test result: 'About Us' URL is found and correct");

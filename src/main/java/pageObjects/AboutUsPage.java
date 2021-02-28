@@ -8,21 +8,28 @@ public class AboutUsPage {
     public WebDriver driver;
 
     WebElement aboutUsLink;
+//    WebElement returnToHomeButton;
+
+    String actualAboutUsLinkName;
     String expectedLinkName = "About us";
-    String actualLinkName;
-    String expectedTitle = "About us - My Store";
     String actualTitle;
-    String expectedUrl = "http://automationpractice.com/index.php?id_cms=4&controller=cms";
+    String expectedTitle = "About us - My Store";
     String actualUrl;
+    String expectedUrl = "http://automationpractice.com/index.php?id_cms=4&controller=cms";
+    String aboutUs;
+    String aboutUsUrl = "http://automationpractice.com/index.php?id_cms=4&controller=cms";
+//    String actualReturnToHomeButtonName;
+//    String expectedReturnToHomeButtonName = "Return to home";
 
     public AboutUsPage(WebDriver driver) {
         this.driver = driver;
 
-        aboutUsLink = driver.findElement(By.linkText("About us"));
+        aboutUsLink = driver.findElement(By.xpath("//a[@title='About us']"));
+//        returnToHomeButton = driver.findElement(By.xpath("//*[@id=\"columns\"]/div[1]/a"));
 
-        actualTitle = driver.getTitle();         //get title of About Us page
-        actualLinkName = aboutUsLink.getText();  //get name of link
-        actualUrl = driver.getCurrentUrl();      //get URL for further comparison
+        actualTitle = driver.getTitle();                //get title of About Us page
+        actualAboutUsLinkName = aboutUsLink.getText();  //get name of link
+        actualUrl = driver.getCurrentUrl();             //get URL for further comparison
     }
 
     public AboutUsPage clickAboutUsLink() {
@@ -34,23 +41,36 @@ public class AboutUsPage {
         return actualTitle;
     }
 
-    public String getExpectedTitle() {
+    public String expectedTitle() {
         return expectedTitle;
     }
 
-    public String getExpectedLinkName() {
+    public String expectedLinkName() {
         return expectedLinkName;
     }
 
     public String getActualLinkName() {
-        return actualLinkName;
+        return actualAboutUsLinkName;
     }
 
-    public String getExpectedUrl() {
+    public String expectedUrl() {
         return expectedUrl;
     }
 
     public String getActualUrl() {
         return actualUrl;
     }
+
+    public String putAboutUsUrl() {
+        driver.get(aboutUsUrl);
+        return aboutUs;
+    }
+
+//    public String getActualReturnToHomeButtonName() {
+//        return actualReturnToHomeButtonName;
+//    }
+//
+//    public String expectedReturnToHomeButtonName() {
+//        return expectedReturnToHomeButtonName;
+//    }
 }

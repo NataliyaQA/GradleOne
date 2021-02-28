@@ -13,7 +13,7 @@ public class PagesTitlesTestN extends BaseTestAbstract {
         new AboutUsPage(driver).clickAboutUsLink();
 
         String actualTitleName = new AboutUsPage(driver).getActualTitle();
-        String expectedTitleName = new AboutUsPage(driver).getExpectedTitle();
+        String expectedTitleName = new AboutUsPage(driver).expectedTitle();
 
         assertEquals(actualTitleName, expectedTitleName);
         System.out.println("Test result: 'About us - My Store' name of page is found and correct");

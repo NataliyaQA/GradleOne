@@ -21,13 +21,13 @@ public class MenuTest extends BaseTestAbstract {
             e.printStackTrace();
         }
 
-        new SearchHomePageElements(driver).hoverWomen(); //hover Women tab name
-        new SearchHomePageElements(driver).clickOnWomenMenuTshirsOption(); //click on Women tab name
+        new SearchHomePageElements(driver).hoverWomen();                               //hover Women tab name
+        new SearchHomePageElements(driver).clickOnWomenMenuTshirsOption();             //click on Women tab name
 
-        String womenMenuTshirsOption = new RedirectionUrls(driver).getTshirtsPageUrl(); //get URL of new opened page
+        String womenMenuTshirsOption = new RedirectionUrls(driver).getTshirtsPageUrl();//get URL of new opened page
         String tShirsPageUrl = new RedirectionUrls(driver).tShirtsPageUrl();
 
-        assertEquals(womenMenuTshirsOption, tShirsPageUrl, "URL is correct"); // compare actual and expected result
+        assertEquals(womenMenuTshirsOption, tShirsPageUrl, "URL is correct");  //compare actual and expected result
         System.out.print("'T-Short' page is opened from 'Women'");
     }
 
@@ -44,10 +44,10 @@ public class MenuTest extends BaseTestAbstract {
 
         new SearchHomePageElements(driver).hoverWomen();
         new SearchHomePageElements(driver).clickOnWomenMenuBlousesOption();
-        String womenMenuBlousesOption = new RedirectionUrls(driver).getUrlBlouses(); //get URL of mew opened page
+        String womenMenuBlousesOption = new RedirectionUrls(driver).getUrlBlouses();   //get URL of new opened page
         String blousesPageUrl = new RedirectionUrls(driver).blousesPageUrl();
 
-        assertEquals(womenMenuBlousesOption, blousesPageUrl, "URL is correct"); // compare actual and expected result
+        assertEquals(womenMenuBlousesOption, blousesPageUrl, "URL is correct");//compare actual and expected result
         System.out.print("'Blouses' page is opened from 'Women'");
     }
 
@@ -64,10 +64,10 @@ public class MenuTest extends BaseTestAbstract {
 
         new SearchHomePageElements(driver).hoverWomen();
         new SearchHomePageElements(driver).clickOnCasualDressesOption();
-        String casualDressesOption = new RedirectionUrls(driver).getUrlCasualDresses(); //get URL of mew opened page
+        String casualDressesOption = new RedirectionUrls(driver).getUrlCasualDresses();   //get URL of mew opened page
         String casualDressesPageUrl = new RedirectionUrls(driver).casualDressesPageUrl();
 
-        assertEquals(casualDressesOption, casualDressesPageUrl, "URL is correct"); // compare actual and expected result
+        assertEquals(casualDressesOption, casualDressesPageUrl, "URL is correct");//compare actual and expected result
         System.out.print("'Casual Dresses' page is opened from 'Women'");
     }
 
@@ -84,10 +84,10 @@ public class MenuTest extends BaseTestAbstract {
 
         new SearchHomePageElements(driver).hoverWomen();
         new SearchHomePageElements(driver).clickOnEveningDressesOption();
-        String eveningDressesOption = new RedirectionUrls(driver).getUrlEveningDresses(); //get URL of mew opened page
+        String eveningDressesOption = new RedirectionUrls(driver).getUrlEveningDresses();   //get URL of mew opened page
         String eveningDressesPageUrl = new RedirectionUrls(driver).eveningDressesPageUrl();
 
-        assertEquals(eveningDressesOption, eveningDressesPageUrl, "URL is correct"); // compare actual and expected result
+        assertEquals(eveningDressesOption, eveningDressesPageUrl, "URL is correct");//compare actual and expected result
         System.out.print("'Evening Dresses' page is opened from 'Women'");
     }
 
@@ -104,10 +104,10 @@ public class MenuTest extends BaseTestAbstract {
 
         new SearchHomePageElements(driver).hoverWomen();
         new SearchHomePageElements(driver).clickOnSummerDressesOption();
-        String summerDressesOption = new RedirectionUrls(driver).getUrlSummerDresses(); //get URL of mew opened page
+        String summerDressesOption = new RedirectionUrls(driver).getUrlSummerDresses();   //get URL of mew opened page
         String summerDressesPageUrl = new RedirectionUrls(driver).summerDressesPageUrl();
 
-        assertEquals(summerDressesOption, summerDressesPageUrl, "URL is correct"); // compare actual and expected result
+        assertEquals(summerDressesOption, summerDressesPageUrl, "URL is correct");//compare actual and expected result
         System.out.print("'Summer Dresses' page is opened from 'Women'");
     }
 
@@ -127,7 +127,8 @@ public class MenuTest extends BaseTestAbstract {
         String dressesCasualDressesOption = new RedirectionUrls(driver).getUrlCasualDresses(); //get URL of mew opened page
         String dressesCasualDressesPageUrl = new RedirectionUrls(driver).casualDressesPageUrl();
 
-        assertEquals(dressesCasualDressesOption, dressesCasualDressesPageUrl, "URL is correct"); // compare actual and expected result
+        assertEquals(dressesCasualDressesOption, dressesCasualDressesPageUrl,
+                "URL is correct");                                                     //compare actual and expected result
         System.out.print("'Casual Dresses' page is opened from 'Dresses'");
     }
 
@@ -144,10 +145,11 @@ public class MenuTest extends BaseTestAbstract {
 
         new SearchHomePageElements(driver).hoverDresses();
         new SearchHomePageElements(driver).clickOnDressesEveningDressesOption();
-        String dressesEveningDressesOption = new RedirectionUrls(driver).getUrlEveningDresses(); //get URL of mew opened page
+        String dressesEveningDressesOption = new RedirectionUrls(driver).getUrlEveningDresses();//get URL of mew opened page
         String dressesEveningDressesPageUrl = new RedirectionUrls(driver).eveningDressesPageUrl();
 
-        assertEquals(dressesEveningDressesOption, dressesEveningDressesPageUrl, "URL is correct"); // compare actual and expected result
+        assertEquals(dressesEveningDressesOption, dressesEveningDressesPageUrl,
+                "URL is correct");                                                      //compare actual and expected result
         System.out.print("'Evening Dresses' page is opened from 'Dresses'");
     }
 
@@ -164,10 +166,11 @@ public class MenuTest extends BaseTestAbstract {
 
         new SearchHomePageElements(driver).hoverDresses();
         new SearchHomePageElements(driver).clickOnDressesSummerDressesOption();
-        String dressesSummerDressesOption = new RedirectionUrls(driver).getUrlSummerDresses(); //get URL of mew opened page
+        String dressesSummerDressesOption = new RedirectionUrls(driver).getUrlSummerDresses();//get URL of mew opened page
         String dressesSummerDressesPageUrl = new RedirectionUrls(driver).summerDressesPageUrl();
 
-        assertEquals(dressesSummerDressesOption, dressesSummerDressesPageUrl, "URL is correct"); // compare actual and expected result
+        assertEquals(dressesSummerDressesOption, dressesSummerDressesPageUrl,
+                "URL is correct");                                                    //compare actual and expected result
         System.out.print("'Evening Dresses' page is opened from 'Dresses'");
     }
 
@@ -186,7 +189,7 @@ public class MenuTest extends BaseTestAbstract {
         String tShirtsTab = new RedirectionUrls(driver).getTshirtsPageUrl(); //get URL of new opened page
         String tShirtsTabUrl = new RedirectionUrls(driver).tShirtsPageUrl();
 
-        assertEquals(tShirtsTab, tShirtsTabUrl, "URL is correct"); // compare actual and expected result
+        assertEquals(tShirtsTab, tShirtsTabUrl, "URL is correct");  //compare actual and expected result
         System.out.print("'T-Shirts Tab' page is opened via '-Shirts'");
     }
 }

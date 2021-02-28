@@ -14,20 +14,21 @@ public class SearchHomePageElements {
 
     WebElement womenButton;
     WebElement womenMenuTopsSubMenu;
-    WebElement womenMenuDressesSubMenu;
     WebElement womenMenuTshirsOption;
     WebElement womenMenuBlousesOption;
 
-    WebElement dressesButton;
+    WebElement womenMenuDressesSubMenu;
     WebElement casualDressesOption;
     WebElement eveningDressesOption;
     WebElement summerDressesOption;
 
+    WebElement dressesButton;
     WebElement dressesCasualDressesOption;
     WebElement dressesEveningDressesOption;
     WebElement dressesSummerDressesOption;
 
     WebElement tShirtsButton;
+
     WebElement cartButton;
     WebElement contactUsButton;
     WebElement signInButton;
@@ -36,11 +37,27 @@ public class SearchHomePageElements {
     WebElement bestSellersButton;
 
     String actualWomenMenuName;
-    String expectedWomenName;
+    String expectedWomenName = "WOMEN";
+    String actualWomenMenuTopsSubMenuName;
+    String expectedWomenMenuTopsSubMenuName = "TOPS";
+    String actualWomenMenuTshirsOptionName;
+    String expectedWomenMenuTshirsOptionName = "T-shirts";
+    String actualWomenMenuBlousesOptionName;
+    String expectedWomenMenuBlousesOptionName = "Blouses";
+    String actualWomenMenuDressesSubMenuName;
+    String expectedWomenMenuDressesSubMenuName = "DRESSES";
+    String actualCasualDressesOptionName;
+    String expectedCasualDressesOptionName = "Casual Dresses";
+    String actualEveningDressesOptionName;
+    String expectedEveningDressesOptionName = "Evening Dresses";
+    String actualSummerDressesOptionName;
+    String expectedSummerDressesOptionName = "Summer Dresses";
+
     String actualDressesMenuName;
-    String expectedDressesName;
+    String expectedDressesName = "DRESSES";
+
     String actualTshirtsMenuName;
-    String expectedTshirtsName;
+    String expectedTshirtsName = "T-SHIRTS";
 
     String expectedHomePageTitle = "My Store";
     String expectedWomenPageTitle = "Women - My Store";
@@ -56,8 +73,8 @@ public class SearchHomePageElements {
         contactUsButton = driver.findElement(By.xpath("//a[@title='Contact Us']"));
         signInButton = driver.findElement(By.xpath("//a[contains(@title,'Log in')]"));
         logoButton = driver.findElement(By.xpath("//img[contains(@class,'logo')]"));
-        popularButton = driver.findElement(By.xpath("//a[contains(@class,'homefeatured')]"));
-        bestSellersButton = driver.findElement(By.xpath("//a[contains(@class,'blockbestsellers')]"));
+        //popularButton = driver.findElement(By.xpath("//a[contains(@class,'homefeatured')]"));
+        //bestSellersButton = driver.findElement(By.xpath("//a[contains(@class,'blockbestsellers')]"));
 
         womenButton = driver.findElement(By.xpath("//a[@title='Women']/parent::li")); //
         womenMenuTopsSubMenu = driver.findElement(By.xpath("//a[@title='Women']/following::a[@title='Tops']"));
@@ -81,13 +98,16 @@ public class SearchHomePageElements {
         actualTitle = driver.getTitle();
 
         actualWomenMenuName = womenButton.getText();
-        expectedWomenName = "Women";
-
         actualDressesMenuName = dressesButton.getText();
-        expectedDressesName = "Dresses";
-
         actualTshirtsMenuName = tShirtsButton.getText();
-        expectedTshirtsName = "T-Shirts";
+        actualWomenMenuTopsSubMenuName = womenMenuTopsSubMenu.getText();
+        actualWomenMenuTshirsOptionName = womenMenuTshirsOption.getText();
+        actualWomenMenuBlousesOptionName = womenMenuBlousesOption.getText();
+        actualWomenMenuDressesSubMenuName = womenMenuDressesSubMenu.getText();
+        actualCasualDressesOptionName = casualDressesOption.getText();
+        actualEveningDressesOptionName = eveningDressesOption.getText();
+        actualSummerDressesOptionName = summerDressesOption.getText();
+
     }
 
     public WebElement subMenuWomenTops(String titleOne) {
@@ -104,8 +124,13 @@ public class SearchHomePageElements {
         return driver.findElement(By.xpath("//ul[contains(@class,'submenu')]/li/a[@title='" + titleThree + "']"));
     }
 
+    public SearchHomePageElements clickAction(WebElement clickElement) {
+        clickElement.click();
+        return this;
+    }
+
     public SearchHomePageElements clickOnSearchButton() {
-        searchButton.click();
+        clickAction(searchButton);
         return this;
     }
 
@@ -127,8 +152,63 @@ public class SearchHomePageElements {
         return this;
     }
 
+    public SearchHomePageElements hoverTopsSubMenu() {
+        hoverOverElement(womenMenuTopsSubMenu);
+        return this;
+    }
+
+    public SearchHomePageElements hoverTshirtsSubMenu() {
+        hoverOverElement(womenMenuTshirsOption);
+        return this;
+    }
+
+    public SearchHomePageElements hoverBlousesSubMenu() {
+        hoverOverElement(womenMenuBlousesOption);
+        return this;
+    }
+
+    public SearchHomePageElements hoverDressesSubMenu() {
+        hoverOverElement(womenMenuDressesSubMenu);
+        return this;
+    }
+
+    public SearchHomePageElements hoverWomenCasualDressesOption() {
+        hoverOverElement(casualDressesOption);
+        return this;
+    }
+
+    public SearchHomePageElements hoverWomenEveningDressesOption() {
+        hoverOverElement(eveningDressesOption);
+        return this;
+    }
+
+    public SearchHomePageElements hoverWomenSummerDressesOption() {
+        hoverOverElement(summerDressesOption);
+        return this;
+    }
+
     public SearchHomePageElements hoverDresses() {
         hoverOverElement(dressesButton);
+        return this;
+    }
+
+    public SearchHomePageElements hoverDressesCasualDressesOption() {
+        hoverOverElement(dressesCasualDressesOption);
+        return this;
+    }
+
+    public SearchHomePageElements hoverDressesEveningDressesOption() {
+        hoverOverElement(dressesEveningDressesOption);
+        return this;
+    }
+
+    public SearchHomePageElements hoverDressesSummerDressesOption() {
+        hoverOverElement(dressesSummerDressesOption);
+        return this;
+    }
+
+    public SearchHomePageElements hoverTshirts() {
+        hoverOverElement(tShirtsButton);
         return this;
     }
 
@@ -137,62 +217,62 @@ public class SearchHomePageElements {
      * @return instance of page (this)
      */
     public SearchHomePageElements clickOnStaticLogo() {
-        logoButton.click();
+        clickAction(logoButton);
         return this;
     }
 
     public SearchHomePageElements clickOnWomenMenuButton() {
-        womenButton.click();
+        clickAction(womenButton);
         return this;
     }
 
     public SearchHomePageElements clickOnWomenMenuTshirsOption() {
-        womenMenuTshirsOption.click();
+        clickAction(womenMenuTshirsOption);
         return this;
     }
 
     public SearchHomePageElements clickOnWomenMenuBlousesOption() {
-        womenMenuBlousesOption.click();
+        clickAction(womenMenuBlousesOption);
         return this;
     }
 
     public SearchHomePageElements clickOnCasualDressesOption() {
-        casualDressesOption.click();
+        clickAction(casualDressesOption);
         return this;
     }
 
     public SearchHomePageElements clickOnEveningDressesOption() {
-        eveningDressesOption.click();
+        clickAction(eveningDressesOption);
         return this;
     }
 
     public SearchHomePageElements clickOnSummerDressesOption() {
-        summerDressesOption.click();
+        clickAction(summerDressesOption);
         return this;
     }
 
     public SearchHomePageElements clickOnDressesCasualDressesOption() {
-        dressesCasualDressesOption.click();
+        clickAction(dressesCasualDressesOption);
         return this;
     }
 
     public SearchHomePageElements clickOnDressesEveningDressesOption() {
-        dressesEveningDressesOption.click();
+        clickAction(dressesEveningDressesOption);
         return this;
     }
 
     public SearchHomePageElements clickOnDressesSummerDressesOption() {
-        summerDressesOption.click();
+        clickAction(summerDressesOption);
         return this;
     }
 
     public SearchHomePageElements clickOnDressesButton() {
-        dressesButton.click();
+        clickAction(dressesButton);
         return this;
     }
 
     public SearchHomePageElements clickOnTshirtsButton() {
-        tShirtsButton.click();
+        clickAction(tShirtsButton);
         return this;
     }
 
@@ -216,6 +296,62 @@ public class SearchHomePageElements {
         return expectedWomenName;
     }
 
+    public String getActualWomenMenuTopsSubMenuName() {
+        return actualWomenMenuTopsSubMenuName;
+    }
+
+    public String expectedWomenMenuTopsSubMenuName() {
+        return expectedWomenMenuTopsSubMenuName;
+    }
+
+    public String getActualWomenMenuTshirsOptionName() {
+        return actualWomenMenuTshirsOptionName;
+    }
+
+    public String expectedWomenMenuTshirsOptionName() {
+        return expectedWomenMenuTshirsOptionName;
+    }
+
+    public String getActualWomenMenuBlousesOptionName() {
+        return actualWomenMenuBlousesOptionName;
+    }
+
+    public String expectedWomenMenuBlousesOptionName() {
+        return expectedWomenMenuBlousesOptionName;
+    }
+
+    public String getActualWomenMenuDressesSubMenuName() {
+        return actualWomenMenuDressesSubMenuName;
+    }
+
+    public String expectedWomenMenuDressesSubMenuName() {
+        return expectedWomenMenuDressesSubMenuName;
+    }
+
+    public String getActualCasualDressesOptionName() {
+        return actualCasualDressesOptionName;
+    }
+
+    public String expectedCasualDressesOptionName() {
+        return expectedCasualDressesOptionName;
+    }
+
+    public String getActualEveningDressesOptionName() {
+        return actualEveningDressesOptionName;
+    }
+
+    public String expectedEveningDressesOptionName() {
+        return expectedEveningDressesOptionName;
+    }
+
+    public String getActualSummerDressesOptionName() {
+        return actualSummerDressesOptionName;
+    }
+
+    public String expectedSummerDressesOptionName() {
+        return expectedSummerDressesOptionName;
+    }
+
     public String getActualDressesMenuName() {
         return actualDressesMenuName;
     }
@@ -231,4 +367,5 @@ public class SearchHomePageElements {
     public String expectedTshirtsName() {
         return expectedTshirtsName;
     }
+
 }
