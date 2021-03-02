@@ -368,4 +368,14 @@ public class SearchHomePageElements {
         return expectedTshirtsName;
     }
 
+
+
+    String stringUrl = "http://automationpractice.com/index.php?id_cms=4&controller=cms";
+
+    public void putAboutUsUrl() {
+        driver.get(stringUrl);
+    }
+
+
+
 }

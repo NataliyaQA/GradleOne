@@ -8,7 +8,7 @@ public class AboutUsPage {
     public WebDriver driver;
 
     WebElement aboutUsLink;
-//    WebElement returnToHomeButton;
+    WebElement returnToHomeButton;
 
     String actualAboutUsLinkName;
     String expectedLinkName = "About us";
@@ -18,18 +18,19 @@ public class AboutUsPage {
     String expectedUrl = "http://automationpractice.com/index.php?id_cms=4&controller=cms";
     String aboutUs;
     String aboutUsUrl = "http://automationpractice.com/index.php?id_cms=4&controller=cms";
-//    String actualReturnToHomeButtonName;
-//    String expectedReturnToHomeButtonName = "Return to home";
+    String actualReturnToHomeButtonName;
+    String expectedReturnToHomeButtonName = "Return to home";
 
     public AboutUsPage(WebDriver driver) {
         this.driver = driver;
 
         aboutUsLink = driver.findElement(By.xpath("//a[@title='About us']"));
-//        returnToHomeButton = driver.findElement(By.xpath("//*[@id=\"columns\"]/div[1]/a"));
+        returnToHomeButton = driver.findElement(By.xpath("//*[@id=\"columns\"]/div[1]/a"));
 
         actualTitle = driver.getTitle();                //get title of About Us page
         actualAboutUsLinkName = aboutUsLink.getText();  //get name of link
         actualUrl = driver.getCurrentUrl();             //get URL for further comparison
+        actualReturnToHomeButtonName = returnToHomeButton.getText();
     }
 
     public AboutUsPage clickAboutUsLink() {
@@ -66,11 +67,11 @@ public class AboutUsPage {
         return aboutUs;
     }
 
-//    public String getActualReturnToHomeButtonName() {
-//        return actualReturnToHomeButtonName;
-//    }
-//
-//    public String expectedReturnToHomeButtonName() {
-//        return expectedReturnToHomeButtonName;
-//    }
+    public String getActualReturnToHomeButtonName() {
+        return actualReturnToHomeButtonName;
+    }
+
+    public String expectedReturnToHomeButtonName() {
+        return expectedReturnToHomeButtonName;
+    }
 }

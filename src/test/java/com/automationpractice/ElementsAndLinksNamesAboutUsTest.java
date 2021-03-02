@@ -10,20 +10,24 @@ import pageObjects.SearchHomePageElements;
 import static org.testng.Assert.assertEquals;
 
 public class ElementsAndLinksNamesAboutUsTest extends BaseTestAbstract {
+    AboutUsPage aboutUsPage;
 
     /**
      * Check link name of AboutUs page
      */
     @Test
     public void AboutUsLinkName() {
+
+        aboutUsPage = new AboutUsPage(driver);
+
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        String actualLinkName = new AboutUsPage(driver).getActualLinkName();
-        String expectedLinkName = new AboutUsPage(driver).expectedLinkName();
+        String actualLinkName = aboutUsPage.getActualLinkName();
+        String expectedLinkName = aboutUsPage.expectedLinkName();
 
         assertEquals(actualLinkName, expectedLinkName);
         System.out.println("Test result: 'About Us' name of link is found and correct");
@@ -35,7 +39,9 @@ public class ElementsAndLinksNamesAboutUsTest extends BaseTestAbstract {
     @Test
     public void mainMenuWomenNameAboutUsPage() {
 
-        new AboutUsPage(driver).clickAboutUsLink();
+        aboutUsPage = new AboutUsPage(driver);
+
+        aboutUsPage.clickAboutUsLink();
 
         String actualName = new SearchHomePageElements(driver).getActualWomenMenuName();
         String expectedName = new SearchHomePageElements(driver).expectedWomenName();
@@ -49,7 +55,9 @@ public class ElementsAndLinksNamesAboutUsTest extends BaseTestAbstract {
     @Test
     public void mainMenuDressesNameAboutUsPage() {
 
-        new AboutUsPage(driver).clickAboutUsLink();
+        aboutUsPage = new AboutUsPage(driver);
+
+        aboutUsPage.clickAboutUsLink();
 
         String actualName = new SearchHomePageElements(driver).getActualDressesMenuName();
         String expectedName = new SearchHomePageElements(driver).expectedDressesName();
@@ -63,7 +71,9 @@ public class ElementsAndLinksNamesAboutUsTest extends BaseTestAbstract {
     @Test
     public void mainMenuTshirtsNameAboutUsPage() {
 
-        new AboutUsPage(driver).clickAboutUsLink();
+        aboutUsPage = new AboutUsPage(driver);
+
+        aboutUsPage.clickAboutUsLink();
 
         String actualName = new SearchHomePageElements(driver).getActualTshirtsMenuName();
         String expectedName = new SearchHomePageElements(driver).expectedTshirtsName();
@@ -73,8 +83,11 @@ public class ElementsAndLinksNamesAboutUsTest extends BaseTestAbstract {
 
     @Test
     public void mainMenuWomenListOfOptionsAboutUsPage() {
+        new SearchHomePageElements(driver).putAboutUsUrl();
+        aboutUsPage = new AboutUsPage(driver);
 
-        new AboutUsPage(driver).putAboutUsUrl();
+        //aboutUsPage.putAboutUsUrl();
+
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
@@ -93,7 +106,9 @@ public class ElementsAndLinksNamesAboutUsTest extends BaseTestAbstract {
     @Test
     public void mainMenuWomenNamesOfOptionsAboutUsPage() {
 
-        new AboutUsPage(driver).putAboutUsUrl();
+        aboutUsPage = new AboutUsPage(driver);
+
+        aboutUsPage.putAboutUsUrl();
 
         new SearchHomePageElements(driver).hoverWomen();
 
@@ -133,20 +148,28 @@ public class ElementsAndLinksNamesAboutUsTest extends BaseTestAbstract {
         assertEquals(actualNameEight, expectedNameEight);
     }
 
-//    @Test //does not work and causes falling of all tests
-//    public void returnToHomeButton() {
-//        //new AboutUsPage(driver).clickAboutUsLink();
-//        new AboutUsPage(driver).putAboutUsUrl();
-//
-//        try {
-//            Thread.sleep(3000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//
-//        String actualToHome = new AboutUsPage(driver).getActualReturnToHomeButtonName();
-//        String expectedToHome = new AboutUsPage(driver).expectedReturnToHomeButtonName();
-//        assertEquals(actualToHome, expectedToHome);
-//    }
+    @Test //does not work and causes falling of all tests
+    public void returnToHomeButton() {
+        new SearchHomePageElements(driver).putAboutUsUrl();
+        aboutUsPage = new AboutUsPage(driver);
+
+        //aboutUsPage.putAboutUsUrl();
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        String actualToHome = aboutUsPage.getActualReturnToHomeButtonName();
+        String expectedToHome = aboutUsPage.expectedReturnToHomeButtonName();
+        assertEquals(actualToHome, expectedToHome);
+
+//        start HomePage driver
+//        click About us age
+//        Init about us page controls
+//        compare expect and actual
+
+    }
 }
 
