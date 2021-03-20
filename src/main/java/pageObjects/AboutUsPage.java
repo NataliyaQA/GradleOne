@@ -46,21 +46,22 @@ public class AboutUsPage {
         return expectedTitle;
     }
 
+    public String getActualLinkName() {
+        return actualAboutUsLinkName;
+    }
+
     public String expectedLinkName() {
         return expectedLinkName;
     }
 
-    public String getActualLinkName() {
-        return actualAboutUsLinkName;
+    public String getActualUrl() {
+        return actualUrl;
     }
 
     public String expectedUrl() {
         return expectedUrl;
     }
 
-    public String getActualUrl() {
-        return actualUrl;
-    }
 
     public String putAboutUsUrl() {
         driver.get(aboutUsUrl);
