@@ -16,6 +16,7 @@ public class SearchFunctionalityTest {
     private String searchQuery = "Faded Short Sleeve T-shirts";
 
     public WebDriver getDriver() {
+        System.setProperty("webdriver.chrome.driver", "C:\\Data\\Temp\\GradleOne\\src\\main\\resources\\Drivers\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();

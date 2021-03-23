@@ -64,37 +64,37 @@ public class SignInPage {
         actualTitle = driver.getTitle();                //get title of Sign in page
         actualUrl = driver.getCurrentUrl();             //get URL for further comparison
 
-        signInHeaderButton = driver.findElement(By.xpath(""));
+        signInHeaderButton = driver.findElement(By.xpath("//a[@title='Log in to your customer account']"));
         actualSignInHeaderButtonName = signInHeaderButton.getText();  //get name of button
 
-        authenticationSectionTitle = driver.findElement(By.xpath(""));
+        authenticationSectionTitle = driver.findElement(By.xpath("//h1[text()='Authentication']"));
         actualAuthenticationSectionTitle = authenticationSectionTitle.getText();
 
-        createAnAccountTitle = driver.findElement(By.xpath(""));
+        createAnAccountTitle = driver.findElement(By.xpath("//h3[text()='Create an account']"));
         actualCreateAnAccountTitleName = createAnAccountTitle.getText();
 
-        createAnAccountText = driver.findElement(By.xpath(""));
+        createAnAccountText = driver.findElement(By.xpath("//h3[contains(text(),'Create')]"));
         actualCreateAnAccountText = createAnAccountText.getText();
 
-        createAnAccountButton = driver.findElement(By.xpath(""));
+        createAnAccountButton = driver.findElement(By.xpath("//*[@id=\"SubmitCreate\"]/span"));
         actualCreateAnAccountButtonName = createAnAccountButton.getText();
 
-        emailAddressFieldCreateAnAccount = driver.findElement(By.xpath(""));
+        emailAddressFieldCreateAnAccount = driver.findElement(By.xpath("//*[@id=\"email_create\"]"));
         actualEmailAddressFieldCreateAnAccountName = emailAddressFieldCreateAnAccount.getText();
 
-        alreadyRegisteredTitle = driver.findElement(By.xpath(""));
+        alreadyRegisteredTitle = driver.findElement(By.xpath("//h3[text()='Already registered?']"));
         actualAlreadyRegisteredTitle = alreadyRegisteredTitle.getText();
 
-        emailAddressFieldAlreadyRegistered = driver.findElement(By.xpath(""));
+        emailAddressFieldAlreadyRegistered = driver.findElement(By.xpath("//*[@id=\"email\"]"));
         actualEmailAddressFieldAlreadyRegisteredName = emailAddressFieldAlreadyRegistered.getText();
 
-        passwordFieldAlreadyRegistered = driver.findElement(By.xpath(""));
+        passwordFieldAlreadyRegistered = driver.findElement(By.xpath("//*[@id=\"passwd\"]"));
         actualPasswordFieldAlreadyRegisteredName = passwordFieldAlreadyRegistered.getText();
 
-        signInAlreadyRegisteredButton = driver.findElement(By.xpath(""));
+        signInAlreadyRegisteredButton = driver.findElement(By.xpath("//*[@id=\"SubmitLogin\"]/span"));
         actualSignInAlreadyRegisteredButtonName = signInAlreadyRegisteredButton.getText();
 
-        forgotYourPassword = driver.findElement(By.xpath(""));
+        forgotYourPassword = driver.findElement(By.xpath("//p[contains(@class,'lost')]/a"));
         actualForgotYourPasswordName = forgotYourPassword.getText();
     }
 
