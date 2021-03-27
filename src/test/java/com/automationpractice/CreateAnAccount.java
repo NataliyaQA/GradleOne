@@ -4,7 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.SignInPage;
 
-//27 tests
+//27 tests, 22 new
 public class CreateAnAccount extends BaseTestAbstract {
     String stringUrlMainPage = "http://automationpractice.com/index.php";
     String stringUrl = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
