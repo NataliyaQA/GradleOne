@@ -4,10 +4,59 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.SignInPage;
 
-public class CreateAnAccount extends BaseTestAbstract{
+//27 tests
+public class CreateAnAccount extends BaseTestAbstract {
+    String stringUrlMainPage = "http://automationpractice.com/index.php";
+    String stringUrl = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
+
+    SignInPage signInPage = new SignInPage(driver);
+
+    @Test
+    public void checkClickSignInMainPage() {
+        driver.get(stringUrlMainPage);
+
+        signInPage.clickSignInHeaderButton();
+        String actualUrl = signInPage.actualUrlFind(driver);
+        String expectedUrl = signInPage.EXPECTED_URL;
+
+        Assert.assertEquals(actualUrl, expectedUrl);
+        System.out.println("Expected Url is correct");
+    }
+
+    @Test
+    public void checkClickSignInAccountPage() {
+        driver.get(stringUrl);
+
+        signInPage.clickSignInHeaderButton();
+        String actualUrl = signInPage.actualUrlFind(driver);
+        String expectedUrl = signInPage.EXPECTED_URL;
+
+        Assert.assertEquals(actualUrl, expectedUrl);
+        System.out.println("Expected Url is correct");
+    }
+
+    @Test
+    public void signInButtonNameMainPage() {
+        driver.get(stringUrlMainPage);
+
+        String actual = signInPage.signInHeaderButtonNameFind();
+        String expected = signInPage.EXPECTED_SIGN_IN_HEADER_BUTTON_NAME;
+
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test
+    public void signInButtonNameAccountPage() {
+        driver.get(stringUrl);
+
+        String actual = signInPage.signInHeaderButtonNameFind();
+        String expected = signInPage.EXPECTED_SIGN_IN_HEADER_BUTTON_NAME;
+
+        Assert.assertEquals(actual, expected);
+    }
 
     @Test // works
-    public void createAnAccountTitle() throws InterruptedException {
+    public void signInPageTitle() throws InterruptedException {
         String stringUrl = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
         driver.get(stringUrl);
 
@@ -19,6 +68,48 @@ public class CreateAnAccount extends BaseTestAbstract{
 
         Assert.assertEquals(actualTitle, expectedTitle);
         System.out.println("You are on Login - My Store");
+    }
+
+    @Test
+    public void authenticationSectionName() {
+        driver.get(stringUrl);
+
+        String actual = signInPage.authenticationSectionTitleFind(driver);
+        String expected = signInPage.EXPECTED_AUTHENTICATION_SECTION_TITLE;
+
+        Assert.assertEquals(actual, expected.toUpperCase());
+    }
+
+    @Test
+    public void createAnAccountSectionName() {
+        driver.get(stringUrl);
+
+        String actual = signInPage.createAnAccountTitleFind(driver);
+        String expected = signInPage.EXPECTED_CREATE_AN_ACCOUNT_TITLE_NAME;
+
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test
+    public void createAnAccountSectionText() {
+        driver.get(stringUrl);
+
+        String actual = signInPage.createAnAccountTextFind(driver);
+        String expected = signInPage.EXPECTED_CREATE_AN_ACCOUNT_TEXT;
+
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test
+    public void emailFieldCreateAnAccountName() {
+        driver.get(stringUrl);
+
+        String actualName = signInPage.emailAddressFieldCreateAnAccountTitle(driver);
+        String expectedName = signInPage.EXPECTED_EMAIL_ADDRESS_FIELD_CREATE_AN_ACCOUNT_NAME;
+
+        Assert.assertEquals(actualName, expectedName);
+        System.out.print("The title of email Address Field is " + '"'
+                + signInPage.EXPECTED_EMAIL_ADDRESS_FIELD_CREATE_AN_ACCOUNT_NAME + '"');
     }
 
     @Test //works
@@ -41,7 +132,6 @@ public class CreateAnAccount extends BaseTestAbstract{
         new SignInPage(driver).emailAddressFieldCreateAnAccountFind(driver);
         new SignInPage(driver).inputEmail();
         new SignInPage(driver).createAnAccountButtonClick();
-
     }
 
     @Test // works
@@ -53,7 +143,7 @@ public class CreateAnAccount extends BaseTestAbstract{
         Thread.sleep(5000);
         String email = "qwe@gmail.com";
 
-        signInPage.inputEmail(email);
+        signInPage.inputEmailCreateAnAccount(email);
         signInPage.createAnAccountButtonClick();
         Thread.sleep(5000);
 
@@ -72,10 +162,43 @@ public class CreateAnAccount extends BaseTestAbstract{
         Assert.assertEquals(actual, expected);
         System.out.println("An account using this email address has already been registered. " +
                 "Please enter a valid password or request a new one.");
-
     }
 
-    @Test // I want to add put from ContextMap
+    @Test // Url put and creation of instance of "SignInPage" class moved to current class
+    public void invalidEmailMessage() throws InterruptedException {
+
+        driver.get(stringUrl);
+
+        signInPage.inputEmailInvalidCreateAnAccount();
+        signInPage.createAnAccountButtonClick();
+
+        String actualText = signInPage.invalidEmail(driver);
+        String expectedText = signInPage.INVALID_EMAIL;
+
+        Thread.sleep(5000);
+
+        Assert.assertEquals(actualText, expectedText);
+        System.out.println("The text of message is " + '"' + signInPage.INVALID_EMAIL + '"');
+    }
+
+    @Test
+    public void invalidEmailMessageWhenEmailEmpty() throws InterruptedException {
+
+        driver.get(stringUrl);
+
+        signInPage.createAnAccountButtonClick();
+
+        String actualText = signInPage.invalidEmail(driver);
+        String expectedText = signInPage.INVALID_EMAIL;
+
+        Thread.sleep(5000);
+
+        Assert.assertEquals(actualText, expectedText);
+        System.out.println("The text of message is " + '"' + signInPage.INVALID_EMAIL + '"');
+    }
+
+    @Test
+    // I want to add put from ContextMap. Main idea is: input a new generated email and then check it in the list of all emails
     public void emailInputWithPut() {
 
         String stringUrl = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
@@ -87,4 +210,197 @@ public class CreateAnAccount extends BaseTestAbstract{
         new SignInPage(driver).createAnAccountButtonClick();
     }
 
+    @Test
+    public void createAnAccountButtonName() {
+        driver.get(stringUrl);
+
+        String actual = signInPage.createAnAccountButtonFind(driver);
+        String expected = signInPage.EXPECTED_CREATE_AN_ACCOUNT_BUTTON_NAME;
+
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test
+    public void alreadyRegisteredSectionName() {
+        driver.get(stringUrl);
+
+        String actual = signInPage.alreadyRegisteredTitleFind(driver);
+        String expected = signInPage.EXPECTED_ALREADY_REGISTERED_TITLE;
+
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test
+    public void emailFieldAlreadyRegisteredName() {
+        driver.get(stringUrl);
+
+        String actual = signInPage.emailAddressFieldAlreadyRegisteredTitle(driver);
+        String expected = signInPage.EXPECTED_EMAIL_ADDRESS_FIELD_ALREADY_REGISTERED_NAME;
+
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test
+    public void passwordFieldAlreadyRegisteredName() {
+        driver.get(stringUrl);
+
+        String actual = signInPage.passwordFieldAlreadyRegisteredName(driver);
+        String expected = signInPage.EXPECTED_PASSWORD_FIELD_ALREADY_REGISTERED_NAME;
+
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test
+    public void signInButtonAlreadyRegisteredName() {
+        driver.get(stringUrl);
+
+        String actual = signInPage.signInAlreadyRegisteredButtonFind(driver);
+        String expected = signInPage.EXPECTED_SIGN_IN_ALREADY_REGISTERED_BUTTON_NAME;
+
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test
+    public void signInButtonClick() throws InterruptedException {
+        driver.get(stringUrl);
+
+        signInPage.clickSignInHeaderButton();
+        Thread.sleep(5000);
+    }
+
+    @Test
+    public void forgotYourPasswordButtonName() {
+        driver.get(stringUrl);
+
+        String actual = signInPage.forgotYourPasswordFind(driver);
+        String expected = signInPage.EXPECTED_FORGOT_YOUR_PASSWORD_NAME;
+
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test
+    public void invalidEmailMessageAlreadyRegistered() throws InterruptedException {
+        driver.get(stringUrl);
+
+        signInPage.inputEmailInvalidAlreadyRegistered();
+        signInPage.signInAlreadyRegisteredButtonClick();
+        Thread.sleep(5000);
+
+        String actualTextFirst = signInPage.invalidMessageAlreadyRegisteredFirstText(driver);
+        String expectedTextFirst = signInPage.INVALID_MESSAGE_ALREADY_REGISTERED_FIRST;
+        Assert.assertEquals(actualTextFirst, expectedTextFirst);
+        System.out.println("The text of message is " + '"'
+                + signInPage.INVALID_MESSAGE_ALREADY_REGISTERED_FIRST + '"');
+
+        Thread.sleep(5000);
+
+        String actualTextSecond = signInPage.invalidMessageAlreadyRegisteredSecondText(driver);
+        String expectedTextSecond = signInPage.INVALID_EMAIL_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_IS;
+        Assert.assertEquals(actualTextSecond, expectedTextSecond);
+        System.out.println("The text of message is " + '"'
+                + signInPage.INVALID_EMAIL_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_IS + '"');
+    }
+
+    @Test
+    public void invalidEmptyEmailMessageAlreadyRegistered() throws InterruptedException {
+        driver.get(stringUrl);
+
+        signInPage.signInAlreadyRegisteredButtonClick();
+        Thread.sleep(5000);
+
+        String actualTextFirst = signInPage.invalidMessageAlreadyRegisteredFirstText(driver);
+        String expectedTextFirst = signInPage.INVALID_MESSAGE_ALREADY_REGISTERED_FIRST;
+        Assert.assertEquals(actualTextFirst, expectedTextFirst);
+        System.out.println("The text of message is " + '"'
+                + signInPage.INVALID_MESSAGE_ALREADY_REGISTERED_FIRST + '"');
+
+        Thread.sleep(5000);
+
+        String actualTextSecond = signInPage.invalidMessageAlreadyRegisteredSecondText(driver);
+        String expectedTextSecond = signInPage.INVALID_EMAIL_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_EMPTY;
+        Assert.assertEquals(actualTextSecond, expectedTextSecond);
+        System.out.println("The text of message is " + '"'
+                + signInPage.INVALID_EMAIL_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_EMPTY + '"');
+    }
+
+    @Test
+    public void invalidPasswordMessageAlreadyRegistered() throws InterruptedException {
+        driver.get(stringUrl);
+
+        String email = "qwe@gmail.com";
+        signInPage.inputEmailAlreadyRegistered(email);
+        Thread.sleep(5000);
+
+        signInPage.inputPasswordInvalidAlreadyRegistered();
+        signInPage.signInAlreadyRegisteredButtonClick();
+        Thread.sleep(5000);
+
+        String actualTextFirst = signInPage.invalidMessageAlreadyRegisteredFirstText(driver);
+        String expectedTextFirst = signInPage.INVALID_MESSAGE_ALREADY_REGISTERED_FIRST;
+        Assert.assertEquals(actualTextFirst, expectedTextFirst);
+        System.out.println("The text of message is " + '"'
+                + signInPage.INVALID_MESSAGE_ALREADY_REGISTERED_FIRST + '"');
+
+        Thread.sleep(5000);
+
+        String actualTextSecond = signInPage.invalidMessageAlreadyRegisteredSecondText(driver);
+        String expectedTextSecond = signInPage.INVALID_PASSWORD_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_IS;
+        Assert.assertEquals(actualTextSecond, expectedTextSecond);
+        System.out.println("The text of message is " + '"'
+                + signInPage.INVALID_PASSWORD_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_IS + '"');
+    }
+
+    @Test
+    public void missedPasswordMessageAlreadyRegistered() throws InterruptedException {
+        driver.get(stringUrl);
+
+        String email = "qwe@gmail.com";
+        signInPage.inputEmailAlreadyRegistered(email);
+        Thread.sleep(5000);
+
+        //signInPage.inputPasswordInvalidAlreadyRegistered();
+        signInPage.signInAlreadyRegisteredButtonClick();
+        Thread.sleep(5000);
+
+        String actualTextFirst = signInPage.invalidMessageAlreadyRegisteredFirstText(driver);
+        String expectedTextFirst = signInPage.INVALID_MESSAGE_ALREADY_REGISTERED_FIRST;
+        Assert.assertEquals(actualTextFirst, expectedTextFirst);
+        System.out.println("The text of message is " + '"'
+                + signInPage.INVALID_MESSAGE_ALREADY_REGISTERED_FIRST + '"');
+
+        Thread.sleep(5000);
+
+        String actualTextSecond = signInPage.invalidMessageAlreadyRegisteredSecondText(driver);
+        String expectedTextSecond = signInPage.INVALID_PASSWORD_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_EMPTY;
+        Assert.assertEquals(actualTextSecond, expectedTextSecond);
+        System.out.println("The text of message is " + '"'
+                + signInPage.INVALID_PASSWORD_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_EMPTY + '"');
+    }
+
+    @Test
+    public void mismatchedPasswordMessageAlreadyRegistered() throws InterruptedException {
+        driver.get(stringUrl);
+
+        String email = "qwe@gmail.com";
+        signInPage.inputEmailAlreadyRegistered(email);
+        Thread.sleep(5000);
+
+        signInPage.inputPasswordAlreadyRegistered(email);
+        signInPage.signInAlreadyRegisteredButtonClick();
+        Thread.sleep(5000);
+
+        String actualTextFirst = signInPage.invalidMessageAlreadyRegisteredFirstText(driver);
+        String expectedTextFirst = signInPage.INVALID_MESSAGE_ALREADY_REGISTERED_FIRST;
+        Assert.assertEquals(actualTextFirst, expectedTextFirst);
+        System.out.println("The text of message is " + '"'
+                + signInPage.INVALID_MESSAGE_ALREADY_REGISTERED_FIRST + '"');
+
+        Thread.sleep(5000);
+
+        String actualTextSecond = signInPage.invalidMessageAlreadyRegisteredSecondText(driver);
+        String expectedTextSecond = signInPage.INVALID_PASSWORD_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_MISMATCHED;
+        Assert.assertEquals(actualTextSecond, expectedTextSecond);
+        System.out.println("The text of message is " + '"'
+                + signInPage.INVALID_PASSWORD_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_MISMATCHED + '"');
+    }
 }
