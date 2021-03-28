@@ -1,13 +1,15 @@
 package com.automationpractice;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.SignInPage;
 
 import java.util.List;
 
-//36 tests, 31 new
+//40 tests, 35 new
 public class CreateAnAccount extends BaseTestAbstract {
     String stringUrlMainPage = "http://automationpractice.com/index.php";
     String stringUrl = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
@@ -24,11 +26,13 @@ public class CreateAnAccount extends BaseTestAbstract {
 
         Assert.assertEquals(actualUrl, expectedUrl);
         System.out.println("Expected Url is correct");
+        driver.quit();
     }
 
     @Test
-    public void checkClickSignInAccountPage() {
+    public void checkClickSignInAccountPage() throws InterruptedException {
         driver.get(stringUrl);
+        Thread.sleep(5000);
 
         signInPage.clickSignInHeaderButton();
         String actualUrl = signInPage.actualUrlFind(driver);
@@ -36,6 +40,7 @@ public class CreateAnAccount extends BaseTestAbstract {
 
         Assert.assertEquals(actualUrl, expectedUrl);
         System.out.println("Expected Url is correct");
+        driver.quit();
     }
 
     @Test
@@ -46,6 +51,7 @@ public class CreateAnAccount extends BaseTestAbstract {
         String expected = signInPage.EXPECTED_SIGN_IN_HEADER_BUTTON_NAME;
 
         Assert.assertEquals(actual, expected);
+        driver.quit();
     }
 
     @Test
@@ -56,6 +62,7 @@ public class CreateAnAccount extends BaseTestAbstract {
         String expected = signInPage.EXPECTED_SIGN_IN_HEADER_BUTTON_NAME;
 
         Assert.assertEquals(actual, expected);
+        driver.quit();
     }
 
     @Test // works
@@ -71,6 +78,7 @@ public class CreateAnAccount extends BaseTestAbstract {
 
         Assert.assertEquals(actualTitle, expectedTitle);
         System.out.println("You are on Login - My Store");
+        driver.quit();
     }
 
     @Test
@@ -81,6 +89,7 @@ public class CreateAnAccount extends BaseTestAbstract {
         String expected = signInPage.EXPECTED_AUTHENTICATION_SECTION_TITLE;
 
         Assert.assertEquals(actual, expected.toUpperCase());
+        driver.quit();
     }
 
     @Test
@@ -91,6 +100,7 @@ public class CreateAnAccount extends BaseTestAbstract {
         String expected = signInPage.EXPECTED_CREATE_AN_ACCOUNT_TITLE_NAME;
 
         Assert.assertEquals(actual, expected);
+        driver.quit();
     }
 
     @Test
@@ -101,6 +111,7 @@ public class CreateAnAccount extends BaseTestAbstract {
         String expected = signInPage.EXPECTED_CREATE_AN_ACCOUNT_TEXT;
 
         Assert.assertEquals(actual, expected);
+        driver.quit();
     }
 
     @Test
@@ -113,6 +124,7 @@ public class CreateAnAccount extends BaseTestAbstract {
         Assert.assertEquals(actualName, expectedName);
         System.out.print("The title of email Address Field is " + '"'
                 + signInPage.EXPECTED_EMAIL_ADDRESS_FIELD_CREATE_AN_ACCOUNT_NAME + '"');
+        driver.quit();
     }
 
     @Test //works
@@ -125,6 +137,7 @@ public class CreateAnAccount extends BaseTestAbstract {
         signInPage.emailAddressFieldCreateAnAccountFind(driver);
         signInPage.inputEmail();
         signInPage.createAnAccountButtonClick();
+        driver.quit();
     }
 
     @Test // works
@@ -135,6 +148,7 @@ public class CreateAnAccount extends BaseTestAbstract {
         new SignInPage(driver).emailAddressFieldCreateAnAccountFind(driver);
         new SignInPage(driver).inputEmail();
         new SignInPage(driver).createAnAccountButtonClick();
+        driver.quit();
     }
 
     @Test // works
@@ -165,6 +179,7 @@ public class CreateAnAccount extends BaseTestAbstract {
         Assert.assertEquals(actual, expected);
         System.out.println("An account using this email address has already been registered. " +
                 "Please enter a valid password or request a new one.");
+        driver.quit();
     }
 
     @Test // Url put and creation of instance of "SignInPage" class moved to current class
@@ -182,6 +197,7 @@ public class CreateAnAccount extends BaseTestAbstract {
 
         Assert.assertEquals(actualText, expectedText);
         System.out.println("The text of message is " + '"' + signInPage.INVALID_EMAIL + '"');
+        driver.quit();
     }
 
     @Test
@@ -198,6 +214,7 @@ public class CreateAnAccount extends BaseTestAbstract {
 
         Assert.assertEquals(actualText, expectedText);
         System.out.println("The text of message is " + '"' + signInPage.INVALID_EMAIL + '"');
+        driver.quit();
     }
 
     @Test
@@ -211,6 +228,7 @@ public class CreateAnAccount extends BaseTestAbstract {
         new SignInPage(driver).inputEmail();
         //put....
         new SignInPage(driver).createAnAccountButtonClick();
+        driver.quit();
     }
 
     @Test
@@ -221,6 +239,7 @@ public class CreateAnAccount extends BaseTestAbstract {
         String expected = signInPage.EXPECTED_CREATE_AN_ACCOUNT_BUTTON_NAME;
 
         Assert.assertEquals(actual, expected);
+        driver.quit();
     }
 
     @Test
@@ -231,6 +250,7 @@ public class CreateAnAccount extends BaseTestAbstract {
         String expected = signInPage.EXPECTED_ALREADY_REGISTERED_TITLE;
 
         Assert.assertEquals(actual, expected);
+        driver.quit();
     }
 
     @Test
@@ -241,6 +261,7 @@ public class CreateAnAccount extends BaseTestAbstract {
         String expected = signInPage.EXPECTED_EMAIL_ADDRESS_FIELD_ALREADY_REGISTERED_NAME;
 
         Assert.assertEquals(actual, expected);
+        driver.quit();
     }
 
     @Test
@@ -251,6 +272,7 @@ public class CreateAnAccount extends BaseTestAbstract {
         String expected = signInPage.EXPECTED_PASSWORD_FIELD_ALREADY_REGISTERED_NAME;
 
         Assert.assertEquals(actual, expected);
+        driver.quit();
     }
 
     @Test
@@ -261,6 +283,7 @@ public class CreateAnAccount extends BaseTestAbstract {
         String expected = signInPage.EXPECTED_SIGN_IN_ALREADY_REGISTERED_BUTTON_NAME;
 
         Assert.assertEquals(actual, expected);
+        driver.quit();
     }
 
     @Test
@@ -269,6 +292,7 @@ public class CreateAnAccount extends BaseTestAbstract {
 
         signInPage.clickSignInHeaderButton();
         Thread.sleep(5000);
+        driver.quit();
     }
 
     @Test
@@ -279,6 +303,7 @@ public class CreateAnAccount extends BaseTestAbstract {
         String expected = signInPage.EXPECTED_FORGOT_YOUR_PASSWORD_NAME;
 
         Assert.assertEquals(actual, expected);
+        driver.quit();
     }
 
     @Test
@@ -302,6 +327,7 @@ public class CreateAnAccount extends BaseTestAbstract {
         Assert.assertEquals(actualTextSecond, expectedTextSecond);
         System.out.println("The text of message is " + '"'
                 + signInPage.INVALID_EMAIL_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_IS + '"');
+        driver.quit();
     }
 
     @Test
@@ -324,6 +350,7 @@ public class CreateAnAccount extends BaseTestAbstract {
         Assert.assertEquals(actualTextSecond, expectedTextSecond);
         System.out.println("The text of message is " + '"'
                 + signInPage.INVALID_EMAIL_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_EMPTY + '"');
+        driver.quit();
     }
 
     @Test
@@ -351,6 +378,7 @@ public class CreateAnAccount extends BaseTestAbstract {
         Assert.assertEquals(actualTextSecond, expectedTextSecond);
         System.out.println("The text of message is " + '"'
                 + signInPage.INVALID_PASSWORD_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_IS + '"');
+        driver.quit();
     }
 
     @Test
@@ -378,6 +406,7 @@ public class CreateAnAccount extends BaseTestAbstract {
         Assert.assertEquals(actualTextSecond, expectedTextSecond);
         System.out.println("The text of message is " + '"'
                 + signInPage.INVALID_PASSWORD_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_EMPTY + '"');
+        driver.quit();
     }
 
     @Test
@@ -405,6 +434,7 @@ public class CreateAnAccount extends BaseTestAbstract {
         Assert.assertEquals(actualTextSecond, expectedTextSecond);
         System.out.println("The text of message is " + '"'
                 + signInPage.INVALID_PASSWORD_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_MISMATCHED + '"');
+        driver.quit();
     }
 
     @Test
@@ -417,6 +447,7 @@ public class CreateAnAccount extends BaseTestAbstract {
         String expected = signInPage.CREATE_AN_ACCOUNT_PERSONAL_INFO_TITLE;
 
         Assert.assertEquals(actual, expected);
+        driver.quit();
     }
 
     @Test
@@ -429,6 +460,7 @@ public class CreateAnAccount extends BaseTestAbstract {
         String expected = signInPage.YOUR_PERSONAL_INFO_SECTION_TITLE;
 
         Assert.assertEquals(actual, expected);
+        driver.quit();
     }
 
     @Test
@@ -441,6 +473,7 @@ public class CreateAnAccount extends BaseTestAbstract {
         String expected = signInPage.YOUR_PERSONAL_INFO_TITLE;
 
         Assert.assertEquals(actual, expected);
+        driver.quit();
     }
 
     @Test
@@ -450,6 +483,7 @@ public class CreateAnAccount extends BaseTestAbstract {
         signInPage.inputEmail().createAnAccountButtonClick();
         signInPage.mrRadioButtonDisplayed();
         Assert.assertTrue(signInPage.mrRadioButtonDisplayed());
+        driver.quit();
     }
 
     @Test
@@ -459,6 +493,7 @@ public class CreateAnAccount extends BaseTestAbstract {
         signInPage.inputEmail().createAnAccountButtonClick();
         signInPage.mrRadioButtonEnabled();
         Assert.assertTrue(signInPage.mrRadioButtonEnabled());
+        driver.quit();
     }
 
     @Test
@@ -468,6 +503,7 @@ public class CreateAnAccount extends BaseTestAbstract {
         signInPage.inputEmail().createAnAccountButtonClick();
         signInPage.mrsRadioButtonDisplayed();
         Assert.assertTrue(signInPage.mrsRadioButtonDisplayed());
+        driver.quit();
     }
 
     @Test
@@ -477,6 +513,7 @@ public class CreateAnAccount extends BaseTestAbstract {
         signInPage.inputEmail().createAnAccountButtonClick();
         signInPage.mrsRadioButtonEnabled();
         Assert.assertTrue(signInPage.mrsRadioButtonEnabled());
+        driver.quit();
     }
 
     @Test
@@ -488,6 +525,7 @@ public class CreateAnAccount extends BaseTestAbstract {
         signInPage.clickMrRadioButton();
         signInPage.selectedStatusMr();
         Assert.assertTrue(signInPage.selectedStatusMr());
+        driver.quit();
     }
 
     @Test
@@ -499,7 +537,79 @@ public class CreateAnAccount extends BaseTestAbstract {
         signInPage.clickMrsRadioButton();
         signInPage.selectedStatusMrs();
         Assert.assertTrue(signInPage.selectedStatusMrs());
+        driver.quit();
     }
 
+    @Test
+    public void selectDropDown() throws InterruptedException {
+        driver.get(stringUrl);
 
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        //selecting the dropdown element by locating its id
+        Select select = new Select(driver.findElement(By.xpath("//*[@id='days']")));
+
+        //Get list of web elements of the dropdown
+        List<WebElement> lst = select.getOptions();
+
+        //Looping through the options and printing dropdown options
+        System.out.println("The dropdown options are:");
+        for (WebElement options : lst)
+            System.out.println(options.getText());
+
+        //Selecting the option as '4'-- selectByIndex
+        System.out.println("Select the Option by Index 4");
+        select.selectByIndex(4);
+        System.out.println("Select value is: " + select.getFirstSelectedOption().getText());
+
+        //Selecting the option as '-'-- selectByVisibleText
+        System.out.println("Select the Option by Text -");
+        select.selectByVisibleText("-");
+        System.out.println("Select value is: " + select.getFirstSelectedOption().getText());
+
+        //Selecting an option by its value
+        System.out.println("Select the Option by value 6");
+        select.selectByValue("6");
+        System.out.println("Select value is: " + select.getFirstSelectedOption().getText());
+        driver.quit();
+    }
+
+    @Test //failed. Question: how to check all options value simultaneously?
+    public void selectDropDownDaysAll() throws InterruptedException {
+        driver.get(stringUrl);
+
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        String actual = signInPage.dropDownDaysAllOptions();
+        int[] expected = signInPage.DROPDOWN_DAYS;
+
+        Assert.assertEquals(actual, expected);
+        driver.quit();
+    }
+
+    @Test //passed. Question: how to check all options value one by one? May I use loop (for) in method?
+    public void selectDropDownDaysOptionByIndex() throws InterruptedException {
+        driver.get(stringUrl);
+
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        signInPage.selectDropDownDaysOptionByIndex();
+        driver.quit();
+    }
+
+    @Test //passed. Question: how to check all options value one by one?
+    public void selectDropDownDaysOptionByValue() throws InterruptedException {
+        driver.get(stringUrl);
+
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        signInPage.selectDropDownDaysOptionByValue();
+        driver.quit();
+    }
 }
+
+

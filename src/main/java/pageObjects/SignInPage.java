@@ -4,6 +4,10 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SignInPage {
     public WebDriver driver;
@@ -29,6 +33,7 @@ public class SignInPage {
     WebElement yourPersonalInfoTitle;
     WebElement mrRadioButton;
     WebElement mrsRadioButton;
+    WebElement dropDownDays;
 
     WebElement newsLetterLink;
     WebElement enterYourEmailField;
@@ -77,6 +82,13 @@ public class SignInPage {
     String emailInvalid = "qwe@g";
     String passwordIncorrect = "123";
     String passwordCorrect = "zzz123";
+
+    public static final int[] DROPDOWN_DAYS = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+            21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
+            //"1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20," +
+            //"21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31";
+    //"1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31";
+
 
     //constructor
     public SignInPage(WebDriver driver) {
@@ -335,5 +347,32 @@ public class SignInPage {
         mrsRadioButton = driver.findElement(By.xpath("//*[@id='id_gender2']"));
         Boolean status = selectedStatus(mrsRadioButton);
         return status;
+    }
+
+    public String dropDownDaysAllOptions() {
+        //Find the dropdown element by xPath
+        Select select = new Select(driver.findElement(By.xpath("//*[@id='days']")));
+        //Get list of web elements
+        List<WebElement> list = select.getOptions();
+        for (WebElement dropDownDays : list) {
+            dropDownDays.getText();
+        }
+        return String.valueOf(this);
+    }
+
+    public SignInPage selectDropDownDaysOptionByIndex() {
+        Select select = new Select(driver.findElement(By.xpath("//*[@id='days']")));
+        int i = 0;
+        select.selectByIndex(i);
+        for (i = 0; i < DROPDOWN_DAYS.length; i++)
+        select.getFirstSelectedOption().getText();
+        return this;
+    }
+
+    public SignInPage selectDropDownDaysOptionByValue() {
+        Select select = new Select(driver.findElement(By.xpath("//*[@id='days']")));
+        select.selectByValue("6");
+        select.getFirstSelectedOption().getText();
+        return this;
     }
 }

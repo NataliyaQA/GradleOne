@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
-public class DropDown extends BaseTestAbstract {
+public class DropDownExample extends BaseTestAbstract {
 //    String stringUrl = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
 //
 //    SignInPage signInPage = new SignInPage(driver);
@@ -58,9 +58,9 @@ public class DropDown extends BaseTestAbstract {
         select.selectByIndex(4);
         System.out.println("Select value is: " + select.getFirstSelectedOption().getText());
 
-        //Step#6- Selecting the option as 'Magenta'-- selectByVisibleText
+        //Step#6- Selecting the option as '-'-- selectByVisibleText
         System.out.println("Select the Option by Text Magenta");
-        select.selectByVisibleText("Magenta");
+        select.selectByVisibleText("-");
         System.out.println("Select value is: " + select.getFirstSelectedOption().getText());
 
         //Step#7- Selecting an option by its value
