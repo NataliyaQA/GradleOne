@@ -42,13 +42,16 @@ public class BannersPage {
         this.driver = driver;
 
         firstBanner = driver.findElement(By.xpath("//img[contains(@src,\"sample-1.jpg\")]\n"));
-        firstBannerButton = driver.findElement(By.xpath("//img[contains(@src,'sample-1.jpg')]/ancestor::li[@class='homeslider-container']/div//button\n")); //1t banner button
+        firstBannerButton = driver.findElement(By.xpath("//img[contains(@src,'sample-1.jpg')]" +
+                "/ancestor::li[@class='homeslider-container']/div//button\n")); //1t banner button
 
         secondBanner = driver.findElement(By.xpath("//img[contains(@src,\"sample-2.jpg\")]\n")); //2d Carrousel Banner
-        secondBannerButton = driver.findElement(By.xpath("//img[contains(@src,'sample-2.jpg')]/ancestor::li[@class='homeslider-container']/div//button\n")); //2d banner button
+        secondBannerButton = driver.findElement(By.xpath("//img[contains(@src,'sample-2.jpg')]" +
+                "/ancestor::li[@class='homeslider-container']/div//button\n")); //2d banner button
 
         thirdBanner = driver.findElement(By.xpath("//img[contains(@src,\"sample-3.jpg\")]\n")); //3d Carrousel Banner
-        thirdBannerButton = driver.findElement(By.xpath("//img[contains(@src,'sample-3.jpg')]/ancestor::li[@class='homeslider-container']/div//button\n")); //3d banner button
+        thirdBannerButton = driver.findElement(By.xpath("//img[contains(@src,'sample-3.jpg')]" +
+                "/ancestor::li[@class='homeslider-container']/div//button\n")); //3d banner button
 
         rightArrowButton = driver.findElement(By.xpath("//a[@class='bx-next']")); //right arrow button
         leftArrowButton = driver.findElement(By.xpath("//a[@class='bx-prev']")); //left arrow button

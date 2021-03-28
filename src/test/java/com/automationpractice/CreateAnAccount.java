@@ -1,10 +1,13 @@
 package com.automationpractice;
 
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.SignInPage;
 
-//27 tests, 22 new
+import java.util.List;
+
+//36 tests, 31 new
 public class CreateAnAccount extends BaseTestAbstract {
     String stringUrlMainPage = "http://automationpractice.com/index.php";
     String stringUrl = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
@@ -403,4 +406,100 @@ public class CreateAnAccount extends BaseTestAbstract {
         System.out.println("The text of message is " + '"'
                 + signInPage.INVALID_PASSWORD_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_MISMATCHED + '"');
     }
+
+    @Test
+    public void createAnAccountPersonalInfoTitle() {
+        driver.get(stringUrl);
+
+        signInPage.inputEmail().createAnAccountButtonClick();
+
+        String actual = signInPage.createAnAccountPersonalInfoTitle(driver);
+        String expected = signInPage.CREATE_AN_ACCOUNT_PERSONAL_INFO_TITLE;
+
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test
+    public void yourPersonalInfoSectionTitle() {
+        driver.get(stringUrl);
+
+        signInPage.inputEmail().createAnAccountButtonClick();
+
+        String actual = signInPage.yourPersonalInfoSectionTitle();
+        String expected = signInPage.YOUR_PERSONAL_INFO_SECTION_TITLE;
+
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test
+    public void yourPersonalInfoTitle() {
+        driver.get(stringUrl);
+
+        signInPage.inputEmail().createAnAccountButtonClick();
+
+        String actual = signInPage.yourPersonalInfoTitle();
+        String expected = signInPage.YOUR_PERSONAL_INFO_TITLE;
+
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test
+    public void mrRadioButtonDisplayed() {
+        driver.get(stringUrl);
+
+        signInPage.inputEmail().createAnAccountButtonClick();
+        signInPage.mrRadioButtonDisplayed();
+        Assert.assertTrue(signInPage.mrRadioButtonDisplayed());
+    }
+
+    @Test
+    public void mrRadioButtonEnabled() {
+        driver.get(stringUrl);
+
+        signInPage.inputEmail().createAnAccountButtonClick();
+        signInPage.mrRadioButtonEnabled();
+        Assert.assertTrue(signInPage.mrRadioButtonEnabled());
+    }
+
+    @Test
+    public void mrsRadioButtonDisplayed() {
+        driver.get(stringUrl);
+
+        signInPage.inputEmail().createAnAccountButtonClick();
+        signInPage.mrsRadioButtonDisplayed();
+        Assert.assertTrue(signInPage.mrsRadioButtonDisplayed());
+    }
+
+    @Test
+    public void mrsRadioButtonEnabled() {
+        driver.get(stringUrl);
+
+        signInPage.inputEmail().createAnAccountButtonClick();
+        signInPage.mrsRadioButtonEnabled();
+        Assert.assertTrue(signInPage.mrsRadioButtonEnabled());
+    }
+
+    @Test
+    public void selectedStatusMrRadioButton() throws InterruptedException {
+        driver.get(stringUrl);
+
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+        signInPage.clickMrRadioButton();
+        signInPage.selectedStatusMr();
+        Assert.assertTrue(signInPage.selectedStatusMr());
+    }
+
+    @Test
+    public void selectedStatusMrsRadioButton() throws InterruptedException {
+        driver.get(stringUrl);
+
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+        signInPage.clickMrsRadioButton();
+        signInPage.selectedStatusMrs();
+        Assert.assertTrue(signInPage.selectedStatusMrs());
+    }
+
+
 }

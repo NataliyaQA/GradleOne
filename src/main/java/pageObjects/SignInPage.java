@@ -24,6 +24,12 @@ public class SignInPage {
     WebElement forgotYourPassword;
     WebElement invalidMessageAlreadyRegisteredFirst;
     WebElement invalidMessageAlreadyRegisteredSecond;
+    WebElement createAnAccountPersonalInfoTitle;
+    WebElement yourPersonalInfoSectionTitle;
+    WebElement yourPersonalInfoTitle;
+    WebElement mrRadioButton;
+    WebElement mrsRadioButton;
+
     WebElement newsLetterLink;
     WebElement enterYourEmailField;
     WebElement enterYourEmailButton;
@@ -37,48 +43,35 @@ public class SignInPage {
     String pageUrl;
 
     public static final String EXPECTED_TITLE = "Login - My Store";
-
     public static final String EXPECTED_URL = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
-
     public static final String EXPECTED_SIGN_IN_HEADER_BUTTON_NAME = "Sign in";
-
     public static final String EXPECTED_AUTHENTICATION_SECTION_TITLE = "Authentication";
-
     public static final String EXPECTED_CREATE_AN_ACCOUNT_TITLE_NAME = "CREATE AN ACCOUNT";
-
     public static final String EXPECTED_CREATE_AN_ACCOUNT_TEXT = "Please enter your email address to create an account.";
-
     public static final String EXPECTED_CREATE_AN_ACCOUNT_BUTTON_NAME = "Create an account";
-
     public static final String EXPECTED_EMAIL_ADDRESS_FIELD_CREATE_AN_ACCOUNT_NAME = "Email address";
-
     public static final String EXPECTED_ERROR_EXISTING_EMAIL = "An account using this email address has already been " +
             "registered. Please enter a valid password or request a new one.";
-
     public static final String INVALID_EMAIL = "Invalid email address.";
-
     public static final String EXPECTED_ALREADY_REGISTERED_TITLE = "ALREADY REGISTERED?";
-
     public static final String EXPECTED_EMAIL_ADDRESS_FIELD_ALREADY_REGISTERED_NAME = "Email address";
-
     public static final String EXPECTED_PASSWORD_FIELD_ALREADY_REGISTERED_NAME = "Password";
-
     public static final String EXPECTED_SIGN_IN_ALREADY_REGISTERED_BUTTON_NAME = "Sign in";
-
     public static final String EXPECTED_FORGOT_YOUR_PASSWORD_NAME = "Forgot your password?";
-
-    public static final String INVALID_MESSAGE_ALREADY_REGISTERED_FIRST = "There is 1 error" ;
-
+    public static final String INVALID_MESSAGE_ALREADY_REGISTERED_FIRST = "There is 1 error";
     public static final String INVALID_EMAIL_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_IS = "Invalid email address.";
-
     public static final String INVALID_EMAIL_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_EMPTY = "An email address required.";
-
     public static final String INVALID_PASSWORD_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_IS = "Invalid password.";
-
     public static final String INVALID_PASSWORD_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_EMPTY = "Password is required.";
-
     public static final String INVALID_PASSWORD_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_MISMATCHED = "Authentication" +
             " failed.";
+    public static final String CREATE_AN_ACCOUNT_PERSONAL_INFO_TITLE = "CREATE AN ACCOUNT";
+    public static final String YOUR_PERSONAL_INFO_SECTION_TITLE = "YOUR PERSONAL INFORMATION";
+    public static final String YOUR_PERSONAL_INFO_TITLE = "Title";
+
+    boolean displayedStatus;
+    boolean enabledStatus;
+    boolean selectedStatus;
 
     String emailO = "Auto_" + RandomStringUtils.randomAlphabetic(5) + "@mail.com";
     String emailInvalid = "qwe@g";
@@ -207,7 +200,6 @@ public class SignInPage {
         return this;
     }
 
-    //Overloading
     public SignInPage inputEmailCreateAnAccount(String email) {
         emailAddressFieldCreateAnAccount = driver.findElement(By.xpath("//*[@id='email_create']"));
         emailAddressFieldCreateAnAccount.sendKeys(email);
@@ -259,5 +251,89 @@ public class SignInPage {
     public String invalidMessageAlreadyRegisteredSecondText(WebDriver driver) {
         invalidMessageAlreadyRegisteredSecond = driver.findElement(By.xpath("//div[@id='center_column']//child::li"));
         return invalidMessageAlreadyRegisteredSecond.getText();
+    }
+
+    public String createAnAccountPersonalInfoTitle(WebDriver driver) {
+        createAnAccountPersonalInfoTitle = driver.findElement(By.xpath("//h1[text()='Create an account']"));
+        return createAnAccountPersonalInfoTitle.getText();
+    }
+
+    public String yourPersonalInfoSectionTitle() {
+        yourPersonalInfoSectionTitle = driver.findElement(By.xpath("//h3[text()='Your personal information']"));
+        return yourPersonalInfoSectionTitle.getText();
+    }
+
+    public String yourPersonalInfoTitle() {
+        yourPersonalInfoTitle = driver.findElement(By.xpath("//div[@class='clearfix']/label"));
+        return yourPersonalInfoTitle.getText();
+    }
+
+    //General
+    public Boolean isDisplayed(WebElement webElement) {
+        displayedStatus = webElement.isDisplayed();
+        return displayedStatus;
+    }
+
+    public Boolean mrRadioButtonDisplayed() {
+        mrRadioButton = driver.findElement(By.xpath("//*[@id='id_gender1']"));
+        Boolean displayed = isDisplayed(mrRadioButton);
+        return displayed;
+    }
+
+    public Boolean mrsRadioButtonDisplayed() {
+        mrsRadioButton = driver.findElement(By.xpath("//*[@id='id_gender2']"));
+        Boolean displayed = isDisplayed(mrsRadioButton);
+        return displayed;
+    }
+
+    //General
+    public Boolean isEnabled(WebElement webElement) {
+        enabledStatus = webElement.isEnabled();
+        return enabledStatus;
+    }
+
+    public Boolean mrRadioButtonEnabled() {
+        mrRadioButton = driver.findElement(By.xpath("//*[@id='id_gender1']"));
+        Boolean enabled = isEnabled(mrRadioButton);
+        return enabled;
+    }
+
+    public Boolean mrsRadioButtonEnabled() {
+        mrsRadioButton = driver.findElement(By.xpath("//*[@id='id_gender2']"));
+        Boolean enabled = isEnabled(mrsRadioButton);
+        return enabled;
+    }
+
+    //General
+    public void clickAction(WebElement clickElement) {
+        clickElement.click();
+    }
+
+    public void clickMrRadioButton() {
+        mrRadioButton = driver.findElement(By.xpath("//*[@id='id_gender1']"));
+        clickAction(mrRadioButton);
+    }
+
+    public void clickMrsRadioButton() {
+        mrsRadioButton = driver.findElement(By.xpath("//*[@id='id_gender2']"));
+        clickAction(mrsRadioButton);
+    }
+
+    //General
+    public Boolean selectedStatus(WebElement webElement) {
+        selectedStatus = webElement.isSelected();
+        return selectedStatus;
+    }
+
+    public Boolean selectedStatusMr() {
+        mrRadioButton = driver.findElement(By.xpath("//*[@id='id_gender1']"));
+        Boolean status = selectedStatus(mrRadioButton);
+        return status;
+    }
+
+    public Boolean selectedStatusMrs() {
+        mrsRadioButton = driver.findElement(By.xpath("//*[@id='id_gender2']"));
+        Boolean status = selectedStatus(mrsRadioButton);
+        return status;
     }
 }

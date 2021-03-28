@@ -21,10 +21,10 @@ public class BaseTestAbstract {
         driver.get("http://automationpractice.com/");
     }
 
-    @AfterMethod
-    public void tearDown() {
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.quit();
-    }
+//    @AfterMethod
+//    public void tearDown() {
+//        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//        driver.quit();
+//    }
 
 }
