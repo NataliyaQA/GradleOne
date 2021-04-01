@@ -575,15 +575,15 @@ public class CreateAnAccount extends BaseTestAbstract {
         driver.quit();
     }
 
-    @Test //failed. Question: how to check all options value simultaneously?
+    @Test
     public void selectDropDownDaysAll() throws InterruptedException {
         driver.get(stringUrl);
 
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
 
-        String actual = signInPage.dropDownDaysAllOptions();
-        int[] expected = signInPage.DROPDOWN_DAYS;
+        int [] actual = signInPage.dropDownDaysAllOptions();
+        int [] expected = signInPage.DROPDOWN_DAYS;
 
         Assert.assertEquals(actual, expected);
         driver.quit();

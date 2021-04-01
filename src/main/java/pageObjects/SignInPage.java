@@ -83,10 +83,9 @@ public class SignInPage {
     String passwordIncorrect = "123";
     String passwordCorrect = "zzz123";
 
-    public static final int[] DROPDOWN_DAYS = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+    public static final int [] DROPDOWN_DAYS = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
             21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
-            //"1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20," +
-            //"21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31";
+
     //"1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31";
 
 
@@ -349,15 +348,19 @@ public class SignInPage {
         return status;
     }
 
-    public String dropDownDaysAllOptions() {
+    public int [] dropDownDaysAllOptions() {
         //Find the dropdown element by xPath
         Select select = new Select(driver.findElement(By.xpath("//*[@id='days']")));
         //Get list of web elements
         List<WebElement> list = select.getOptions();
-        for (WebElement dropDownDays : list) {
-            dropDownDays.getText();
+        list.remove(0);
+        List<Integer> bufferListStringToInteger = new ArrayList<>();
+        for (WebElement optionDayOfDropDownDays : list) {
+            bufferListStringToInteger.add(Integer.parseInt(optionDayOfDropDownDays.getText()
+                    .replaceAll("&nbsp;","").trim()));
         }
-        return String.valueOf(this);
+        int[] dropDownDays = bufferListStringToInteger.stream().mapToInt(i->i).toArray();
+        return dropDownDays;
     }
 
     public SignInPage selectDropDownDaysOptionByIndex() {
