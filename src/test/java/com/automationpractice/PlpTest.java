@@ -8,7 +8,7 @@ import static org.testng.Assert.assertTrue;
 
 //2 tests
 
-public class Plp extends BaseTestAbstract {
+public class PlpTest extends BaseTestAbstractClass {
     String buttonMore = "More";
 
     @Test

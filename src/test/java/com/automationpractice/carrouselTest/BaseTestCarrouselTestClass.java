@@ -1,10 +1,10 @@
-package com.automationpractice.carrousel;
+package com.automationpractice.carrouselTest;
 
-import com.automationpractice.BaseTestAbstract;
+import com.automationpractice.BaseTestAbstractClass;
 import org.testng.annotations.BeforeMethod;
 
 //written for Carrousel Package only, but extends main abstract class "BaseTestClass"
-public class BaseTestCarrousel extends BaseTestAbstract {
+public class BaseTestCarrouselTestClass extends BaseTestAbstractClass {
     @BeforeMethod
     public void setUp() {
         //System.setProperty("webdriver.chrome.driver", "src/main/resources/Drivers/chromedriver.exe"); // moved to Wrapper

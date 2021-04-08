@@ -1,4 +1,4 @@
-package com.automationpractice.carrousel;
+package com.automationpractice.carrouselTest;
 
 import logs.Log;
 import logs.LogType;
@@ -11,7 +11,7 @@ import static org.testng.Assert.assertEquals;
 
 //4 tests created
 
-public class CarrouselBannerTest extends BaseTestCarrousel {
+public class CarrouselBannerTestClass extends BaseTestCarrouselTestClass {
 
     @Test
     //re-wrote  + question (why we return to the initial page and make there verification, why don't do it on redirection page?)

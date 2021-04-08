@@ -10,7 +10,7 @@ import pageObjects.SignInPage;
 import java.util.List;
 
 //40 tests, 35 new
-public class CreateAnAccount extends BaseTestAbstract {
+public class CreateAnAccountTest extends BaseTestAbstractClass {
     String stringUrlMainPage = "http://automationpractice.com/index.php";
     String stringUrl = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
 
@@ -584,19 +584,44 @@ public class CreateAnAccount extends BaseTestAbstract {
 
         int [] actual = signInPage.dropDownDaysAllOptions();
         int [] expected = signInPage.DROPDOWN_DAYS;
-
+        int index = generateRandomIntInRange(0, expected.length - 1);
         Assert.assertEquals(actual, expected);
+        Assert.assertEquals(actual[index], expected[index]);
+        System.out.println("*********" + index + " " + actual[index]  + " " + expected[index]);
         driver.quit();
     }
 
-    @Test //passed. Question: how to check all options value one by one? May I use loop (for) in method?
-    public void selectDropDownDaysOptionByIndex() throws InterruptedException {
+    @Test //passed
+    public void selectDropDownDaysOption() throws InterruptedException {
         driver.get(stringUrl);
 
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
 
-        signInPage.selectDropDownDaysOptionByIndex();
+        int [] actual = signInPage.dropDownDaysAllOptions();
+        int [] expected = signInPage.DROPDOWN_DAYS;
+
+        Assert.assertEquals(actual.length, expected.length, "Compare list length");
+        // update with stream
+        for (int i=0; i < expected.length; i++) {
+            Assert.assertEquals(actual[i], expected[i]);
+        }
+        driver.quit();
+    }
+
+    @Test //passed
+    public void selectDropDownDaysOptionOneByOne() throws InterruptedException {
+        driver.get(stringUrl);
+
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        int [] actual = signInPage.dropDownDaysAllOptions();
+
+        for (int i=0; i < 31; i++) {
+            int tmp = i;
+            Assert.assertEquals(actual[i], tmp+1);
+        }
         driver.quit();
     }
 
@@ -608,7 +633,22 @@ public class CreateAnAccount extends BaseTestAbstract {
         Thread.sleep(5000);
 
         signInPage.selectDropDownDaysOptionByValue();
-        driver.quit();
+        driver.quit(); //question
+    }
+
+    @Test //failed. Compare option one by one found by value
+    public void selectDropDownDaysOptionByValueOneByOne() throws InterruptedException {
+        driver.get(stringUrl);
+
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        int [] actual = (int[]) signInPage.selectDropDownDaysOptionByValueOneByOne();
+        for (int i=0; i < 31; i++) {
+            int tmp = i;
+            Assert.assertEquals(actual[i], tmp+1);
+        }
+        //driver.quit();
     }
 }
 

@@ -83,7 +83,7 @@ public class SignInPage {
     String passwordIncorrect = "123";
     String passwordCorrect = "zzz123";
 
-    public static final int [] DROPDOWN_DAYS = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+    public static final int[] DROPDOWN_DAYS = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
             21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
 
     //"1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31";
@@ -348,7 +348,7 @@ public class SignInPage {
         return status;
     }
 
-    public int [] dropDownDaysAllOptions() {
+    public int[] dropDownDaysAllOptions() {
         //Find the dropdown element by xPath
         Select select = new Select(driver.findElement(By.xpath("//*[@id='days']")));
         //Get list of web elements
@@ -356,25 +356,37 @@ public class SignInPage {
         list.remove(0);
         List<Integer> bufferListStringToInteger = new ArrayList<>();
         for (WebElement optionDayOfDropDownDays : list) {
+            //if optionDayOfDropDownDays !=
             bufferListStringToInteger.add(Integer.parseInt(optionDayOfDropDownDays.getText()
-                    .replaceAll("&nbsp;","").trim()));
+                    .replaceAll("&nbsp;", "").trim()));
         }
-        int[] dropDownDays = bufferListStringToInteger.stream().mapToInt(i->i).toArray();
+        int[] dropDownDays = bufferListStringToInteger.stream().mapToInt(i -> i).toArray();
         return dropDownDays;
-    }
-
-    public SignInPage selectDropDownDaysOptionByIndex() {
-        Select select = new Select(driver.findElement(By.xpath("//*[@id='days']")));
-        int i = 0;
-        select.selectByIndex(i);
-        for (i = 0; i < DROPDOWN_DAYS.length; i++)
-        select.getFirstSelectedOption().getText();
-        return this;
     }
 
     public SignInPage selectDropDownDaysOptionByValue() {
         Select select = new Select(driver.findElement(By.xpath("//*[@id='days']")));
         select.selectByValue("6");
+        select.getFirstSelectedOption().getText();
+        return this;
+    }
+
+    // I'd like to select all options of dropdown by value (one by one), where value = each option of
+    // DROPDOWN_DAYS array found by index
+    public Object selectDropDownDaysOptionByValueOneByOne() {
+        Select select = new Select(driver.findElement(By.xpath("//*[@id='days']")));
+        List<WebElement> list = select.getOptions();
+        list.toArray();
+        List<Integer> exListString = new ArrayList<>();
+        int i;
+        for (i = 0; i < DROPDOWN_DAYS.length; i++) {
+            select.selectByIndex(i);
+            select.getFirstSelectedOption().getText();
+            exListString.add(i);
+            return exListString;
+        }
+        //select.setSelectedByIndex(i);
+        select.selectByValue(String.valueOf(i));
         select.getFirstSelectedOption().getText();
         return this;
     }

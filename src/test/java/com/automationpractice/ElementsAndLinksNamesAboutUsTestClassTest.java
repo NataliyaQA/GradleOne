@@ -1,15 +1,12 @@
 package com.automationpractice;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
-import org.testng.annotations.TestInstance;
 import pageObjects.AboutUsPage;
 import pageObjects.SearchHomePageElements;
 
 import static org.testng.Assert.assertEquals;
 
-public class ElementsAndLinksNamesAboutUsTest extends BaseTestAbstract {
+public class ElementsAndLinksNamesAboutUsTestClassTest extends BaseTestAbstractClass {
     AboutUsPage aboutUsPage;
 
     /**

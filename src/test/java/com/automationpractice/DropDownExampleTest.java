@@ -5,14 +5,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.*;
-import pageObjects.SignInPage;
 
-import java.sql.Driver;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
-public class DropDownExample extends BaseTestAbstract {
+public class DropDownExampleTest extends BaseTestAbstractClass {
 //    String stringUrl = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
 //
 //    SignInPage signInPage = new SignInPage(driver);

@@ -7,9 +7,10 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import wrapper.Wrapper;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-public class BaseTestAbstract {
+public class BaseTestAbstractClass {
     public WebDriver driver = Wrapper.getDriver();
 
     @BeforeMethod
@@ -26,5 +27,10 @@ public class BaseTestAbstract {
 //        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 //        driver.quit();
 //    }
+
+    public static int generateRandomIntInRange(int min, int max) {
+        Random r = new Random();
+        return r.nextInt((max - min) + 1) + min;
+    }
 
 }

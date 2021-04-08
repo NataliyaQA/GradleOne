@@ -12,7 +12,7 @@ import static org.testng.Assert.assertEquals;
 
 //13 tests created
 
-public class OpenCloseMainPagesUrlTest extends BaseTestAbstract {
+public class OpenCloseMainPagesUrlTest extends BaseTestAbstractClass {
 
     /**
      * Check title of Home page

@@ -8,7 +8,7 @@ import static org.testng.Assert.assertEquals;
 
 //9 tests created
 
-public class MenuTest extends BaseTestAbstract {
+public class MenuTestClassTest extends BaseTestAbstractClass {
 
     /**
      * Check redirection and link of T-Shirt page via T-Shirt submenu of Women menu

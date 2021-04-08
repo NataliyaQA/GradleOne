@@ -1,4 +1,4 @@
 package com.automationpractice;
 
-public class Login {
+public class LoginTest {
 }

@@ -2,7 +2,7 @@ package com.automationpractice;
 
 import org.testng.annotations.Test;
 
-public class Checkout extends BaseTestAbstract {
+public class CheckoutTest extends BaseTestAbstractClass {
 
     @Test
     public void findProduct () {
