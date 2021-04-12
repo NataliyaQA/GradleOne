@@ -582,8 +582,8 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
 
-        int [] actual = signInPage.dropDownDaysAllOptions();
-        int [] expected = signInPage.DROPDOWN_DAYS;
+        int[] actual = signInPage.dropDownDaysAllOptions();
+        int[] expected = signInPage.DROPDOWN_DAYS;
         int index = generateRandomIntInRange(0, expected.length - 1);
         Assert.assertEquals(actual, expected);
         Assert.assertEquals(actual[index], expected[index]);
@@ -598,8 +598,8 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
 
-        int [] actual = signInPage.dropDownDaysAllOptions();
-        int [] expected = signInPage.DROPDOWN_DAYS;
+        int[] actual = signInPage.dropDownDaysAllOptions();
+        int[] expected = signInPage.DROPDOWN_DAYS;
 
         Assert.assertEquals(actual.length, expected.length, "Compare list length");
         // update with stream
@@ -616,7 +616,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
 
-        int [] actual = signInPage.dropDownDaysAllOptions();
+        int[] actual = signInPage.dropDownDaysAllOptions();
 
         for (int i=0; i < 31; i++) {
             int tmp = i;
@@ -643,12 +643,109 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
 
-        int [] actual = (int[]) signInPage.selectDropDownDaysOptionByValueOneByOne();
+        int[] actual = (int[]) signInPage.selectDropDownDaysOptionByValueOneByOne();
         for (int i=0; i < 31; i++) {
             int tmp = i;
             Assert.assertEquals(actual[i], tmp+1);
         }
         //driver.quit();
+    }
+
+    @Test // does not work. java.lang.ClassCastException: [Ljava.lang.Object; cannot be cast to [Ljava.lang.String;
+    public void selectDropDownMonthsAllOne() throws InterruptedException {
+        driver.get(stringUrl);
+
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        String[] actual = signInPage.dropDownMonthsAllOptionsOne();
+        String[] expected = signInPage.DROPDOWN_MONTHS;
+        int index = generateRandomIntInRange(0, expected.length - 1);
+        Assert.assertEquals(actual, expected);
+        Assert.assertEquals(actual[index], expected[index]);
+        System.out.println("*********" + index + " " + actual[index]  + " " + expected[index]);
+        driver.quit();
+    }
+
+    @Test // does not work. java.lang.AssertionError: Arrays do not have the same size:13 != 12
+    public void selectDropDownMonthsAll() throws InterruptedException {
+        driver.get(stringUrl);
+
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        String[] actual = (String[]) signInPage.dropDownMonthsAllOptions();
+        String[] expected = signInPage.DROPDOWN_MONTHS;
+        int index = generateRandomIntInRange(0, expected.length);
+        Assert.assertEquals(actual, expected);
+        Assert.assertEquals(actual[index], expected[index]);
+        System.out.println("*********" + index + " " + actual[index]  + " " + expected[index]);
+        driver.quit();
+    }
+
+    @Test //passed
+    public void checkEmailFieldIfNotEmpty() throws InterruptedException {
+        driver.get(stringUrl);
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        boolean actual = signInPage.emptyField();
+        boolean expected = false;
+        Assert.assertEquals(actual, expected);
+
+
+        System.out.println(signInPage.emptyField());
+    }
+
+    @Test //passed
+    public void checkEmailFieldValue() throws InterruptedException {
+        driver.get(stringUrl);
+        signInPage.inputEmail();
+        Thread.sleep(5000);
+        String newEmail = signInPage.valueOfEmailFieldHomePage();
+
+        signInPage.createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        String actual = signInPage.valueOfEmailField();
+        String expected = newEmail;
+        Assert.assertEquals(actual, expected);
+
+        System.out.println(signInPage.valueOfEmailField());
+    }
+
+    @Test
+    public void deleteValue() throws InterruptedException {
+        driver.get(stringUrl);
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        signInPage.deleteValue();
+
+        boolean actual = signInPage.emptyField();
+        boolean expected = true;
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test
+    public void errorAlert() throws InterruptedException {
+        driver.get(stringUrl);
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        signInPage.deleteValue();
+        signInPage.clickRegisterButton();
+        WebElement errorAlert = signInPage.errorAlert();
+        Assert.assertTrue(errorAlert.isDisplayed());
+    }
+
+    @Test
+    public void countryDropDown() throws InterruptedException {
+        driver.get(stringUrl);
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        signInPage.countryDropDown();
     }
 }
 

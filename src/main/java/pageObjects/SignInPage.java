@@ -4,6 +4,7 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
@@ -33,6 +34,17 @@ public class SignInPage {
     WebElement yourPersonalInfoTitle;
     WebElement mrRadioButton;
     WebElement mrsRadioButton;
+
+    WebElement firstNameField;
+    WebElement lastNameField;
+    WebElement emailField;
+    WebElement passwordField;
+    WebElement country;
+
+    WebElement registerButton;
+
+    WebElement errorAlert;
+
     WebElement dropDownDays;
 
     WebElement newsLetterLink;
@@ -73,6 +85,15 @@ public class SignInPage {
     public static final String CREATE_AN_ACCOUNT_PERSONAL_INFO_TITLE = "CREATE AN ACCOUNT";
     public static final String YOUR_PERSONAL_INFO_SECTION_TITLE = "YOUR PERSONAL INFORMATION";
     public static final String YOUR_PERSONAL_INFO_TITLE = "Title";
+    public static final String COUNTRY = "Country";
+
+
+//    public static final String FIRSTNAME_FIELD = "First name";
+//    public static final String LASTNAME_FIELD = "Last name";
+//    public static final String EMAIL_FIELD = "Email";
+//    public static final String PASSWORD_FIELD = "Password";
+
+    public static final String REGISTER_BUTTON = "Register";
 
     boolean displayedStatus;
     boolean enabledStatus;
@@ -82,12 +103,17 @@ public class SignInPage {
     String emailInvalid = "qwe@g";
     String passwordIncorrect = "123";
     String passwordCorrect = "zzz123";
+//    String textFieldAlphabetic = RandomStringUtils.randomAlphabetic(5);
+//    String testFieldAlphaNumeric = RandomStringUtils.randomAlphanumeric(5);
+//    String testField = RandomStringUtils.random(15, 6, 10, true, true);
 
     public static final int[] DROPDOWN_DAYS = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
             21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
 
     //"1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31";
 
+    public static final String[] DROPDOWN_MONTHS = {"January", "February", "March", "April", "May", "June", "July",
+            "August", "September", "October", "November", "December"};
 
     //constructor
     public SignInPage(WebDriver driver) {
@@ -356,7 +382,6 @@ public class SignInPage {
         list.remove(0);
         List<Integer> bufferListStringToInteger = new ArrayList<>();
         for (WebElement optionDayOfDropDownDays : list) {
-            //if optionDayOfDropDownDays !=
             bufferListStringToInteger.add(Integer.parseInt(optionDayOfDropDownDays.getText()
                     .replaceAll("&nbsp;", "").trim()));
         }
@@ -390,4 +415,82 @@ public class SignInPage {
         select.getFirstSelectedOption().getText();
         return this;
     }
+
+    //does not work
+    public String[] dropDownMonthsAllOptionsOne() {
+        //Find the dropdown element by xPath
+        Select select = new Select(driver.findElement(By.xpath("//*[@id='months']")));
+        //Get list of web elements
+        List<WebElement> list = select.getOptions();
+        List<String> listString = new ArrayList<>();
+        for (WebElement optionMonthOfDropDownMonths : list) {
+            listString.add(optionMonthOfDropDownMonths.getText()
+                    .replaceAll("&nbsp;", "").trim());
+        }
+        String[] dropDownMonths = (String[]) listString.stream().map(x -> x.toString()).sorted().toArray(); //map, lambda?
+        // For lambda I should have link to functional interface. How to know to which one? Where and what to write?
+        return dropDownMonths;
+    }
+
+    public Object[] dropDownMonthsAllOptions() {
+        //Find the dropdown element by xPath
+        Select select = new Select(driver.findElement(By.xpath("//*[@id='months']")));
+        //Get list of web elements
+        List<WebElement> list = select.getOptions();
+        List<String> listString = new ArrayList<>();
+        for (WebElement optionMonthOfDropDownMonths : list) {
+            listString.add(optionMonthOfDropDownMonths.getText()
+                    .replaceAll("&nbsp;", "").trim());
+        }
+        Object[] dropDownMonths = listString.stream().map(x -> x.toString()).sorted().toArray(); //map, lambda?
+        // For lambda I should have link to functional interface. How to know to which one? Where and what to write?
+        return dropDownMonths;
+    }
+
+    public void clickRegisterButton() {
+        registerButton = driver.findElement(By.xpath("//button[@id='submitAccount']"));
+        clickAction(registerButton);
+    }
+
+    public boolean emptyField() {
+        emailField = driver.findElement(By.xpath("//*[@id='email']"));
+        if (emailField.getAttribute("value").isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public String valueOfEmailFieldHomePage() {
+        emailField = driver.findElement(By.xpath("//*[@id='email_create']"));
+        String value = emailField.getAttribute("value");
+        return value;
+    }
+
+    public String valueOfEmailField() {
+        emailField = driver.findElement(By.xpath("//*[@id='email']"));
+        String value = emailField.getAttribute("value");
+        return value;
+    }
+
+    public void deleteValue() {
+        emailField = driver.findElement(By.xpath("//*[@id='email']"));
+        emailField.clear();
+    }
+
+    public WebElement errorAlert() {
+        errorAlert = driver.findElement(By.xpath("//div[@class='alert alert-danger']"));
+        return errorAlert;
+    }
+
+    public void countryDropDown() {
+        Actions action = new Actions(driver);
+        country = driver.findElement(By.xpath("//*[@id='id_country']"));
+        action.moveToElement(country).build().perform();
+        country.click();
+
+        Select select = new Select(country);
+        select.selectByValue("21");
+    }
 }
+
