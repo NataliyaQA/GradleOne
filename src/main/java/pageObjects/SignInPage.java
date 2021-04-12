@@ -483,14 +483,14 @@ public class SignInPage {
         return errorAlert;
     }
 
-    public void countryDropDown() {
+    public void countryDropDownFirstOption() {
         Actions action = new Actions(driver);
         country = driver.findElement(By.xpath("//*[@id='id_country']"));
         action.moveToElement(country).build().perform();
         country.click();
 
         Select select = new Select(country);
-        select.selectByValue("21");
+        select.selectByIndex(0);
     }
 }
 

@@ -714,7 +714,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         System.out.println(signInPage.valueOfEmailField());
     }
 
-    @Test
+    @Test //passed
     public void deleteValue() throws InterruptedException {
         driver.get(stringUrl);
         signInPage.inputEmail().createAnAccountButtonClick();
@@ -727,25 +727,26 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         Assert.assertEquals(actual, expected);
     }
 
-    @Test
-    public void errorAlert() throws InterruptedException {
+    @Test //passed
+    public void errorAlertAll() throws InterruptedException {
         driver.get(stringUrl);
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
 
         signInPage.deleteValue();
+        signInPage.countryDropDownFirstOption();
         signInPage.clickRegisterButton();
         WebElement errorAlert = signInPage.errorAlert();
         Assert.assertTrue(errorAlert.isDisplayed());
     }
 
-    @Test
-    public void countryDropDown() throws InterruptedException {
+    @Test //passed
+    public void countryDropDownFirstOption() throws InterruptedException {
         driver.get(stringUrl);
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
 
-        signInPage.countryDropDown();
+        signInPage.countryDropDownFirstOption();
     }
 }
 
