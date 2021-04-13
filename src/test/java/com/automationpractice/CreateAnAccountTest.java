@@ -540,7 +540,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         driver.quit();
     }
 
-    @Test
+    @Test //passed
     public void selectDropDown() throws InterruptedException {
         driver.get(stringUrl);
 
@@ -636,30 +636,44 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         driver.quit(); //question
     }
 
-    @Test //failed. Compare option one by one found by value
-    public void selectDropDownDaysOptionByValueOneByOne() throws InterruptedException {
+    @Test // passed
+    public void selectDropDownMonthsAllOptions() throws InterruptedException {
         driver.get(stringUrl);
 
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
 
-        int[] actual = (int[]) signInPage.selectDropDownDaysOptionByValueOneByOne();
-        for (int i=0; i < 31; i++) {
-            int tmp = i;
-            Assert.assertEquals(actual[i], tmp+1);
-        }
-        //driver.quit();
+        List<String> actual = signInPage.dropDownMonthsAllOptions();
+        List<String> expected = signInPage.DROPDOWN_MONTHS;
+        int index = generateRandomIntInRange(0, expected.size() - 1);
+        Assert.assertEquals(actual.get(index), expected.get(index));
+        System.out.println("*********" + index + " " + actual.get(index)  + " " + expected.get(index));
+        driver.quit();
     }
 
-    @Test // does not work. java.lang.ClassCastException: [Ljava.lang.Object; cannot be cast to [Ljava.lang.String;
-    public void selectDropDownMonthsAllOne() throws InterruptedException {
+    @Test // passed
+    public void selectDropDownMonthsOneOption() throws InterruptedException {
         driver.get(stringUrl);
 
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
 
-        String[] actual = signInPage.dropDownMonthsAllOptionsOne();
-        String[] expected = signInPage.DROPDOWN_MONTHS;
+        List<String> actual = signInPage.dropDownMonthsAllOptions();
+        List<String> expected = signInPage.DROPDOWN_MONTHS;
+        Assert.assertEquals(actual, expected);
+        System.out.println("*********" + actual + " \n " +  expected);
+        driver.quit();
+    }
+
+    @Test
+    public void selectDropDownYearsAll() throws InterruptedException {
+        driver.get(stringUrl);
+
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        int[] actual = signInPage.dropDownYearsAllOptions();
+        int[] expected = signInPage.DROPDOWN_YEARS;
         int index = generateRandomIntInRange(0, expected.length - 1);
         Assert.assertEquals(actual, expected);
         Assert.assertEquals(actual[index], expected[index]);
@@ -667,19 +681,21 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         driver.quit();
     }
 
-    @Test // does not work. java.lang.AssertionError: Arrays do not have the same size:13 != 12
-    public void selectDropDownMonthsAll() throws InterruptedException {
+    @Test //passed
+    public void selectDropDownYearsOption() throws InterruptedException {
         driver.get(stringUrl);
 
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
 
-        String[] actual = (String[]) signInPage.dropDownMonthsAllOptions();
-        String[] expected = signInPage.DROPDOWN_MONTHS;
-        int index = generateRandomIntInRange(0, expected.length);
-        Assert.assertEquals(actual, expected);
-        Assert.assertEquals(actual[index], expected[index]);
-        System.out.println("*********" + index + " " + actual[index]  + " " + expected[index]);
+        int[] actual = signInPage.dropDownYearsAllOptions();
+        int[] expected = signInPage.DROPDOWN_YEARS;
+
+        Assert.assertEquals(actual.length, expected.length, "Compare list length");
+        // update with stream
+        for (int i=0; i < expected.length; i++) {
+            Assert.assertEquals(actual[i], expected[i]);
+        }
         driver.quit();
     }
 
@@ -728,7 +744,16 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
     }
 
     @Test //passed
-    public void errorAlertAll() throws InterruptedException {
+    public void countryDropDownFirstOption() throws InterruptedException {
+        driver.get(stringUrl);
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        signInPage.countryDropDownFirstOption();
+    }
+
+    @Test //passed
+    public void errorAlertIs() throws InterruptedException {
         driver.get(stringUrl);
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
@@ -736,17 +761,26 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         signInPage.deleteValue();
         signInPage.countryDropDownFirstOption();
         signInPage.clickRegisterButton();
+
         WebElement errorAlert = signInPage.errorAlert();
         Assert.assertTrue(errorAlert.isDisplayed());
     }
 
     @Test //passed
-    public void countryDropDownFirstOption() throws InterruptedException {
+    public void errorAlertText() throws InterruptedException {
         driver.get(stringUrl);
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
 
+        signInPage.deleteValue();
         signInPage.countryDropDownFirstOption();
+        signInPage.clickRegisterButton();
+
+        WebElement errorAlert = signInPage.errorAlert();
+        String actual = errorAlert.getText();
+        System.out.println("result:" + "\n" + actual);
+
+        Assert.assertEquals(actual, signInPage.ALERT_ERROR);
     }
 }
 
