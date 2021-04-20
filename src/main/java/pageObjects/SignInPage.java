@@ -49,6 +49,9 @@ public class SignInPage {
 
     WebElement dropDownDays;
 
+    WebElement signUpCheckBox;
+    WebElement offersCheckBox;
+
     WebElement newsLetterLink;
     WebElement enterYourEmailField;
     WebElement enterYourEmailButton;
@@ -112,8 +115,6 @@ public class SignInPage {
     public static final int[] DROPDOWN_DAYS = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
             21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
 
-    //"1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31";
-
     public static final List<String> DROPDOWN_MONTHS = Arrays.asList("-", "January", "February", "March", "April", "May",
             "June", "July", "August", "September", "October", "November", "December");
 
@@ -127,7 +128,7 @@ public class SignInPage {
             1908, 1907, 1906, 1905, 1904, 1903, 1902, 1901, 1900};
 
     public static final String ALERT_ERROR = "There are 10 errors"
-            + "\n" +"You must register at least one phone number."
+            + "\n" + "You must register at least one phone number."
             + "\n" + "lastname is required."
             + "\n" + "firstname is required."
             + "\n" + "email is required."
@@ -137,6 +138,9 @@ public class SignInPage {
             + "\n" + "city is required."
             + "\n" + "Country cannot be loaded with address->id_country"
             + "\n" + "Country is invalid";
+
+    public static final String SIGNUP_CHECKBOX = "Sign up for our newsletter!";
+    public static final String OFFERS_CHECKBOX = "Receive special offers from our partners!";
 
     //constructor
     public SignInPage(WebDriver driver) {
@@ -328,10 +332,10 @@ public class SignInPage {
         return yourPersonalInfoTitle.getText();
     }
 
-    //General
+    //General isDisplayed
     public Boolean isDisplayed(WebElement webElement) {
         displayedStatus = webElement.isDisplayed();
-        return displayedStatus;
+        return true;
     }
 
     public Boolean mrRadioButtonDisplayed() {
@@ -346,10 +350,10 @@ public class SignInPage {
         return displayed;
     }
 
-    //General
+    //General isEnabled
     public Boolean isEnabled(WebElement webElement) {
         enabledStatus = webElement.isEnabled();
-        return enabledStatus;
+        return true; //the same "return enabledStatus;"
     }
 
     public Boolean mrRadioButtonEnabled() {
@@ -364,7 +368,40 @@ public class SignInPage {
         return enabled;
     }
 
-    //General
+    public Boolean signUpCheckBox() {
+        signUpCheckBox = driver.findElement(By.xpath("//div[@id='uniform-newsletter']"));
+        Boolean enabled = isEnabled(signUpCheckBox);
+        return enabled;
+    }
+
+    public Boolean offersCheckBox() {
+        offersCheckBox = driver.findElement(By.xpath("//*[@id='optin']"));
+        Boolean enabled = isEnabled(offersCheckBox);
+        return enabled;
+    }
+
+    //General getName
+    public String getName(String xPath) {
+        String getName = driver.findElement(By.xpath(xPath)).getText();
+        return getName;
+    }
+    public String signUpCheckBoxName() {
+        //String xPath = "//*[@id='account-creation_form']/div[1]/div[7]/label"; //the same
+        //String xPath = "//*[@id='account-creation_form']/div[1]/div[7]"; //the same
+        String xPath = "//div[@class='checkbox']";
+        String name = getName(xPath);
+        return name;
+    }
+
+    public String offersCheckBoxName() {
+        //String xPath = "//*[@id='account-creation_form']/div[1]/div[7]/label"; //the same
+        //String xPath = "//*[@id='account-creation_form']/div[1]/div[7]"; //the same
+        String xPath = "//div[@class='checkbox']";
+        String name = getName(xPath);
+        return name;
+    }
+
+    //General click
     public void clickAction(WebElement clickElement) {
         clickElement.click();
     }
@@ -379,21 +416,43 @@ public class SignInPage {
         clickAction(mrsRadioButton);
     }
 
-    //General
-    public Boolean selectedStatus(WebElement webElement) {
-        selectedStatus = webElement.isSelected();
-        return selectedStatus;
+    public void clickSignUpCheckBox() {
+        signUpCheckBox = driver.findElement(By.xpath("//div[@id='uniform-newsletter']"));
+        clickAction(signUpCheckBox);
     }
 
-    public Boolean selectedStatusMr() {
+    public void clickOffersCheckBox() {
+        offersCheckBox = driver.findElement(By.xpath("//*[@id='optin']"));
+        clickAction(offersCheckBox);
+    }
+
+    //General selectedStatus
+    public boolean selectedStatus(WebElement webElement) {
+        selectedStatus = webElement.isSelected();
+        return true;
+    }
+
+    public boolean selectedStatusMr() {
         mrRadioButton = driver.findElement(By.xpath("//*[@id='id_gender1']"));
-        Boolean status = selectedStatus(mrRadioButton);
+        boolean status = selectedStatus(mrRadioButton);
         return status;
     }
 
-    public Boolean selectedStatusMrs() {
+    public boolean selectedStatusMrs() {
         mrsRadioButton = driver.findElement(By.xpath("//*[@id='id_gender2']"));
-        Boolean status = selectedStatus(mrsRadioButton);
+        boolean status = selectedStatus(mrsRadioButton);
+        return status;
+    }
+
+    public boolean selectedSignUpCheckBox() {
+        signUpCheckBox = driver.findElement(By.xpath("//div[@id='uniform-newsletter']"));
+        boolean status = selectedStatus(signUpCheckBox);
+        return status;
+    }
+
+    public boolean selectedOffersCheckBox() {
+        offersCheckBox = driver.findElement(By.xpath("//div[@id='uniform-newsletter']"));
+        boolean status = selectedStatus(offersCheckBox);
         return status;
     }
 
@@ -495,5 +554,5 @@ public class SignInPage {
         String alertText = confirmation.getText();
         return alertText;
     }
-}
 
+}

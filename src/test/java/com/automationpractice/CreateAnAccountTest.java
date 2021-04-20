@@ -16,7 +16,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
 
     SignInPage signInPage = new SignInPage(driver);
 
-    @Test
+    @Test //passed
     public void checkClickSignInMainPage() {
         driver.get(stringUrlMainPage);
 
@@ -29,7 +29,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         driver.quit();
     }
 
-    @Test
+    @Test //passed
     public void checkClickSignInAccountPage() throws InterruptedException {
         driver.get(stringUrl);
         Thread.sleep(5000);
@@ -43,7 +43,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         driver.quit();
     }
 
-    @Test
+    @Test //passed
     public void signInButtonNameMainPage() {
         driver.get(stringUrlMainPage);
 
@@ -54,7 +54,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         driver.quit();
     }
 
-    @Test
+    @Test //passed
     public void signInButtonNameAccountPage() {
         driver.get(stringUrl);
 
@@ -81,7 +81,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         driver.quit();
     }
 
-    @Test
+    @Test //passed
     public void authenticationSectionName() {
         driver.get(stringUrl);
 
@@ -92,7 +92,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         driver.quit();
     }
 
-    @Test
+    @Test //passed
     public void createAnAccountSectionName() {
         driver.get(stringUrl);
 
@@ -103,7 +103,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         driver.quit();
     }
 
-    @Test
+    @Test //passed
     public void createAnAccountSectionText() {
         driver.get(stringUrl);
 
@@ -114,7 +114,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         driver.quit();
     }
 
-    @Test
+    @Test //passed
     public void emailFieldCreateAnAccountName() {
         driver.get(stringUrl);
 
@@ -200,7 +200,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         driver.quit();
     }
 
-    @Test
+    @Test //passed
     public void invalidEmailMessageWhenEmailEmpty() throws InterruptedException {
 
         driver.get(stringUrl);
@@ -217,7 +217,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         driver.quit();
     }
 
-    @Test
+    @Test //passed
     // I want to add put from ContextMap. Main idea is: input a new generated email and then check it in the list of all emails
     public void emailInputWithPut() {
 
@@ -231,7 +231,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         driver.quit();
     }
 
-    @Test
+    @Test //passed
     public void createAnAccountButtonName() {
         driver.get(stringUrl);
 
@@ -242,7 +242,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         driver.quit();
     }
 
-    @Test
+    @Test //passed
     public void alreadyRegisteredSectionName() {
         driver.get(stringUrl);
 
@@ -253,7 +253,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         driver.quit();
     }
 
-    @Test
+    @Test //passed
     public void emailFieldAlreadyRegisteredName() {
         driver.get(stringUrl);
 
@@ -264,7 +264,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         driver.quit();
     }
 
-    @Test
+    @Test //passed
     public void passwordFieldAlreadyRegisteredName() {
         driver.get(stringUrl);
 
@@ -275,7 +275,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         driver.quit();
     }
 
-    @Test
+    @Test //passed
     public void signInButtonAlreadyRegisteredName() {
         driver.get(stringUrl);
 
@@ -286,7 +286,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         driver.quit();
     }
 
-    @Test
+    @Test //passed
     public void signInButtonClick() throws InterruptedException {
         driver.get(stringUrl);
 
@@ -295,7 +295,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         driver.quit();
     }
 
-    @Test
+    @Test //passed
     public void forgotYourPasswordButtonName() {
         driver.get(stringUrl);
 
@@ -306,7 +306,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         driver.quit();
     }
 
-    @Test
+    @Test //passed
     public void invalidEmailMessageAlreadyRegistered() throws InterruptedException {
         driver.get(stringUrl);
 
@@ -330,7 +330,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         driver.quit();
     }
 
-    @Test
+    @Test //passed
     public void invalidEmptyEmailMessageAlreadyRegistered() throws InterruptedException {
         driver.get(stringUrl);
 
@@ -353,7 +353,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         driver.quit();
     }
 
-    @Test
+    @Test //passed
     public void invalidPasswordMessageAlreadyRegistered() throws InterruptedException {
         driver.get(stringUrl);
 
@@ -381,7 +381,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         driver.quit();
     }
 
-    @Test
+    @Test //passed
     public void missedPasswordMessageAlreadyRegistered() throws InterruptedException {
         driver.get(stringUrl);
 
@@ -409,7 +409,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         driver.quit();
     }
 
-    @Test
+    @Test //passed
     public void mismatchedPasswordMessageAlreadyRegistered() throws InterruptedException {
         driver.get(stringUrl);
 
@@ -437,12 +437,12 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         driver.quit();
     }
 
-    @Test
-    public void createAnAccountPersonalInfoTitle() {
+    @Test //passed
+    public void createAnAccountPersonalInfoTitle() throws InterruptedException {
         driver.get(stringUrl);
 
         signInPage.inputEmail().createAnAccountButtonClick();
-
+        Thread.sleep(5000);
         String actual = signInPage.createAnAccountPersonalInfoTitle(driver);
         String expected = signInPage.CREATE_AN_ACCOUNT_PERSONAL_INFO_TITLE;
 
@@ -450,7 +450,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         driver.quit();
     }
 
-    @Test
+    @Test //passed
     public void yourPersonalInfoSectionTitle() {
         driver.get(stringUrl);
 
@@ -463,7 +463,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         driver.quit();
     }
 
-    @Test
+    @Test //passed
     public void yourPersonalInfoTitle() {
         driver.get(stringUrl);
 
@@ -476,12 +476,12 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         driver.quit();
     }
 
-    @Test
+    @Test //passed
     public void mrRadioButtonDisplayed() {
         driver.get(stringUrl);
 
         signInPage.inputEmail().createAnAccountButtonClick();
-        signInPage.mrRadioButtonDisplayed();
+
         Assert.assertTrue(signInPage.mrRadioButtonDisplayed());
         driver.quit();
     }
@@ -496,46 +496,46 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         driver.quit();
     }
 
-    @Test
+    @Test //passed
     public void mrsRadioButtonDisplayed() {
         driver.get(stringUrl);
 
         signInPage.inputEmail().createAnAccountButtonClick();
-        signInPage.mrsRadioButtonDisplayed();
+
         Assert.assertTrue(signInPage.mrsRadioButtonDisplayed());
         driver.quit();
     }
 
-    @Test
+    @Test //passed
     public void mrsRadioButtonEnabled() {
         driver.get(stringUrl);
 
         signInPage.inputEmail().createAnAccountButtonClick();
-        signInPage.mrsRadioButtonEnabled();
+
         Assert.assertTrue(signInPage.mrsRadioButtonEnabled());
         driver.quit();
     }
 
-    @Test
+    @Test //passed
     public void selectedStatusMrRadioButton() throws InterruptedException {
         driver.get(stringUrl);
 
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
         signInPage.clickMrRadioButton();
-        signInPage.selectedStatusMr();
+
         Assert.assertTrue(signInPage.selectedStatusMr());
         driver.quit();
     }
 
-    @Test
+    @Test //passed
     public void selectedStatusMrsRadioButton() throws InterruptedException {
         driver.get(stringUrl);
 
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
         signInPage.clickMrsRadioButton();
-        signInPage.selectedStatusMrs();
+
         Assert.assertTrue(signInPage.selectedStatusMrs());
         driver.quit();
     }
@@ -781,6 +781,76 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         System.out.println("result:" + "\n" + actual);
 
         Assert.assertEquals(actual, signInPage.ALERT_ERROR);
+    }
+
+    @Test
+    public void signUpCheckBoxEnabled() throws InterruptedException {
+        driver.get(stringUrl);
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        Assert.assertTrue(signInPage.signUpCheckBox());
+        driver.quit();
+    }
+
+    @Test //passed
+    public void signUpCheckBoxClickAndSelected() throws InterruptedException {
+        driver.get(stringUrl);
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        signInPage.clickSignUpCheckBox();
+        Thread.sleep(5000);
+        signInPage.selectedSignUpCheckBox();
+        driver.quit();
+    }
+
+    @Test
+    public void signUpCheckBoxName() throws InterruptedException {
+        driver.get(stringUrl);
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        String actual = signInPage.signUpCheckBoxName();
+        String expected = signInPage.SIGNUP_CHECKBOX;
+
+        Assert.assertEquals(actual, expected, "signUpCheckBoxName is not correct");
+        driver.quit();
+    }
+
+    @Test
+    public void offersCheckBoxEnabled() throws InterruptedException {
+        driver.get(stringUrl);
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        Assert.assertTrue(signInPage.offersCheckBox());
+        driver.quit();
+    }
+
+    @Test
+    public void offersCheckBoxName() throws InterruptedException {
+        driver.get(stringUrl);
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        String actual = signInPage.offersCheckBoxName();
+        String expected = signInPage.OFFERS_CHECKBOX;
+
+        Assert.assertEquals(actual, expected, "offersCheckBoxName is not correct");
+        driver.quit();
+    }
+
+    @Test //passed
+    public void offersCheckBoxClickAndSelected() throws InterruptedException {
+        driver.get(stringUrl);
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        signInPage.clickOffersCheckBox();
+        Thread.sleep(5000);
+        signInPage.selectedOffersCheckBox();
+        driver.quit();
     }
 }
 
