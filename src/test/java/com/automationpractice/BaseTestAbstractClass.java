@@ -1,14 +1,11 @@
 package com.automationpractice;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import wrapper.Wrapper;
 
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 public class BaseTestAbstractClass {
     public WebDriver driver = Wrapper.getDriver();
@@ -22,11 +19,11 @@ public class BaseTestAbstractClass {
         driver.get("http://automationpractice.com/");
     }
 
-//    @AfterMethod
-//    public void tearDown() {
-//        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-//        driver.quit();
-//    }
+    @AfterTest
+    public void tearDown() {
+        //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.quit();
+    }
 
     public static int generateRandomIntInRange(int min, int max) {
         Random r = new Random();

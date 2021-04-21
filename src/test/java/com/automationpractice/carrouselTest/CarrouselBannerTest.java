@@ -13,7 +13,7 @@ import static org.testng.Assert.assertEquals;
 
 public class CarrouselBannerTest extends BaseTestCarrouselTest {
 
-    @Test
+    @Test (enabled=false)
     //re-wrote  + question (why we return to the initial page and make there verification, why don't do it on redirection page?)
     public void firstCarrouselBanner() {
         new BannersPage(driver).hoverFirstBannerButton(); //hover button on 1st banner
@@ -34,7 +34,7 @@ public class CarrouselBannerTest extends BaseTestCarrouselTest {
         Log.log("First link from carrousel is correct", LogType.WARNING);
     }
 
-    @Test //re-wrote
+    @Test (enabled=false) //re-wrote
     public void goToSecondCarrouselBanner() {
         new BannersPage(driver).clickOnRightArrowButton();
 
@@ -60,7 +60,7 @@ public class CarrouselBannerTest extends BaseTestCarrouselTest {
         Log.log("Name of the button is correct", LogType.INFO);
     }
 
-    @Test //re-wrote + question about verification of redirected banner
+    @Test (enabled=false) //re-wrote + question about verification of redirected banner
     public void UseArrowsGoRightGoLeftBanner() throws InterruptedException {
         new BannersPage(driver).clickOnRightArrowButton();
         Log.log("The mouse found the right arrow button on the first carrousel", LogType.INFO);

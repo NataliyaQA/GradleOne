@@ -145,117 +145,99 @@ public class SignInPage {
     //constructor
     public SignInPage(WebDriver driver) {
         this.driver = driver;
-
         //emailO = "Auto_" + RandomStringUtils.randomAlphabetic(5) + "@mail.com";
     }
 
     //methods
     public String actualTitleFind(WebDriver driver) { //get title of Sign in page
-        pageTitle = driver.getTitle();
-        return pageTitle;
+        return driver.getTitle();
     }
 
     public String actualUrlFind(WebDriver driver) {  //get URL for further comparison
-        pageUrl = driver.getCurrentUrl();
-        return pageUrl;
+        return driver.getCurrentUrl();
+    }
+
+    //General getName
+    public String getName(String xPath) {
+        return driver.findElement(By.xpath(xPath)).getText();
     }
 
     public String signInHeaderButtonNameFind() {
-        signInHeaderButton = driver.findElement(By.xpath("//a[@title='Log in to your customer account']"));
-        return signInHeaderButton.getText();
+        return getName("//a[@title='Log in to your customer account']");
     }
 
-    public String authenticationSectionTitleFind(WebDriver driver) {
-        authenticationSectionTitle = driver.findElement(By.xpath("//h1[text()='Authentication']"));
-        return authenticationSectionTitle.getText();
+    public String authenticationSectionTitleFind() {
+        return getName("//h1[text()='Authentication']");
     }
 
-    public String createAnAccountTitleFind(WebDriver driver) {
-        createAnAccountTitle = driver.findElement(By.xpath("//h3[text()='Create an account']"));
-        return createAnAccountTitle.getText();
+    public String createAnAccountTitleFind() {
+        return getName("//h3[text()='Create an account']");
     }
 
-    public String createAnAccountTextFind(WebDriver driver) {
-        createAnAccountText = driver.findElement(By.xpath("//div[@class='form_content clearfix']" +
-                "/p[contains(text(),'Please')]"));
-        return createAnAccountText.getText();
+    public String createAnAccountTextFind() {
+        return getName("//div[@class='form_content clearfix']" +
+                "/p[contains(text(),'Please')]");
     }
 
-    public String createAnAccountButtonFind(WebDriver driver) {
-        createAnAccountButton = driver.findElement(By.xpath("//*[@id='SubmitCreate']/span"));
-        return createAnAccountButton.getText();
+    public String createAnAccountButtonFind() {
+        return getName("//*[@id='SubmitCreate']/span");
     }
 
-    public String emailAddressFieldCreateAnAccountFind(WebDriver driver) {
-        emailAddressFieldCreateAnAccount = driver.findElement(By.xpath("//*[@id='email_create']"));
-        return emailAddressFieldCreateAnAccount.getText();
+    public String emailAddressFieldCreateAnAccountFind() {
+        return getName("//*[@id='email_create']");
     }
 
-    public String emailAddressFieldCreateAnAccountTitle(WebDriver driver) {
-        emailAddressFieldCreateAnAccountTitle = driver.findElement(By.xpath("//*[@id='create-account_form']" +
-                "//child::div[2]/label"));
-        return emailAddressFieldCreateAnAccountTitle.getText();
+    public String emailAddressFieldCreateAnAccountTitle() {
+        return getName("//*[@id='create-account_form']" +
+                "//child::div[2]/label");
     }
 
-    public String errorMessageIsExist(WebDriver driver) {
-        errorExistingEmail = driver.findElement(By.cssSelector("#create_account_error > ol > li"));
-        return errorExistingEmail.getText();
+    public String errorMessageIsExist() {
+        return getName("//div[@id='create_account_error']/ol/li");
     }
 
-    public String invalidEmail(WebDriver driver) {
-        invalidEmailMessageCreateAnAccount = driver.findElement(By.xpath("//li[text()='Invalid email address.']"));
-        return invalidEmailMessageCreateAnAccount.getText();
+    public String invalidEmail() {
+        return getName("//li[text()='Invalid email address.']");
     }
 
-    public String alreadyRegisteredTitleFind(WebDriver driver) {
-        alreadyRegisteredTitle = driver.findElement(By.xpath("//h3[text()='Already registered?']"));
-        return alreadyRegisteredTitle.getText();
+    public String alreadyRegisteredTitleFind() {
+        return getName("//h3[text()='Already registered?']");
     }
 
-    public String emailAddressFieldAlreadyRegisteredFind(WebDriver driver) {
-        emailAddressFieldAlreadyRegistered = driver.findElement(By.xpath("//*[@id='email']"));
-        return emailAddressFieldAlreadyRegistered.getText();
+    public String emailAddressFieldAlreadyRegisteredFind() {
+        return getName("//*[@id='email']");
     }
 
-    public String emailAddressFieldAlreadyRegisteredTitle(WebDriver driver) {
-        emailAddressFieldAlreadyRegistered = driver.findElement(By.xpath("//*[@id='login_form']//child::div[1]/label"));
-        return emailAddressFieldAlreadyRegistered.getText();
+    public String emailAddressFieldAlreadyRegisteredTitle() {
+        return getName("//*[@id='login_form']//child::div[1]/label");
     }
 
-    public String passwordFieldAlreadyRegisteredFind(WebDriver driver) {
-        passwordFieldAlreadyRegistered = driver.findElement(By.xpath("//*[@id='passwd']"));
-        return passwordFieldAlreadyRegistered.getText();
+    public String passwordFieldAlreadyRegisteredFind() {
+        return getName("//*[@id='passwd']");
     }
 
-    public String passwordFieldAlreadyRegisteredName(WebDriver driver) {
-        passwordFieldAlreadyRegistered = driver.findElement(By.xpath("//*[@id=\"login_form\"]/div/div[2]/label"));
-        return passwordFieldAlreadyRegistered.getText();
+    public String passwordFieldAlreadyRegisteredName() {
+        return getName("//*[@id='login_form']/div/div[2]/label");
     }
 
-    public String signInAlreadyRegisteredButtonFind(WebDriver driver) {
-        signInAlreadyRegisteredButton = driver.findElement(By.xpath("//*[@id='SubmitLogin']/span"));
-        return signInAlreadyRegisteredButton.getText();
+    public String signInAlreadyRegisteredButtonFind() {
+        return getName("//*[@id='SubmitLogin']/span");
     }
 
     public void signInAlreadyRegisteredButtonClick() {
-        signInAlreadyRegisteredButton = driver.findElement(By.xpath("//*[@id='SubmitLogin']/span"));
-        signInAlreadyRegisteredButton.click();
+        clickAction("//*[@id='SubmitLogin']/span");
     }
 
-    public String forgotYourPasswordFind(WebDriver driver) {
-        forgotYourPassword = driver.findElement(By.xpath("//p[contains(@class,'lost')]/a"));
-        return forgotYourPassword.getText();
+    public String forgotYourPasswordFind() {
+        return getName("//p[contains(@class,'lost')]/a");
     }
 
     public void clickSignInHeaderButton() {
-        signInHeaderButton = driver.findElement(By.xpath("//a[@title='Log in to your customer account']")); //
-        signInHeaderButton.click();
+        clickAction("//a[@title='Log in to your customer account']");
     }
 
-    public SignInPage createAnAccountButtonClick() {
-        createAnAccountButton = driver.findElement(By.xpath("//*[@id='SubmitCreate']/span"));
-        createAnAccountButton.click();
-        return this;
+    public void createAnAccountButtonClick() {
+        clickAction("//*[@id='SubmitCreate']/span");
     }
 
     public SignInPage inputEmail() {
@@ -308,8 +290,7 @@ public class SignInPage {
     }
 
     public String invalidMessageAlreadyRegisteredFirstText(WebDriver driver) {
-        invalidMessageAlreadyRegisteredFirst = driver.findElement(By.xpath("//div[@class='alert alert-danger']/p"));
-        return invalidMessageAlreadyRegisteredFirst.getText();
+        return driver.findElement(By.xpath("//div[@class='alert alert-danger']/p")).getText();
     }
 
     public String invalidMessageAlreadyRegisteredSecondText(WebDriver driver) {
@@ -318,142 +299,123 @@ public class SignInPage {
     }
 
     public String createAnAccountPersonalInfoTitle(WebDriver driver) {
-        createAnAccountPersonalInfoTitle = driver.findElement(By.xpath("//h1[text()='Create an account']"));
-        return createAnAccountPersonalInfoTitle.getText();
+        return driver.findElement(By.xpath("//h1[text()='Create an account']")).getText();
     }
 
     public String yourPersonalInfoSectionTitle() {
-        yourPersonalInfoSectionTitle = driver.findElement(By.xpath("//h3[text()='Your personal information']"));
-        return yourPersonalInfoSectionTitle.getText();
+        return driver.findElement(By.xpath("//h3[text()='Your personal information']")).getText();
     }
 
     public String yourPersonalInfoTitle() {
-        yourPersonalInfoTitle = driver.findElement(By.xpath("//div[@class='clearfix']/label"));
-        return yourPersonalInfoTitle.getText();
+        return driver.findElement(By.xpath("//div[@class='clearfix']/label")).getText();
     }
 
     //General isDisplayed
     public Boolean isDisplayed(WebElement webElement) {
         displayedStatus = webElement.isDisplayed();
-        return true;
+        return displayedStatus;
     }
 
     public Boolean mrRadioButtonDisplayed() {
-        mrRadioButton = driver.findElement(By.xpath("//*[@id='id_gender1']"));
-        Boolean displayed = isDisplayed(mrRadioButton);
-        return displayed;
+        return isDisplayed(driver.findElement(By.xpath("//*[@id='id_gender1']")));
     }
 
     public Boolean mrsRadioButtonDisplayed() {
-        mrsRadioButton = driver.findElement(By.xpath("//*[@id='id_gender2']"));
-        Boolean displayed = isDisplayed(mrsRadioButton);
-        return displayed;
+        return isDisplayed(driver.findElement(By.xpath("//*[@id='id_gender2']")));
+        //the same
+//        mrsRadioButton = driver.findElement(By.xpath("//*[@id='id_gender2']"));
+//        Boolean displayed = isDisplayed(mrsRadioButton);
+//        return displayed;
     }
 
     //General isEnabled
-    public Boolean isEnabled(WebElement webElement) {
-        enabledStatus = webElement.isEnabled();
-        return true; //the same "return enabledStatus;"
+//    public Boolean isEnabled(WebElement webElement) {
+////        enabledStatus = webElement.isEnabled();
+////        return enabledStatus; //the same "return true;"
+////        if (webElement.isEnabled()) {
+////            return true;
+////        }
+////        else return false;
+//
+//        return (webElement.isEnabled()) ? true : false;
+//    }
+
+    public boolean isEnabled(String xPath) {
+        return (driver.findElement(By.xpath(xPath)).isEnabled()) ? true : false;
     }
 
     public Boolean mrRadioButtonEnabled() {
-        mrRadioButton = driver.findElement(By.xpath("//*[@id='id_gender1']"));
-        Boolean enabled = isEnabled(mrRadioButton);
-        return enabled;
+        return isEnabled("//*[@id='id_gender1']");
     }
 
     public Boolean mrsRadioButtonEnabled() {
-        mrsRadioButton = driver.findElement(By.xpath("//*[@id='id_gender2']"));
-        Boolean enabled = isEnabled(mrsRadioButton);
-        return enabled;
+        return isEnabled("//*[@id='id_gender2']");
     }
 
     public Boolean signUpCheckBox() {
-        signUpCheckBox = driver.findElement(By.xpath("//div[@id='uniform-newsletter']"));
-        Boolean enabled = isEnabled(signUpCheckBox);
-        return enabled;
+        return isEnabled("//div[@id='uniform-newsletter']");
     }
 
     public Boolean offersCheckBox() {
-        offersCheckBox = driver.findElement(By.xpath("//*[@id='optin']"));
-        Boolean enabled = isEnabled(offersCheckBox);
-        return enabled;
+        return isEnabled("//*[@id='optin']");
     }
 
-    //General getName
-    public String getName(String xPath) {
-        String getName = driver.findElement(By.xpath(xPath)).getText();
-        return getName;
-    }
     public String signUpCheckBoxName() {
         //String xPath = "//*[@id='account-creation_form']/div[1]/div[7]/label"; //the same
         //String xPath = "//*[@id='account-creation_form']/div[1]/div[7]"; //the same
-        String xPath = "//div[@class='checkbox']";
-        String name = getName(xPath);
-        return name;
+        //String xPath = "//div[@class='checkbox']"; //the sme to the next
+        return getName("//div[@class='checkbox']");
     }
 
     public String offersCheckBoxName() {
         //String xPath = "//*[@id='account-creation_form']/div[1]/div[7]/label"; //the same
         //String xPath = "//*[@id='account-creation_form']/div[1]/div[7]"; //the same
-        String xPath = "//div[@class='checkbox']";
-        String name = getName(xPath);
-        return name;
+        //String xPath = "//div[@class='checkbox']"; //the sme to the next
+        return getName("//*[@id='account-creation_form']/div[1]/div[8]/label"); //will be re-written
     }
 
     //General click
-    public void clickAction(WebElement clickElement) {
+    public void clickAction(String xPath) {
+        WebElement clickElement = driver.findElement(By.xpath(xPath));
         clickElement.click();
     }
 
     public void clickMrRadioButton() {
-        mrRadioButton = driver.findElement(By.xpath("//*[@id='id_gender1']"));
-        clickAction(mrRadioButton);
+        clickAction("//*[@id='id_gender1']");
     }
 
     public void clickMrsRadioButton() {
-        mrsRadioButton = driver.findElement(By.xpath("//*[@id='id_gender2']"));
-        clickAction(mrsRadioButton);
+        clickAction("//*[@id='id_gender2']");
     }
 
     public void clickSignUpCheckBox() {
-        signUpCheckBox = driver.findElement(By.xpath("//div[@id='uniform-newsletter']"));
-        clickAction(signUpCheckBox);
+        clickAction("//div[@id='uniform-newsletter']");
     }
 
     public void clickOffersCheckBox() {
-        offersCheckBox = driver.findElement(By.xpath("//*[@id='optin']"));
-        clickAction(offersCheckBox);
+        clickAction("//*[@id='optin']");
     }
 
     //General selectedStatus
     public boolean selectedStatus(WebElement webElement) {
         selectedStatus = webElement.isSelected();
-        return true;
+        return selectedStatus;
     }
 
     public boolean selectedStatusMr() {
-        mrRadioButton = driver.findElement(By.xpath("//*[@id='id_gender1']"));
-        boolean status = selectedStatus(mrRadioButton);
-        return status;
+        return selectedStatus(driver.findElement(By.xpath("//*[@id='id_gender1']")));
     }
 
     public boolean selectedStatusMrs() {
-        mrsRadioButton = driver.findElement(By.xpath("//*[@id='id_gender2']"));
-        boolean status = selectedStatus(mrsRadioButton);
-        return status;
+        return selectedStatus(driver.findElement(By.xpath("//*[@id='id_gender2']")));
     }
 
     public boolean selectedSignUpCheckBox() {
-        signUpCheckBox = driver.findElement(By.xpath("//div[@id='uniform-newsletter']"));
-        boolean status = selectedStatus(signUpCheckBox);
-        return status;
+        return selectedStatus(driver.findElement(By.xpath("//div[@id='uniform-newsletter']")));
     }
 
     public boolean selectedOffersCheckBox() {
-        offersCheckBox = driver.findElement(By.xpath("//div[@id='uniform-newsletter']"));
-        boolean status = selectedStatus(offersCheckBox);
-        return status;
+        return selectedStatus(driver.findElement(By.xpath("//div[@id='uniform-newsletter']")));
     }
 
     //General
@@ -503,8 +465,7 @@ public class SignInPage {
     }
 
     public void clickRegisterButton() {
-        registerButton = driver.findElement(By.xpath("//button[@id='submitAccount']"));
-        clickAction(registerButton);
+        clickAction("//button[@id='submitAccount']");
     }
 
     public boolean emptyField() {
@@ -517,20 +478,16 @@ public class SignInPage {
     }
 
     public String valueOfEmailFieldHomePage() {
-        emailField = driver.findElement(By.xpath("//*[@id='email_create']"));
-        String value = emailField.getAttribute("value");
-        return value;
+        return driver.findElement(By.xpath("//*[@id='email_create']"))
+                .getAttribute("value");
     }
 
     public String valueOfEmailField() {
-        emailField = driver.findElement(By.xpath("//*[@id='email']"));
-        String value = emailField.getAttribute("value");
-        return value;
+        return driver.findElement(By.xpath("//*[@id='email']")).getAttribute("value");
     }
 
     public void deleteValue() {
-        emailField = driver.findElement(By.xpath("//*[@id='email']"));
-        emailField.clear();
+        driver.findElement(By.xpath("//*[@id='email']")).clear();
     }
 
     public void countryDropDownFirstOption() {
@@ -544,8 +501,7 @@ public class SignInPage {
     }
 
     public WebElement errorAlert() {
-        errorAlert = driver.findElement(By.xpath("//div[@class='alert alert-danger']"));
-        return errorAlert;
+        return driver.findElement(By.xpath("//div[@class='alert alert-danger']"));
     }
 
     // is not verified
