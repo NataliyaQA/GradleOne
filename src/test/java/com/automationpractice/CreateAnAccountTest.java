@@ -8,9 +8,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pageObjects.SignInPage;
 
+import java.awt.*;
 import java.util.List;
 
-//57 tests
+//77 tests
 public class CreateAnAccountTest extends BaseTestAbstractClass {
     String stringUrlMainPage = "http://automationpractice.com/index.php";
     String stringUrl = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
@@ -28,136 +29,83 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         driver.get(stringUrlMainPage);
 
         signInPage.clickSignInHeaderButton();
-        String actualUrl = signInPage.actualUrlFind(driver);
-        String expectedUrl = signInPage.EXPECTED_URL;
-
-        Assert.assertEquals(actualUrl, expectedUrl);
+        Assert.assertEquals(signInPage.actualUrlFind(driver), signInPage.EXPECTED_URL);
         System.out.println("Expected Url is correct");
     }
 
-    @Test (enabled=false) //passed
+    @Test  //passed
     public void checkClickSignInAccountPage() throws InterruptedException {
-        driver.get(stringUrl);
         Thread.sleep(5000);
 
         signInPage.clickSignInHeaderButton();
-        String actualUrl = signInPage.actualUrlFind(driver);
-        String expectedUrl = signInPage.EXPECTED_URL;
-
-        Assert.assertEquals(actualUrl, expectedUrl);
+//        String actualUrl = signInPage.actualUrlFind(driver);
+//        String expectedUrl = signInPage.EXPECTED_URL;
+        Assert.assertEquals(signInPage.actualUrlFind(driver), signInPage.EXPECTED_URL);
         System.out.println("Expected Url is correct");
     }
 
     @Test //passed
     public void signInButtonNameMainPage() {
         driver.get(stringUrlMainPage);
-
-        String actual = signInPage.signInHeaderButtonNameFind();
-        String expected = signInPage.EXPECTED_SIGN_IN_HEADER_BUTTON_NAME;
-
-        Assert.assertEquals(actual, expected);
+        Assert.assertEquals(signInPage.signInHeaderButtonNameFind(), signInPage.EXPECTED_SIGN_IN_HEADER_BUTTON_NAME);
     }
 
     @Test  //passed
     public void signInButtonNameAccountPage() {
-        driver.get(stringUrl);
-
-        String actual = signInPage.signInHeaderButtonNameFind();
-        String expected = signInPage.EXPECTED_SIGN_IN_HEADER_BUTTON_NAME;
-
-        Assert.assertEquals(actual, expected);
+        Assert.assertEquals(signInPage.signInHeaderButtonNameFind(), signInPage.EXPECTED_SIGN_IN_HEADER_BUTTON_NAME);
     }
 
     @Test // works
     public void signInPageTitle() throws InterruptedException {
-        String stringUrl = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
-        driver.get(stringUrl);
-
         SignInPage signInPage = new SignInPage(driver);
         signInPage.clickSignInHeaderButton(); //works with and without
-
-        String actualTitle = signInPage.actualTitleFind(driver);
-        String expectedTitle = signInPage.EXPECTED_TITLE;
-
-        Assert.assertEquals(actualTitle, expectedTitle);
+        Assert.assertEquals(signInPage.actualTitleFind(driver), signInPage.EXPECTED_TITLE);
         System.out.println("You are on Login - My Store");
     }
 
     @Test //passed
     public void authenticationSectionName() {
-        driver.get(stringUrl);
-
-        String actual = signInPage.authenticationSectionTitleFind();
-        String expected = signInPage.EXPECTED_AUTHENTICATION_SECTION_TITLE;
-
-        Assert.assertEquals(actual, expected.toUpperCase());
+        Assert.assertEquals(signInPage.authenticationSectionTitleFind(),
+                signInPage.EXPECTED_AUTHENTICATION_SECTION_TITLE.toUpperCase());
     }
 
     @Test //passed
     public void createAnAccountSectionName() {
-        driver.get(stringUrl);
-
-        String actual = signInPage.createAnAccountTitleFind();
-        String expected = signInPage.EXPECTED_CREATE_AN_ACCOUNT_TITLE_NAME;
-
-        Assert.assertEquals(actual, expected);
+        Assert.assertEquals(signInPage.createAnAccountTitleFind(), signInPage.EXPECTED_CREATE_AN_ACCOUNT_TITLE_NAME);
     }
 
     @Test //passed
     public void createAnAccountSectionText() {
-        driver.get(stringUrl);
-
-        String actual = signInPage.createAnAccountTextFind();
-        String expected = signInPage.EXPECTED_CREATE_AN_ACCOUNT_TEXT;
-
-        Assert.assertEquals(actual, expected);
+        Assert.assertEquals(signInPage.createAnAccountTextFind(), signInPage.EXPECTED_CREATE_AN_ACCOUNT_TEXT);
     }
 
     @Test //passed
     public void emailFieldCreateAnAccountName() {
-        driver.get(stringUrl);
-
-        String actualName = signInPage.emailAddressFieldCreateAnAccountTitle();
-        String expectedName = signInPage.EXPECTED_EMAIL_ADDRESS_FIELD_CREATE_AN_ACCOUNT_NAME;
-
-        Assert.assertEquals(actualName, expectedName);
+        Assert.assertEquals(signInPage.emailAddressFieldCreateAnAccountTitle(),
+                signInPage.EXPECTED_EMAIL_ADDRESS_FIELD_CREATE_AN_ACCOUNT_NAME);
         System.out.print("The title of email Address Field is " + '"'
                 + signInPage.EXPECTED_EMAIL_ADDRESS_FIELD_CREATE_AN_ACCOUNT_NAME + '"');
     }
 
     @Test  //works
     public void emailInputWithOneNew() {
-        String stringUrl = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
-        driver.get(stringUrl);
+        signInPage.emailAddressFieldCreateAnAccountFind();
+        signInPage.inputEmail().createAnAccountButtonClick();
+    }
 
-        SignInPage signInPage = new SignInPage(driver);
-
+    @Test  // works
+    public void emailInput() throws InterruptedException {
         signInPage.emailAddressFieldCreateAnAccountFind();
         signInPage.inputEmail();
         signInPage.createAnAccountButtonClick();
     }
 
     @Test  // works
-    public void emailInput() throws InterruptedException {
-        String stringUrl = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
-        driver.get(stringUrl);
-
-        new SignInPage(driver).emailAddressFieldCreateAnAccountFind();
-        new SignInPage(driver).inputEmail();
-        new SignInPage(driver).createAnAccountButtonClick();
-    }
-
-    @Test  // works
     public void emailInputSameEmail() throws InterruptedException {
-        String stringUrl = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
-        driver.get(stringUrl);
-
-        SignInPage signInPage = new SignInPage(driver);
         Thread.sleep(5000);
         String email = "qwe@gmail.com";
 
-        signInPage.inputEmailCreateAnAccount(email);
-        signInPage.createAnAccountButtonClick();
+        signInPage.inputEmailCreateAnAccount(email).createAnAccountButtonClick();
         Thread.sleep(5000);
 
 //        driver.get(stringUrl);
@@ -169,204 +117,134 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
 
         // 2d part
         Thread.sleep(5000);
-        String actual = signInPage.errorMessageIsExist();
-        String expected = signInPage.EXPECTED_ERROR_EXISTING_EMAIL;
-
-        Assert.assertEquals(actual, expected);
+        Assert.assertEquals(signInPage.errorMessageIsExist(), signInPage.EXPECTED_ERROR_EXISTING_EMAIL);
         System.out.println("An account using this email address has already been registered. " +
                 "Please enter a valid password or request a new one.");
     }
 
     @Test // Url put and creation of instance of "SignInPage" class moved to current class
     public void invalidEmailMessage() throws InterruptedException {
-
-        driver.get(stringUrl);
-
-        signInPage.inputEmailInvalidCreateAnAccount();
-        signInPage.createAnAccountButtonClick();
-
-        String actualText = signInPage.invalidEmail();
-        String expectedText = signInPage.INVALID_EMAIL;
-
+        signInPage.inputEmailInvalidCreateAnAccount().createAnAccountButtonClick();
         Thread.sleep(5000);
 
-        Assert.assertEquals(actualText, expectedText);
+        Assert.assertEquals(signInPage.invalidEmail(), signInPage.INVALID_EMAIL);
         System.out.println("The text of message is " + '"' + signInPage.INVALID_EMAIL + '"');
     }
 
     @Test //passed
     public void invalidEmailMessageWhenEmailEmpty() throws InterruptedException {
-
-        driver.get(stringUrl);
-
         signInPage.createAnAccountButtonClick();
-
-        String actualText = signInPage.invalidEmail();
-        String expectedText = signInPage.INVALID_EMAIL;
-
         Thread.sleep(5000);
 
-        Assert.assertEquals(actualText, expectedText);
+        Assert.assertEquals(signInPage.invalidEmail(), signInPage.INVALID_EMAIL);
         System.out.println("The text of message is " + '"' + signInPage.INVALID_EMAIL + '"');
     }
 
     @Test  //passed
     // I want to add put from ContextMap. Main idea is: input a new generated email and then check it in the list of all emails
     public void emailInputWithPut() {
-
-        String stringUrl = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
-        driver.get(stringUrl);
-
-        new SignInPage(driver).emailAddressFieldCreateAnAccountFind();
-        new SignInPage(driver).inputEmail();
+        signInPage.emailAddressFieldCreateAnAccountFind();
+        signInPage.inputEmail();
         //put....
-        new SignInPage(driver).createAnAccountButtonClick();
+        signInPage.createAnAccountButtonClick();
     }
 
     @Test  //passed
     public void createAnAccountButtonName() {
-        driver.get(stringUrl);
-
-        String actual = signInPage.createAnAccountButtonFind();
-        String expected = signInPage.EXPECTED_CREATE_AN_ACCOUNT_BUTTON_NAME;
-
-        Assert.assertEquals(actual, expected);
+        Assert.assertEquals(signInPage.createAnAccountButtonFind(), signInPage.EXPECTED_CREATE_AN_ACCOUNT_BUTTON_NAME);
     }
 
     @Test  //passed
     public void alreadyRegisteredSectionName() {
-        driver.get(stringUrl);
-
-        String actual = signInPage.alreadyRegisteredTitleFind();
-        String expected = signInPage.EXPECTED_ALREADY_REGISTERED_TITLE;
-
-        Assert.assertEquals(actual, expected);
+        Assert.assertEquals(signInPage.alreadyRegisteredTitleFind(), signInPage.EXPECTED_ALREADY_REGISTERED_TITLE);
     }
 
     @Test //passed
     public void emailFieldAlreadyRegisteredName() {
-        driver.get(stringUrl);
-
-        String actual = signInPage.emailAddressFieldAlreadyRegisteredTitle();
-        String expected = signInPage.EXPECTED_EMAIL_ADDRESS_FIELD_ALREADY_REGISTERED_NAME;
-
-        Assert.assertEquals(actual, expected);
+        Assert.assertEquals(signInPage.emailAddressFieldAlreadyRegisteredTitle(),
+                signInPage.EXPECTED_EMAIL_ADDRESS_FIELD_ALREADY_REGISTERED_NAME);
     }
 
     @Test //passed
     public void passwordFieldAlreadyRegisteredName() {
-        driver.get(stringUrl);
-
-        String actual = signInPage.passwordFieldAlreadyRegisteredName();
-        String expected = signInPage.EXPECTED_PASSWORD_FIELD_ALREADY_REGISTERED_NAME;
-
-        Assert.assertEquals(actual, expected);
+        Assert.assertEquals(signInPage.passwordFieldAlreadyRegisteredName(),
+                signInPage.EXPECTED_PASSWORD_FIELD_ALREADY_REGISTERED_NAME);
     }
 
     @Test  //passed
     public void signInButtonAlreadyRegisteredName() {
-        driver.get(stringUrl);
-
-        String actual = signInPage.signInAlreadyRegisteredButtonFind();
-        String expected = signInPage.EXPECTED_SIGN_IN_ALREADY_REGISTERED_BUTTON_NAME;
-
-        Assert.assertEquals(actual, expected);
+        Assert.assertEquals(signInPage.signInAlreadyRegisteredButtonFind(),
+                signInPage.EXPECTED_SIGN_IN_ALREADY_REGISTERED_BUTTON_NAME);
     }
 
     @Test  //passed
     public void signInButtonClick() throws InterruptedException {
-        driver.get(stringUrl);
-
         signInPage.clickSignInHeaderButton();
         Thread.sleep(5000);
     }
 
     @Test //passed
     public void forgotYourPasswordButtonName() {
-        driver.get(stringUrl);
-
-        String actual = signInPage.forgotYourPasswordFind();
-        String expected = signInPage.EXPECTED_FORGOT_YOUR_PASSWORD_NAME;
-
-        Assert.assertEquals(actual, expected);
+        Assert.assertEquals(signInPage.forgotYourPasswordFind(), signInPage.EXPECTED_FORGOT_YOUR_PASSWORD_NAME);
     }
 
     @Test  //passed
     public void invalidEmailMessageAlreadyRegistered() throws InterruptedException {
-        driver.get(stringUrl);
-
-        signInPage.inputEmailInvalidAlreadyRegistered();
-        signInPage.signInAlreadyRegisteredButtonClick();
+        signInPage.inputEmailInvalidAlreadyRegistered().signInAlreadyRegisteredButtonClick();
         Thread.sleep(5000);
-
-        String actualTextFirst = signInPage.invalidMessageAlreadyRegisteredFirstText(driver);
-        String expectedTextFirst = signInPage.INVALID_MESSAGE_ALREADY_REGISTERED_FIRST;
-        Assert.assertEquals(actualTextFirst, expectedTextFirst);
+        Assert.assertEquals(signInPage.invalidMessageAlreadyRegisteredFirstText(),
+                signInPage.INVALID_MESSAGE_ALREADY_REGISTERED_FIRST);
         System.out.println("The text of message is " + '"'
                 + signInPage.INVALID_MESSAGE_ALREADY_REGISTERED_FIRST + '"');
 
         Thread.sleep(5000);
 
-        String actualTextSecond = signInPage.invalidMessageAlreadyRegisteredSecondText(driver);
-        String expectedTextSecond = signInPage.INVALID_EMAIL_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_IS;
-        Assert.assertEquals(actualTextSecond, expectedTextSecond);
+        Assert.assertEquals(signInPage.invalidMessageAlreadyRegisteredSecondText(),
+                signInPage.INVALID_EMAIL_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_IS);
         System.out.println("The text of message is " + '"'
                 + signInPage.INVALID_EMAIL_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_IS + '"');
     }
 
     @Test  //passed
     public void invalidEmptyEmailMessageAlreadyRegistered() throws InterruptedException {
-        driver.get(stringUrl);
-
         signInPage.signInAlreadyRegisteredButtonClick();
         Thread.sleep(5000);
 
-        String actualTextFirst = signInPage.invalidMessageAlreadyRegisteredFirstText(driver);
-        String expectedTextFirst = signInPage.INVALID_MESSAGE_ALREADY_REGISTERED_FIRST;
-        Assert.assertEquals(actualTextFirst, expectedTextFirst);
+        Assert.assertEquals(signInPage.invalidMessageAlreadyRegisteredFirstText(),
+                signInPage.INVALID_MESSAGE_ALREADY_REGISTERED_FIRST);
         System.out.println("The text of message is " + '"'
                 + signInPage.INVALID_MESSAGE_ALREADY_REGISTERED_FIRST + '"');
 
         Thread.sleep(5000);
-
-        String actualTextSecond = signInPage.invalidMessageAlreadyRegisteredSecondText(driver);
-        String expectedTextSecond = signInPage.INVALID_EMAIL_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_EMPTY;
-        Assert.assertEquals(actualTextSecond, expectedTextSecond);
+        Assert.assertEquals(signInPage.invalidMessageAlreadyRegisteredSecondText(),
+                signInPage.INVALID_EMAIL_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_EMPTY);
         System.out.println("The text of message is " + '"'
                 + signInPage.INVALID_EMAIL_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_EMPTY + '"');
     }
 
     @Test  //passed
     public void invalidPasswordMessageAlreadyRegistered() throws InterruptedException {
-        driver.get(stringUrl);
-
         String email = "qwe@gmail.com";
         signInPage.inputEmailAlreadyRegistered(email);
         Thread.sleep(5000);
 
-        signInPage.inputPasswordInvalidAlreadyRegistered();
-        signInPage.signInAlreadyRegisteredButtonClick();
+        signInPage.inputPasswordInvalidAlreadyRegistered().signInAlreadyRegisteredButtonClick();
         Thread.sleep(5000);
 
-        String actualTextFirst = signInPage.invalidMessageAlreadyRegisteredFirstText(driver);
-        String expectedTextFirst = signInPage.INVALID_MESSAGE_ALREADY_REGISTERED_FIRST;
-        Assert.assertEquals(actualTextFirst, expectedTextFirst);
+        Assert.assertEquals(signInPage.invalidMessageAlreadyRegisteredFirstText(),
+                signInPage.INVALID_MESSAGE_ALREADY_REGISTERED_FIRST);
         System.out.println("The text of message is " + '"'
                 + signInPage.INVALID_MESSAGE_ALREADY_REGISTERED_FIRST + '"');
-
         Thread.sleep(5000);
 
-        String actualTextSecond = signInPage.invalidMessageAlreadyRegisteredSecondText(driver);
-        String expectedTextSecond = signInPage.INVALID_PASSWORD_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_IS;
-        Assert.assertEquals(actualTextSecond, expectedTextSecond);
+        Assert.assertEquals(signInPage.invalidMessageAlreadyRegisteredSecondText(),
+                signInPage.INVALID_PASSWORD_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_IS);
         System.out.println("The text of message is " + '"'
                 + signInPage.INVALID_PASSWORD_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_IS + '"');
     }
 
     @Test  //passed
     public void missedPasswordMessageAlreadyRegistered() throws InterruptedException {
-        driver.get(stringUrl);
-
         String email = "qwe@gmail.com";
         signInPage.inputEmailAlreadyRegistered(email);
         Thread.sleep(5000);
@@ -375,135 +253,100 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         signInPage.signInAlreadyRegisteredButtonClick();
         Thread.sleep(5000);
 
-        String actualTextFirst = signInPage.invalidMessageAlreadyRegisteredFirstText(driver);
-        String expectedTextFirst = signInPage.INVALID_MESSAGE_ALREADY_REGISTERED_FIRST;
-        Assert.assertEquals(actualTextFirst, expectedTextFirst);
+        Assert.assertEquals(signInPage.invalidMessageAlreadyRegisteredFirstText(),
+                signInPage.INVALID_MESSAGE_ALREADY_REGISTERED_FIRST);
         System.out.println("The text of message is " + '"'
                 + signInPage.INVALID_MESSAGE_ALREADY_REGISTERED_FIRST + '"');
-
         Thread.sleep(5000);
 
-        String actualTextSecond = signInPage.invalidMessageAlreadyRegisteredSecondText(driver);
-        String expectedTextSecond = signInPage.INVALID_PASSWORD_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_EMPTY;
-        Assert.assertEquals(actualTextSecond, expectedTextSecond);
+        Assert.assertEquals(signInPage.invalidMessageAlreadyRegisteredSecondText(),
+                signInPage.INVALID_PASSWORD_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_EMPTY);
         System.out.println("The text of message is " + '"'
                 + signInPage.INVALID_PASSWORD_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_EMPTY + '"');
     }
 
     @Test  //passed
     public void mismatchedPasswordMessageAlreadyRegistered() throws InterruptedException {
-        driver.get(stringUrl);
-
         String email = "qwe@gmail.com";
         signInPage.inputEmailAlreadyRegistered(email);
         Thread.sleep(5000);
 
-        signInPage.inputPasswordAlreadyRegistered(email);
-        signInPage.signInAlreadyRegisteredButtonClick();
+        signInPage.inputPasswordAlreadyRegistered(email).signInAlreadyRegisteredButtonClick();
         Thread.sleep(5000);
 
-        String actualTextFirst = signInPage.invalidMessageAlreadyRegisteredFirstText(driver);
-        String expectedTextFirst = signInPage.INVALID_MESSAGE_ALREADY_REGISTERED_FIRST;
-        Assert.assertEquals(actualTextFirst, expectedTextFirst);
+        Assert.assertEquals(signInPage.invalidMessageAlreadyRegisteredFirstText(),
+                signInPage.INVALID_MESSAGE_ALREADY_REGISTERED_FIRST);
         System.out.println("The text of message is " + '"'
                 + signInPage.INVALID_MESSAGE_ALREADY_REGISTERED_FIRST + '"');
-
         Thread.sleep(5000);
 
-        String actualTextSecond = signInPage.invalidMessageAlreadyRegisteredSecondText(driver);
-        String expectedTextSecond = signInPage.INVALID_PASSWORD_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_MISMATCHED;
-        Assert.assertEquals(actualTextSecond, expectedTextSecond);
+        Assert.assertEquals(signInPage.invalidMessageAlreadyRegisteredSecondText(),
+                signInPage.INVALID_PASSWORD_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_MISMATCHED);
         System.out.println("The text of message is " + '"'
                 + signInPage.INVALID_PASSWORD_MESSAGE_ALREADY_REGISTERED_SECOND_WHEN_MISMATCHED + '"');
     }
 
     @Test  //passed
     public void createAnAccountPersonalInfoTitle() throws InterruptedException {
-        driver.get(stringUrl);
-
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
-        String actual = signInPage.createAnAccountPersonalInfoTitle(driver);
-        String expected = signInPage.CREATE_AN_ACCOUNT_PERSONAL_INFO_TITLE;
-
-        Assert.assertEquals(actual, expected);
+        Assert.assertEquals(signInPage.createAnAccountPersonalInfoTitle(),
+                signInPage.CREATE_AN_ACCOUNT_PERSONAL_INFO_TITLE);
     }
 
     @Test  //passed
-    public void yourPersonalInfoSectionTitle() {
-        driver.get(stringUrl);
-
+    public void yourPersonalInfoSectionTitle() throws InterruptedException {
         signInPage.inputEmail().createAnAccountButtonClick();
-
-        String actual = signInPage.yourPersonalInfoSectionTitle();
-        String expected = signInPage.YOUR_PERSONAL_INFO_SECTION_TITLE;
-
-        Assert.assertEquals(actual, expected);
+        Thread.sleep(5000);
+        Assert.assertEquals(signInPage.yourPersonalInfoSectionTitle(), signInPage.YOUR_PERSONAL_INFO_SECTION_TITLE);
     }
 
     @Test  //passed
-    public void yourPersonalInfoTitle() {
-        driver.get(stringUrl);
-
+    public void yourPersonalInfoTitle() throws InterruptedException {
         signInPage.inputEmail().createAnAccountButtonClick();
-
-        String actual = signInPage.yourPersonalInfoTitle();
-        String expected = signInPage.YOUR_PERSONAL_INFO_TITLE;
-
-        Assert.assertEquals(actual, expected);
+        Thread.sleep(5000);
+        Assert.assertEquals(signInPage.yourPersonalInfoTitle(), signInPage.YOUR_PERSONAL_INFO_TITLE);
     }
 
     @Test  //passed
-    public void mrRadioButtonDisplayed() {
-        driver.get(stringUrl);
-
+    public void mrRadioButtonDisplayed() throws InterruptedException {
         signInPage.inputEmail().createAnAccountButtonClick();
-
+        Thread.sleep(5000);
         Assert.assertTrue(signInPage.mrRadioButtonDisplayed());
     }
 
-    @Test
-    public void mrRadioButtonEnabled() {
-        driver.get(stringUrl);
-
+    @Test //passed
+    public void mrRadioButtonEnabled() throws InterruptedException {
         signInPage.inputEmail().createAnAccountButtonClick();
         signInPage.mrRadioButtonEnabled();
+        Thread.sleep(5000);
         Assert.assertTrue(signInPage.mrRadioButtonEnabled());
     }
 
     @Test  //passed
-    public void mrsRadioButtonDisplayed() {
-        driver.get(stringUrl);
-
+    public void mrsRadioButtonDisplayed() throws InterruptedException {
         signInPage.inputEmail().createAnAccountButtonClick();
-
+        Thread.sleep(5000);
         Assert.assertTrue(signInPage.mrsRadioButtonDisplayed());
     }
 
     @Test  //passed
-    public void mrsRadioButtonEnabled() {
-        driver.get(stringUrl);
-
+    public void mrsRadioButtonEnabled() throws InterruptedException {
         signInPage.inputEmail().createAnAccountButtonClick();
-
+        Thread.sleep(5000);
         Assert.assertTrue(signInPage.mrsRadioButtonEnabled());
     }
 
     @Test  //passed
     public void selectedStatusMrRadioButton() throws InterruptedException {
-        driver.get(stringUrl);
-
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
         signInPage.clickMrRadioButton();
-
         Assert.assertTrue(signInPage.selectedStatusMr());
     }
 
     @Test //passed
     public void selectedStatusMrsRadioButton() throws InterruptedException {
-        driver.get(stringUrl);
-
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
         signInPage.clickMrsRadioButton();
@@ -513,8 +356,6 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
 
     @Test  //passed
     public void selectDropDown() throws InterruptedException {
-        driver.get(stringUrl);
-
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
 
@@ -547,8 +388,6 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
 
     @Test
     public void selectDropDownDaysAll() throws InterruptedException {
-        driver.get(stringUrl);
-
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
 
@@ -562,8 +401,6 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
 
     @Test //passed
     public void selectDropDownDaysOption() throws InterruptedException {
-        driver.get(stringUrl);
-
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
 
@@ -579,8 +416,6 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
 
     @Test  //passed
     public void selectDropDownDaysOptionOneByOne() throws InterruptedException {
-        driver.get(stringUrl);
-
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
 
@@ -594,18 +429,13 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
 
     @Test  //passed. Question: how to check all options value one by one?
     public void selectDropDownDaysOptionByValue() throws InterruptedException {
-        driver.get(stringUrl);
-
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
-
         signInPage.selectDropDownDaysOptionByValue();
     }
 
     @Test  // passed
     public void selectDropDownMonthsAllOptions() throws InterruptedException {
-        driver.get(stringUrl);
-
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
 
@@ -618,8 +448,6 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
 
     @Test  // passed
     public void selectDropDownMonthsOneOption() throws InterruptedException {
-        driver.get(stringUrl);
-
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
 
@@ -631,8 +459,6 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
 
     @Test
     public void selectDropDownYearsAll() throws InterruptedException {
-        driver.get(stringUrl);
-
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
 
@@ -646,8 +472,6 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
 
     @Test  //passed
     public void selectDropDownYearsOption() throws InterruptedException {
-        driver.get(stringUrl);
-
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
 
@@ -663,78 +487,60 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
 
     @Test //passed
     public void checkEmailFieldIfNotEmpty() throws InterruptedException {
-        driver.get(stringUrl);
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
-
-        boolean actual = signInPage.emptyField();
-        boolean expected = false;
-        Assert.assertEquals(actual, expected);
-
-        System.out.println(signInPage.emptyField());
+        Assert.assertEquals(signInPage.emptyFieldEmail(), false);
+        System.out.println(signInPage.emptyFieldEmail());
     }
 
     @Test //passed
     public void checkEmailFieldValue() throws InterruptedException {
-        driver.get(stringUrl);
         signInPage.inputEmail();
         Thread.sleep(5000);
         String newEmail = signInPage.valueOfEmailFieldHomePage();
 
         signInPage.createAnAccountButtonClick();
         Thread.sleep(5000);
-
-        String actual = signInPage.valueOfEmailField();
-        String expected = newEmail;
-        Assert.assertEquals(actual, expected);
-
+        Assert.assertEquals(signInPage.valueOfEmailField(), newEmail);
         System.out.println(signInPage.valueOfEmailField());
     }
 
     @Test  //passed
-    public void deleteValue() throws InterruptedException {
-        driver.get(stringUrl);
+    public void deleteEmailValue() throws InterruptedException {
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
-
-        signInPage.deleteValue();
-
-        boolean actual = signInPage.emptyField();
-        boolean expected = true;
-        Assert.assertEquals(actual, expected);
+        signInPage.deleteValueEmail();
+        Assert.assertEquals(signInPage.emptyFieldEmail(), true);
     }
 
     @Test  //passed
     public void countryDropDownFirstOption() throws InterruptedException {
-        driver.get(stringUrl);
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
-
         signInPage.countryDropDownFirstOption();
     }
 
     @Test  //passed
     public void errorAlertIs() throws InterruptedException {
-        driver.get(stringUrl);
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
 
-        signInPage.deleteValue();
+        signInPage.deleteValueEmail();
         signInPage.countryDropDownFirstOption();
-        //signInPage.clickRegisterButton();
-
+        signInPage.clickRegisterButton();
+        Thread.sleep(5000);
         WebElement errorAlert = signInPage.errorAlert();
         Assert.assertTrue(errorAlert.isDisplayed());
     }
 
     @Test  //passed
     public void errorAlertText() throws InterruptedException {
-        driver.get(stringUrl);
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
 
-        signInPage.deleteValue();
+        signInPage.deleteValueEmail();
         signInPage.countryDropDownFirstOption();
+        Thread.sleep(5000);
         signInPage.clickRegisterButton();
 
         WebElement errorAlert = signInPage.errorAlert();
@@ -746,34 +552,26 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
 
     @Test
     public void signUpCheckBoxEnabled() throws InterruptedException {
-        driver.get(stringUrl);
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
-
         Assert.assertTrue(signInPage.signUpCheckBox());
     }
 
-    @Test  //passed
+    @Test  //failed without visible reason
     public void signUpCheckBoxClickAndSelected() throws InterruptedException {
-        driver.get(stringUrl);
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
 
         signInPage.clickSignUpCheckBox();
         Thread.sleep(5000);
-        signInPage.selectedSignUpCheckBox();
+        Assert.assertTrue(signInPage.selectedSignUpCheckBox());
     }
 
     @Test //(enabled=false)
     public void signUpCheckBoxName() throws InterruptedException {
-        driver.get(stringUrl);
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
-
-        String actual = signInPage.signUpCheckBoxName();
-        String expected = signInPage.SIGNUP_CHECKBOX;
-
-        Assert.assertEquals(actual, expected, "signUpCheckBoxName is not correct");
+        Assert.assertEquals(signInPage.signUpCheckBoxName(), signInPage.SIGNUP_CHECKBOX, "signUpCheckBoxName is not correct");
     }
 
     @Test
@@ -800,6 +598,254 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         Thread.sleep(5000);
         Assert.assertTrue(signInPage.selectedOffersCheckBox());
     }
-}
+
+    @Test //passed
+    public void firsNameOneFieldName() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+        Assert.assertEquals(signInPage.firstNameFieldOneName(), signInPage.FIRSTNAME_FIELD);
+    }
+
+    @Test
+    public void lastNameTwoFieldName() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+        Assert.assertEquals(signInPage.lastNameFieldTOneName(), signInPage.LASTNAME_FIELD);
+    }
+
+    @Test //passed
+    public void firsNameTwoFieldName() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+        Assert.assertEquals(signInPage.firstNameFieldTwoName(), signInPage.FIRSTNAME_FIELD);
+    }
+
+    @Test //passed
+    public void lastNameOneFieldName() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+        Assert.assertEquals(signInPage.lastNameFieldTwoName(), signInPage.LASTNAME_FIELD);
+    }
+
+    @Test
+    public void emailFieldName() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+        Assert.assertEquals(signInPage.emailFieldName(), signInPage.EMAIL_FIELD);
+    }
+
+    @Test //passed but time to time is failed with different results of field name
+    public void passwordFieldName() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+        Assert.assertEquals(signInPage.passwordFieldName(), signInPage.PASSWORD_FIELD);
+    }
+
+    @Test
+    public void passwordFieldHelpText() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+        Assert.assertEquals(signInPage.passwordFieldHelpText(), signInPage.PASSWORD_FIELD_HELP_TEXT);
+    }
+
+    @Test
+    public void dateOfBirthFieldName() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+        Assert.assertEquals(signInPage.dateOfBirthFieldName(), signInPage.DATE_OF_BIRTH_FIELD);
+    }
+
+    @Test //passed
+    public void yourAddressSectionName() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+        Assert.assertEquals(signInPage.yourAddressSectionName(), signInPage.YOUR_ADDRESS_SECTION.toUpperCase());
+    }
+
+    @Test
+    public void companyFieldName() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+        Assert.assertEquals(signInPage.companyFieldName(), signInPage.COMPANY_FIELD);
+    }
+
+    @Test
+    public void addressFieldName() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+        Assert.assertEquals(signInPage.addressFieldName(), signInPage.ADDRESS_FIELD);
+    }
+
+    @Test
+    public void addressFieldHelpText() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+        Assert.assertEquals(signInPage.addressFieldHelpText(), signInPage.ADDRESS_HELP_TEXT);
+    }
+
+    @Test
+    public void cityFieldName() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+        Assert.assertEquals(signInPage.cityFieldName(), signInPage.CITY_FIELD);
+    }
+
+    @Test
+    public void countryFieldName() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+        Assert.assertEquals(signInPage.countryFieldName(), signInPage.COUNTRY_FIELD);
+    }
+
+    @Test
+    public void additionalInfoFieldName() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+        Assert.assertEquals(signInPage.additionalInfoFieldName(), signInPage.ADDITIONAL_INFORMATION_FIELD);
+    }
+
+    @Test
+    public void additionalInfoHelpText() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+        Assert.assertEquals(signInPage.additionalInfoHelpText(), signInPage.ADDITIONAL_INFORMATION_HELP_TEXT);
+    }
+
+    @Test
+    public void homePhoneFieldName() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+        Assert.assertEquals(signInPage.homePhoneFieldName(), signInPage.HOME_PHONE_FIELD);
+    }
+
+    @Test
+    public void mobilePhoneFieldName() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+        Assert.assertEquals(signInPage.mobilePhoneFieldName(), signInPage.MOBILE_PHONE_FIELD);
+    }
+
+    @Test
+    public void assignAliasFieldName() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+        Assert.assertEquals(signInPage.assignAliasFieldName(), signInPage.ASSIGN_ADDRESS_ALIAS_FIELD);
+    }
+
+    @Test //passed
+    public void valueOfAddressAliasField() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+        Assert.assertEquals(signInPage.assignAliasFieldValue(), signInPage.ASSIGN_ADDRESS_ALIAS_VALUE);
+    }
+
+    @Test
+    public void registerButtonName() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+        Assert.assertEquals(signInPage.registerButtonName(), signInPage.REGISTER_BUTTON);
+    }
+
+    @Test //passed
+    public void requiredText() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+        Assert.assertEquals(signInPage.requiredText(), signInPage.REQUIRED_TEXT);
+    }
+
+    @Test //probably bad design
+    public void firstNameFieldWithDigits() throws InterruptedException, AWTException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+        String value = "123";
+        if (signInPage.emptyFieldFirstName() == false) {
+            signInPage.deleteValueFirstName();
+        } else if (signInPage.emptyFieldLastName() != true) {
+            signInPage.deleteValueLastName();
+        } else if (signInPage.emptyFieldPassword() == false) {
+            signInPage.deleteValuePassword();
+        } else {
+            signInPage.inputValueLastName(value);
+
+            Thread.sleep(5000);
+            signInPage.clickAnyWhere();
+            Thread.sleep(5000);
+
+            Assert.assertTrue(signInPage.isDisplayed(driver
+                    .findElement(By.xpath("//div[@class='required form-group form-error']"))));
+        }
+    }
+
+        @Test //probably bad design
+        public void firstNameFieldWithLetters () throws InterruptedException, AWTException {
+            signInPage.inputEmail().createAnAccountButtonClick();
+            Thread.sleep(5000);
+            String value = "qwe";
+            if (signInPage.emptyFieldFirstName() == false) {
+                signInPage.deleteValueFirstName();
+            } else if (signInPage.emptyFieldLastName() != true) {
+                signInPage.deleteValueLastName();
+            } else if (signInPage.emptyFieldPassword() == false) {
+                signInPage.deleteValuePassword();
+            } else {
+                signInPage.inputValueLastName(value);
+
+                Thread.sleep(5000);
+                signInPage.clickAnyWhere();
+                Thread.sleep(5000);
+
+                Assert.assertTrue(signInPage.isDisplayed(driver
+                        .findElement(By.xpath("//div[@class='required form-group form-ok']"))));
+            }
+        }
+
+        @Test //probably bad design
+        public void lastNameFieldWithDigits () throws InterruptedException, AWTException {
+            signInPage.inputEmail().createAnAccountButtonClick();
+            Thread.sleep(5000);
+            String value = "123";
+            if (signInPage.emptyFieldFirstName() == false) {
+                signInPage.deleteValueFirstName();
+            } else if (signInPage.emptyFieldLastName() != true) {
+                signInPage.deleteValueLastName();
+            } else if (signInPage.emptyFieldPassword() == false) {
+                signInPage.deleteValuePassword();
+            } else {
+                signInPage.inputValueLastName(value);
+
+                Thread.sleep(5000);
+                signInPage.clickAnyWhere();
+                Thread.sleep(5000);
+
+                Assert.assertTrue(signInPage.isDisplayed(driver
+                        .findElement(By.xpath("//div[@class='required form-group form-error']"))));
+            }
+        }
+
+        @Test //probably bad design
+        public void lastNameFieldWithLetters () throws InterruptedException, AWTException {
+            signInPage.inputEmail().createAnAccountButtonClick();
+            Thread.sleep(5000);
+            String value = "qwe";
+            if (signInPage.emptyFieldFirstName() == false) {
+                signInPage.deleteValueFirstName();
+            } else if (signInPage.emptyFieldLastName() != true) {
+                signInPage.deleteValueLastName();
+            } else if (signInPage.emptyFieldPassword() == false) {
+                signInPage.deleteValuePassword();
+            } else {
+                signInPage.inputValueLastName(value);
+
+                Thread.sleep(5000);
+                signInPage.clickAnyWhere();
+                Thread.sleep(5000);
+
+                Assert.assertTrue(signInPage.isDisplayed(driver
+                        .findElement(By.xpath("//div[@class='required form-group form-ok']"))));
+                Thread.sleep(5000);
+            }
+        }
+    }
+
 
 

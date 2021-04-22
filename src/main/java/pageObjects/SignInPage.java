@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -93,12 +94,27 @@ public class SignInPage {
     public static final String COUNTRY = "Country";
 
 
-//    public static final String FIRSTNAME_FIELD = "First name";
-//    public static final String LASTNAME_FIELD = "Last name";
-//    public static final String EMAIL_FIELD = "Email";
-//    public static final String PASSWORD_FIELD = "Password";
+    public static final String FIRSTNAME_FIELD = "First name *";
+    public static final String LASTNAME_FIELD = "Last name *";
+    public static final String EMAIL_FIELD = "Email *";
+    public static final String PASSWORD_FIELD = "Password *";
+    public static final String PASSWORD_FIELD_HELP_TEXT = "(Five characters minimum)";
+    public static final String DATE_OF_BIRTH_FIELD = "Date of Birth";
+    public static final String YOUR_ADDRESS_SECTION = "Your address";
+    public static final String COMPANY_FIELD = "Company";
+    public static final String ADDRESS_FIELD = "Address *";
+    public static final String ADDRESS_HELP_TEXT = "Street address, P.O. Box, Company name, etc.";
+    public static final String CITY_FIELD = "City *";
+    public static final String COUNTRY_FIELD = "Country *";
+    public static final String ADDITIONAL_INFORMATION_FIELD = "Additional information";
+    public static final String ADDITIONAL_INFORMATION_HELP_TEXT = "You must register at least one phone number.";
+    public static final String HOME_PHONE_FIELD = "Home phone";
+    public static final String MOBILE_PHONE_FIELD = "Mobile phone *";
+    public static final String ASSIGN_ADDRESS_ALIAS_FIELD = "Assign an address alias for future reference. *";
+    public static final String ASSIGN_ADDRESS_ALIAS_VALUE = "My address";
 
     public static final String REGISTER_BUTTON = "Register";
+    public static final String REQUIRED_TEXT = "*Required field";
 
     boolean displayedStatus;
     boolean enabledStatus;
@@ -289,25 +305,24 @@ public class SignInPage {
         return this;
     }
 
-    public String invalidMessageAlreadyRegisteredFirstText(WebDriver driver) {
-        return driver.findElement(By.xpath("//div[@class='alert alert-danger']/p")).getText();
+    public String invalidMessageAlreadyRegisteredFirstText() {
+        return getName("//div[@class='alert alert-danger']/p");
     }
 
-    public String invalidMessageAlreadyRegisteredSecondText(WebDriver driver) {
-        invalidMessageAlreadyRegisteredSecond = driver.findElement(By.xpath("//div[@id='center_column']//child::li"));
-        return invalidMessageAlreadyRegisteredSecond.getText();
+    public String invalidMessageAlreadyRegisteredSecondText() {
+        return getName("//div[@id='center_column']//child::li");
     }
 
-    public String createAnAccountPersonalInfoTitle(WebDriver driver) {
-        return driver.findElement(By.xpath("//h1[text()='Create an account']")).getText();
+    public String createAnAccountPersonalInfoTitle() {
+        return getName("//h1[text()='Create an account']");
     }
 
     public String yourPersonalInfoSectionTitle() {
-        return driver.findElement(By.xpath("//h3[text()='Your personal information']")).getText();
+        return getName("//h3[text()='Your personal information']");
     }
 
     public String yourPersonalInfoTitle() {
-        return driver.findElement(By.xpath("//div[@class='clearfix']/label")).getText();
+        return getName("//div[@class='clearfix']/label");
     }
 
     //General isDisplayed
@@ -317,11 +332,11 @@ public class SignInPage {
     }
 
     public Boolean mrRadioButtonDisplayed() {
-        return isDisplayed(driver.findElement(By.xpath("//*[@id='id_gender1']")));
+        return isDisplayed(driver.findElement(By.xpath("//label[@for='id_gender1']")));
     }
 
     public Boolean mrsRadioButtonDisplayed() {
-        return isDisplayed(driver.findElement(By.xpath("//*[@id='id_gender2']")));
+        return isDisplayed(driver.findElement(By.xpath("//label[@for='id_gender2']")));
         //the same
 //        mrsRadioButton = driver.findElement(By.xpath("//*[@id='id_gender2']"));
 //        Boolean displayed = isDisplayed(mrsRadioButton);
@@ -371,7 +386,7 @@ public class SignInPage {
         //String xPath = "//*[@id='account-creation_form']/div[1]/div[7]/label"; //the same
         //String xPath = "//*[@id='account-creation_form']/div[1]/div[7]"; //the same
         //String xPath = "//div[@class='checkbox']"; //the sme to the next
-        return getName("//*[@id='account-creation_form']/div[1]/div[8]/label"); //will be re-written
+        return getName("//label[@for='optin']");
     }
 
     //General click
@@ -389,7 +404,7 @@ public class SignInPage {
     }
 
     public void clickSignUpCheckBox() {
-        clickAction("//div[@id='uniform-newsletter']");
+        clickAction("//*[@id='uniform-newsletter']");
     }
 
     public void clickOffersCheckBox() {
@@ -411,11 +426,11 @@ public class SignInPage {
     }
 
     public boolean selectedSignUpCheckBox() {
-        return selectedStatus(driver.findElement(By.xpath("//div[@id='uniform-newsletter']")));
+        return selectedStatus(driver.findElement(By.xpath("//*[@id='uniform-newsletter']")));
     }
 
     public boolean selectedOffersCheckBox() {
-        return selectedStatus(driver.findElement(By.xpath("//div[@id='uniform-newsletter']")));
+        return selectedStatus(driver.findElement(By.xpath("//*[@id='optin']")));
     }
 
     //General
@@ -468,13 +483,29 @@ public class SignInPage {
         clickAction("//button[@id='submitAccount']");
     }
 
-    public boolean emptyField() {
-        emailField = driver.findElement(By.xpath("//*[@id='email']"));
-        if (emailField.getAttribute("value").isEmpty()) {
+    //General
+    public boolean emptyField(String xPath) {
+        if (driver.findElement(By.xpath(xPath)).getAttribute("value").isEmpty()) {
             return true;
         } else {
             return false;
         }
+    }
+
+    public boolean emptyFieldEmail() {
+        return emptyField("//*[@id='email']");
+    }
+
+    public boolean emptyFieldFirstName() {
+        return emptyField("//*[@id='customer_firstname']");
+    }
+
+    public boolean emptyFieldLastName() {
+        return emptyField("//*[@id='customer_lastname']");
+    }
+
+    public boolean emptyFieldPassword() {
+        return emptyField("//*[@id='passwd']");
     }
 
     public String valueOfEmailFieldHomePage() {
@@ -486,8 +517,25 @@ public class SignInPage {
         return driver.findElement(By.xpath("//*[@id='email']")).getAttribute("value");
     }
 
-    public void deleteValue() {
-        driver.findElement(By.xpath("//*[@id='email']")).clear();
+    //General
+    public void deleteValue(String xPath) {
+        driver.findElement(By.xpath(xPath)).clear();
+    }
+
+    public void deleteValueEmail() {
+        deleteValue("//*[@id='email']");
+    }
+
+    public void deleteValueFirstName() {
+        deleteValue("//*[@id='customer_firstname']");
+    }
+
+    public void deleteValueLastName() {
+        deleteValue("//*[@id='customer_lastname']");
+    }
+
+    public void deleteValuePassword() {
+        deleteValue("//*[@id='passwd']");
     }
 
     public void countryDropDownFirstOption() {
@@ -509,6 +557,116 @@ public class SignInPage {
         Alert confirmation = driver.switchTo().alert();
         String alertText = confirmation.getText();
         return alertText;
+    }
+
+    public String firstNameFieldOneName() {
+        return getName("//label[@for='customer_firstname']");
+    }
+
+    public String firstNameFieldTwoName() {
+        return getName("//label[@for='firstname']");
+    }
+
+    public String lastNameFieldTOneName() {
+        return getName("//label[@for='customer_lastname']");
+    }
+
+    public String lastNameFieldTwoName() {
+        return getName("//label[@for='lastname']");
+    }
+
+    public String emailFieldName() {
+        return getName("//label[@for='email']");
+    }
+
+    public String passwordFieldName() {
+        return getName("//label[@for='passwd']");
+    }
+
+    public String passwordFieldHelpText() {
+        return getName("//span[contains(text(),'(Five')]");
+    }
+
+    public String dateOfBirthFieldName() {
+        return getName("//label[contains(text(),'Date of Birth')]");
+    }
+
+    public String yourAddressSectionName() {
+        return getName("//*[text()='Your address']");
+    }
+
+    public String companyFieldName() {
+        return getName("//label[@for='company']");
+    }
+
+    public String addressFieldName() {
+        return getName("//label[@for='address1']");
+    }
+
+    public String addressFieldHelpText() {
+        return getName("//span[contains(text(),'Street')]");
+    }
+
+    public String cityFieldName() {
+        return getName("//label[@for='city']");
+    }
+
+    public String countryFieldName() {
+        return getName("//label[@for='id_country']");
+    }
+
+    public String additionalInfoFieldName() {
+        return getName("//label[@for='other']");
+    }
+
+    public String additionalInfoHelpText() {
+        return getName("//p[contains(text(),'You must')]");
+    }
+
+    public String homePhoneFieldName() {
+        return getName("//label[@for='phone']");
+    }
+
+    public String mobilePhoneFieldName() {
+        return getName("//label[@for='phone_mobile']");
+    }
+
+    public String assignAliasFieldName() {
+        return getName("//label[@for='alias']");
+    }
+
+    public String assignAliasFieldValue() {
+        return driver.findElement(By.xpath("//*[@id='alias']")).getAttribute("value");
+    }
+
+    public String registerButtonName() {
+        return getName("//button[@id='submitAccount']");
+    }
+
+    public String requiredText() {
+        return getName("//span[text()='Required field']");
+    }
+
+    public void inputValueFirstName(String value) {
+        firstNameField = driver.findElement(By.xpath("//*[@id='customer_firstname']"));
+        firstNameField.sendKeys(value);
+    }
+
+    public void inputValueLastName(String value) {
+        lastNameField = driver.findElement(By.xpath("//*[@id='customer_lastname']"));
+        lastNameField.sendKeys(value);
+    }
+
+    public void inputValuePassword(String value) {
+        passwordField = driver.findElement(By.xpath("//*[@id='passwd']"));
+        passwordField.sendKeys(value);
+    }
+
+    public void clickAnyWhere() throws AWTException {
+        Actions actions = new Actions(driver);
+        Robot robot = new Robot();
+        robot.mouseMove(50,50);
+        actions.click().build().perform();
     }
 
 }
