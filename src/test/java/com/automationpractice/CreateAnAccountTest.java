@@ -11,15 +11,16 @@ import pageObjects.SignInPage;
 import java.awt.*;
 import java.util.List;
 
-//77 tests
+//97 tests
 public class CreateAnAccountTest extends BaseTestAbstractClass {
     String stringUrlMainPage = "http://automationpractice.com/index.php";
     String stringUrl = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
+    String stringMyAccountUrl = "http://automationpractice.com/index.php?controller=my-account";
 
     SignInPage signInPage;
 
     @BeforeMethod
-    void setUpMethod () {
+    void setUpMethod() {
         driver.get(stringUrl);
         signInPage = new SignInPage(driver);
     }
@@ -27,20 +28,16 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
     @Test  //passed
     public void checkClickSignInMainPage() {
         driver.get(stringUrlMainPage);
-
         signInPage.clickSignInHeaderButton();
-        Assert.assertEquals(signInPage.actualUrlFind(driver), signInPage.EXPECTED_URL);
+        Assert.assertEquals(signInPage.actualUrlFind(), signInPage.EXPECTED_URL);
         System.out.println("Expected Url is correct");
     }
 
     @Test  //passed
     public void checkClickSignInAccountPage() throws InterruptedException {
         Thread.sleep(5000);
-
         signInPage.clickSignInHeaderButton();
-//        String actualUrl = signInPage.actualUrlFind(driver);
-//        String expectedUrl = signInPage.EXPECTED_URL;
-        Assert.assertEquals(signInPage.actualUrlFind(driver), signInPage.EXPECTED_URL);
+        Assert.assertEquals(signInPage.actualUrlFind(), signInPage.EXPECTED_URL);
         System.out.println("Expected Url is correct");
     }
 
@@ -55,7 +52,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         Assert.assertEquals(signInPage.signInHeaderButtonNameFind(), signInPage.EXPECTED_SIGN_IN_HEADER_BUTTON_NAME);
     }
 
-    @Test // works
+    @Test // works 123
     public void signInPageTitle() throws InterruptedException {
         SignInPage signInPage = new SignInPage(driver);
         signInPage.clickSignInHeaderButton(); //works with and without
@@ -87,17 +84,17 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
                 + signInPage.EXPECTED_EMAIL_ADDRESS_FIELD_CREATE_AN_ACCOUNT_NAME + '"');
     }
 
-    @Test  //works
+    @Test  //passed
     public void emailInputWithOneNew() {
-        signInPage.emailAddressFieldCreateAnAccountFind();
         signInPage.inputEmail().createAnAccountButtonClick();
+        Assert.assertEquals(signInPage.authenticationFind(), "Authentication");
     }
 
-    @Test  // works
-    public void emailInput() throws InterruptedException {
-        signInPage.emailAddressFieldCreateAnAccountFind();
-        signInPage.inputEmail();
-        signInPage.createAnAccountButtonClick();
+    @Test  // passed
+    public void emailInputNotEmpty() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+        Assert.assertFalse(signInPage.emptyFieldEmail());
     }
 
     @Test  // works
@@ -354,7 +351,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         Assert.assertTrue(signInPage.selectedStatusMrs());
     }
 
-    @Test  //passed
+    @Test  //passed *** corrupted, java.util. had to be added
     public void selectDropDown() throws InterruptedException {
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
@@ -396,7 +393,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         int index = generateRandomIntInRange(0, expected.length - 1);
         Assert.assertEquals(actual, expected);
         Assert.assertEquals(actual[index], expected[index]);
-        System.out.println("*********" + index + " " + actual[index]  + " " + expected[index]);
+        System.out.println("*********" + index + " " + actual[index] + " " + expected[index]);
     }
 
     @Test //passed
@@ -409,7 +406,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
 
         Assert.assertEquals(actual.length, expected.length, "Compare list length");
         // update with stream
-        for (int i=0; i < expected.length; i++) {
+        for (int i = 0; i < expected.length; i++) {
             Assert.assertEquals(actual[i], expected[i]);
         }
     }
@@ -421,9 +418,9 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
 
         int[] actual = signInPage.dropDownDaysAllOptions();
 
-        for (int i=0; i < 31; i++) {
+        for (int i = 0; i < 31; i++) {
             int tmp = i;
-            Assert.assertEquals(actual[i], tmp+1);
+            Assert.assertEquals(actual[i], tmp + 1);
         }
     }
 
@@ -434,27 +431,25 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         signInPage.selectDropDownDaysOptionByValue();
     }
 
-    @Test  // passed
-    public void selectDropDownMonthsAllOptions() throws InterruptedException {
+    @Test  // passed *** was corrupted when actual and expected were written separately as variables with List<String>
+    public void selectDropDownMonthsAllOptionsByIndex() throws InterruptedException {
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
 
-        List<String> actual = signInPage.dropDownMonthsAllOptions();
-        List<String> expected = signInPage.DROPDOWN_MONTHS;
-        int index = generateRandomIntInRange(0, expected.size() - 1);
-        Assert.assertEquals(actual.get(index), expected.get(index));
-        System.out.println("*********" + index + " " + actual.get(index)  + " " + expected.get(index));
+        int index = generateRandomIntInRange(0, signInPage.DROPDOWN_MONTHS.size() - 1);
+        Assert.assertEquals(signInPage.dropDownMonthsAllOptions().get(index), signInPage.DROPDOWN_MONTHS.get(index));
+        System.out.println("*********" + index + " " + signInPage.dropDownMonthsAllOptions().get(index)
+                + " " + signInPage.DROPDOWN_MONTHS.get(index));
     }
 
-    @Test  // passed
-    public void selectDropDownMonthsOneOption() throws InterruptedException {
+    @Test  // passed *** corrupted when actual and expected were written separately as variables with List<String>
+    public void selectDropDownMonthsAllOption() throws InterruptedException {
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
 
-        List<String> actual = signInPage.dropDownMonthsAllOptions();
-        List<String> expected = signInPage.DROPDOWN_MONTHS;
-        Assert.assertEquals(actual, expected);
-        System.out.println("*********" + actual + " \n " +  expected);
+        Assert.assertEquals(signInPage.dropDownMonthsAllOptions(), signInPage.DROPDOWN_MONTHS);
+        System.out.println("*********" + signInPage.dropDownMonthsAllOptions()
+                + " \n " + signInPage.DROPDOWN_MONTHS);
     }
 
     @Test
@@ -467,7 +462,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         int index = generateRandomIntInRange(0, expected.length - 1);
         Assert.assertEquals(actual, expected);
         Assert.assertEquals(actual[index], expected[index]);
-        System.out.println("*********" + index + " " + actual[index]  + " " + expected[index]);
+        System.out.println("*********" + index + " " + actual[index] + " " + expected[index]);
     }
 
     @Test  //passed
@@ -480,7 +475,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
 
         Assert.assertEquals(actual.length, expected.length, "Compare list length");
         // update with stream
-        for (int i=0; i < expected.length; i++) {
+        for (int i = 0; i < expected.length; i++) {
             Assert.assertEquals(actual[i], expected[i]);
         }
     }
@@ -517,7 +512,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
     public void countryDropDownFirstOption() throws InterruptedException {
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
-        signInPage.countryDropDownFirstOption();
+        Assert.assertEquals(signInPage.countryDropDownFirstOption(), "-");
     }
 
     @Test  //passed
@@ -697,6 +692,27 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         Assert.assertEquals(signInPage.countryFieldName(), signInPage.COUNTRY_FIELD);
     }
 
+    @Test  // passed
+    public void selectDropDownStatesAllOptionsByIndex() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        int index = generateRandomIntInRange(0, signInPage.STATES.size() - 1);
+        Assert.assertEquals(signInPage.dropDownStatesAllOptions().get(index), signInPage.STATES.get(index));
+        System.out.println("*********" + index + " " + signInPage.dropDownStatesAllOptions().get(index)
+                + " " + signInPage.STATES.get(index));
+    }
+
+    @Test  // passed
+    public void selectDropDownStatesAllOption() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        Assert.assertEquals(signInPage.dropDownStatesAllOptions(), signInPage.STATES);
+        System.out.println("*********" + signInPage.dropDownStatesAllOptions()
+                + " \n " + signInPage.STATES);
+    }
+
     @Test
     public void additionalInfoFieldName() throws InterruptedException {
         signInPage.inputEmail().createAnAccountButtonClick();
@@ -753,11 +769,16 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         Assert.assertEquals(signInPage.requiredText(), signInPage.REQUIRED_TEXT);
     }
 
-    @Test //probably bad design
+    /**
+     * Check if the system verifies the invalid input in the FirstName field
+     * @throws InterruptedException
+     * @throws AWTException
+     */
+    @Test //probably bad design. Question about loop. I'd like to empty all fields one by one and then work only
+    // with one field. Should I write if for each field separately
     public void firstNameFieldWithDigits() throws InterruptedException, AWTException {
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
-        String value = "123";
         if (signInPage.emptyFieldFirstName() == false) {
             signInPage.deleteValueFirstName();
         } else if (signInPage.emptyFieldLastName() != true) {
@@ -765,87 +786,313 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         } else if (signInPage.emptyFieldPassword() == false) {
             signInPage.deleteValuePassword();
         } else {
-            signInPage.inputValueLastName(value);
-
-            Thread.sleep(5000);
+            signInPage.inputValueFirstNameDigits();
             signInPage.clickAnyWhere();
-            Thread.sleep(5000);
-
-            Assert.assertTrue(signInPage.isDisplayed(driver
-                    .findElement(By.xpath("//div[@class='required form-group form-error']"))));
+            Assert.assertTrue(signInPage.redSign());
         }
     }
 
-        @Test //probably bad design
-        public void firstNameFieldWithLetters () throws InterruptedException, AWTException {
-            signInPage.inputEmail().createAnAccountButtonClick();
-            Thread.sleep(5000);
-            String value = "qwe";
-            if (signInPage.emptyFieldFirstName() == false) {
-                signInPage.deleteValueFirstName();
-            } else if (signInPage.emptyFieldLastName() != true) {
-                signInPage.deleteValueLastName();
-            } else if (signInPage.emptyFieldPassword() == false) {
-                signInPage.deleteValuePassword();
-            } else {
-                signInPage.inputValueLastName(value);
-
-                Thread.sleep(5000);
-                signInPage.clickAnyWhere();
-                Thread.sleep(5000);
-
-                Assert.assertTrue(signInPage.isDisplayed(driver
-                        .findElement(By.xpath("//div[@class='required form-group form-ok']"))));
-            }
-        }
-
-        @Test //probably bad design
-        public void lastNameFieldWithDigits () throws InterruptedException, AWTException {
-            signInPage.inputEmail().createAnAccountButtonClick();
-            Thread.sleep(5000);
-            String value = "123";
-            if (signInPage.emptyFieldFirstName() == false) {
-                signInPage.deleteValueFirstName();
-            } else if (signInPage.emptyFieldLastName() != true) {
-                signInPage.deleteValueLastName();
-            } else if (signInPage.emptyFieldPassword() == false) {
-                signInPage.deleteValuePassword();
-            } else {
-                signInPage.inputValueLastName(value);
-
-                Thread.sleep(5000);
-                signInPage.clickAnyWhere();
-                Thread.sleep(5000);
-
-                Assert.assertTrue(signInPage.isDisplayed(driver
-                        .findElement(By.xpath("//div[@class='required form-group form-error']"))));
-            }
-        }
-
-        @Test //probably bad design
-        public void lastNameFieldWithLetters () throws InterruptedException, AWTException {
-            signInPage.inputEmail().createAnAccountButtonClick();
-            Thread.sleep(5000);
-            String value = "qwe";
-            if (signInPage.emptyFieldFirstName() == false) {
-                signInPage.deleteValueFirstName();
-            } else if (signInPage.emptyFieldLastName() != true) {
-                signInPage.deleteValueLastName();
-            } else if (signInPage.emptyFieldPassword() == false) {
-                signInPage.deleteValuePassword();
-            } else {
-                signInPage.inputValueLastName(value);
-
-                Thread.sleep(5000);
-                signInPage.clickAnyWhere();
-                Thread.sleep(5000);
-
-                Assert.assertTrue(signInPage.isDisplayed(driver
-                        .findElement(By.xpath("//div[@class='required form-group form-ok']"))));
-                Thread.sleep(5000);
-            }
+    /**
+     * Check if the system verifies the correctness of input in the FirstName field
+     * @throws InterruptedException
+     * @throws AWTException
+     */
+    @Test //probably bad design
+    public void firstNameFieldWithLetters() throws InterruptedException, AWTException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+        if (signInPage.emptyFieldFirstName() == false) {
+            signInPage.deleteValueFirstName();
+        } else if (signInPage.emptyFieldLastName() != true) {
+            signInPage.deleteValueLastName();
+        } else if (signInPage.emptyFieldPassword() == false) {
+            signInPage.deleteValuePassword();
+        } else {
+            signInPage.inputValueFirstNameLetters();
+            signInPage.clickAnyWhere();
+            Assert.assertTrue(signInPage.greenSign());
         }
     }
 
+    /**
+     * Check if the system verifies the invalid input in the LastName field
+     * @throws InterruptedException
+     * @throws AWTException
+     */
+    @Test //probably bad design
+    public void lastNameFieldWithDigits() throws InterruptedException, AWTException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+        if (signInPage.emptyFieldFirstName() == false) {
+            signInPage.deleteValueFirstName();
+        } else if (signInPage.emptyFieldLastName() != true) {
+            signInPage.deleteValueLastName();
+        } else if (signInPage.emptyFieldPassword() == false) {
+            signInPage.deleteValuePassword();
+        } else {
+            signInPage.inputValueLastNameDigits();
+            signInPage.clickAnyWhere();
+            Assert.assertTrue(signInPage.redSign());
+        }
+    }
 
+    /**
+     * Check if the system verifies the correctness of input in the LastName field
+     * @throws InterruptedException
+     * @throws AWTException
+     */
+    @Test //probably bad design
+    public void lastNameFieldWithLetters() throws InterruptedException, AWTException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+        if (signInPage.emptyFieldFirstName() == false) {
+            signInPage.deleteValueFirstName();
+        } else if (signInPage.emptyFieldLastName() != true) {
+            signInPage.deleteValueLastName();
+        } else if (signInPage.emptyFieldPassword() == false) {
+            signInPage.deleteValuePassword();
+        } else {
+            signInPage.inputValueLastNameLetters();
+            signInPage.clickAnyWhere();
+            Assert.assertTrue(signInPage.greenSign());
+        }
+    }
 
+    /**
+     * Check if the system verifies the invalid input in the Email field
+     * @throws InterruptedException
+     * @throws AWTException
+     */
+    @Test //probably bad design
+    public void emailFieldWithAlphaNumeric() throws InterruptedException, AWTException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        if (signInPage.emptyFieldEmail() == false) {
+            signInPage.deleteValueEmail();
+        }
+        signInPage.inputValueAlphaNumericEmail();
+        signInPage.clickAnyWhere();
+        Assert.assertTrue(signInPage.redSign());
+    }
+
+    @Test //probably bad design
+    public void emailFieldWithLetters() throws InterruptedException, AWTException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        if (signInPage.emptyFieldEmail() == false) {
+            signInPage.deleteValueEmail();
+        }
+        signInPage.inputValueAlphaNumericEmail();
+        signInPage.clickAnyWhere();
+        Assert.assertTrue(signInPage.redSign());
+    }
+
+    @Test //probably bad design
+    public void emailFieldWithCorrectEmail() throws InterruptedException, AWTException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        if (signInPage.emptyFieldEmail() == false) {
+            signInPage.deleteValueEmail();
+        }
+        signInPage.inputEmailAuthorization();
+        signInPage.clickAnyWhere();
+        Assert.assertTrue(signInPage.greenSign());
+    }
+
+    @Test
+    public void firstNameFieldsAreEqual() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        signInPage.inputValueFirstNameLetters();
+        Assert.assertEquals(signInPage.valueOfFirstNameOneField(),
+        signInPage.valueOfFirstNameTwoField());
+        System.out.println("first field" + "\n"  + (signInPage.valueOfFirstNameOneField()
+                + "\n" + "second field" + "\n"  + (signInPage.valueOfFirstNameOneField())));
+    }
+
+    @Test
+    public void lastNameFieldsAreEqual() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        signInPage.inputValueLastNameLetters();
+        Assert.assertEquals(signInPage.valueOfLastNameOneField(),
+                signInPage.valueOfLastNameTwoField());
+        System.out.println("first field" + "\n"  + (signInPage.valueOfLastNameOneField()
+                + "\n" + "second field" + "\n"  + (signInPage.valueOfLastNameOneField())));
+    }
+
+    @Test //passed BUT failed due to xPath Question about xPath
+    public void companyFieldAllowed() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        signInPage.inputValueFirstNameLetters();
+        signInPage.inputValueLastNameLetters();
+        signInPage.inputValuePassword("123456");
+        signInPage.inputValueAllowedAddress();
+        signInPage.inputValueAllowedCity();
+        signInPage.statesDropDownOptionByValue();
+        signInPage.inputValueAllowedZip();
+        signInPage.inputValueAllowedPhone();
+        signInPage.inputValueAllowedMobile();
+
+        signInPage.inputValueAllowedCompany();
+        signInPage.clickRegisterButton();
+        Assert.assertEquals(signInPage.actualUrlFind(), signInPage.MY_ACCOUNT_URL );
+
+        System.out.println("result" + "\n"  + (signInPage.actualUrlFind()));
+    }
+
+    @Test //passed BUT failed due to xPath Question about xPath
+    public void companyFieldNotAllowed() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        signInPage.inputValueFirstNameLetters();
+        signInPage.inputValueLastNameLetters();
+        signInPage.inputValuePassword("123456");
+        signInPage.inputValueAllowedAddress();
+        signInPage.inputValueAllowedCity();
+        signInPage.statesDropDownOptionByValue();
+        signInPage.inputValueAllowedZip();
+        signInPage.inputValueAllowedPhone();
+        signInPage.inputValueAllowedMobile();
+
+        signInPage.inputValueNotAllowedCompany();
+        signInPage.clickRegisterButton();
+        Assert.assertTrue(signInPage.errorInput());
+        Assert.assertEquals(signInPage.errorInputIsInvalid(),
+                "company is invalid.");
+        System.out.println("Company field" + "\n"  + (signInPage.errorInputIsInvalid()));
+    }
+
+    @Test //passed
+    public void addressFieldNotAllowed() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        signInPage.inputValueFirstNameLetters();
+        signInPage.inputValueLastNameLetters();
+        signInPage.inputValuePassword("123456");
+        signInPage.inputValueAllowedCompany();
+        signInPage.inputValueAllowedCity();
+        signInPage.statesDropDownOptionByValue();
+        signInPage.inputValueAllowedZip();
+        signInPage.inputValueAllowedPhone();
+        signInPage.inputValueAllowedMobile();
+
+        signInPage.inputValueNotAllowedAddress();
+        signInPage.clickRegisterButton();
+        Assert.assertTrue(signInPage.errorInput());
+        Assert.assertEquals(signInPage.errorInputIsInvalid(),
+                "address1 is invalid.");
+        System.out.println("Address field" + "\n"  + (signInPage.errorInputIsInvalid()));
+    }
+
+    @Test //passed
+    public void cityFieldNotAllowed() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        signInPage.inputValueFirstNameLetters();
+        signInPage.inputValueLastNameLetters();
+        signInPage.inputValuePassword("123456");
+        signInPage.inputValueAllowedCompany();
+        signInPage.inputValueAllowedAddress();
+        signInPage.statesDropDownOptionByValue();
+        signInPage.inputValueAllowedZip();
+        signInPage.inputValueAllowedPhone();
+        signInPage.inputValueAllowedMobile();
+
+        signInPage.inputValueNotAllowedCity();
+        signInPage.clickRegisterButton();
+        Assert.assertTrue(signInPage.errorInput());
+        Assert.assertEquals(signInPage.errorInputIsInvalid(),
+                "city is invalid.");
+        System.out.println("City field" + "\n"  + (signInPage.errorInputIsInvalid()));
+    }
+
+    @Test //passed
+    public void statesFieldNotAllowed() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        signInPage.inputValueFirstNameLetters();
+        signInPage.inputValueLastNameLetters();
+        signInPage.inputValuePassword("123456");
+        signInPage.inputValueAllowedCompany();
+        signInPage.inputValueAllowedAddress();
+        signInPage.inputValueAllowedCity();
+        signInPage.inputValueAllowedZip();
+        signInPage.inputValueAllowedPhone();
+        signInPage.inputValueAllowedMobile();
+
+        signInPage.statesDropDownOptionFirst();
+        signInPage.clickRegisterButton();
+        Assert.assertTrue(signInPage.errorInputRequiresDisplayed());
+        Assert.assertEquals(signInPage.errorInputRequires(),
+                "This country requires you to choose a State.");
+        System.out.println("City field" + "\n"  + (signInPage.errorInputRequires()));
+    }
+
+    @Test //passed
+    public void phoneFieldNotAllowed() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        signInPage.inputValueFirstNameLetters();
+        signInPage.inputValueLastNameLetters();
+        signInPage.inputValuePassword("123456");
+        signInPage.inputValueAllowedCompany();
+        signInPage.inputValueAllowedAddress();
+        signInPage.statesDropDownOptionByValue();
+        signInPage.inputValueAllowedZip();
+        signInPage.inputValueAllowedCity();
+        signInPage.inputValueAllowedMobile();
+
+        signInPage.inputValueNotAllowedPhone();
+        signInPage.clickRegisterButton();
+        Assert.assertTrue(signInPage.errorInput());
+        Assert.assertEquals(signInPage.errorInputIsInvalid(),
+                "phone is invalid.");
+        System.out.println("Phone field" + "\n"  + (signInPage.errorInputIsInvalid()));
+    }
+
+    @Test //passed
+    public void phoneFieldsEmpty() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        signInPage.inputValueFirstNameLetters();
+        signInPage.inputValueLastNameLetters();
+        signInPage.inputValuePassword("123456");
+        signInPage.inputValueAllowedCompany();
+        signInPage.inputValueAllowedAddress();
+        signInPage.inputValueAllowedCity();
+        signInPage.statesDropDownOptionByValue();
+        signInPage.inputValueAllowedZip();
+
+        signInPage.clickRegisterButton();
+        Assert.assertTrue(signInPage.errorInputEmptyField());
+        Assert.assertEquals(signInPage.errorInputEmptyFieldError(),
+                "You must register at least one phone number.");
+        System.out.println("Phone field" + "\n"  + (signInPage.errorInputEmptyFieldError()));
+    }
+
+    @Test //passed
+    public void phoneFieldsEmptyText() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        signInPage.clickRegisterButton();
+        Assert.assertTrue(signInPage.errorInputEmptyPhoneTextDisplayed());
+        Assert.assertEquals(signInPage.errorInputEmptyPhoneText(),
+                "You must register at least one phone number.");
+        System.out.println("Phone field text" + "\n"  + (signInPage.errorInputEmptyPhoneText()));
+    }
+}
