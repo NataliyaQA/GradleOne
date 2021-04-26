@@ -11,11 +11,10 @@ import pageObjects.SignInPage;
 import java.awt.*;
 import java.util.List;
 
-//97 tests
+//98 tests
 public class CreateAnAccountTest extends BaseTestAbstractClass {
     String stringUrlMainPage = "http://automationpractice.com/index.php";
     String stringUrl = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
-    String stringMyAccountUrl = "http://automationpractice.com/index.php?controller=my-account";
 
     SignInPage signInPage;
 
@@ -552,7 +551,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         Assert.assertTrue(signInPage.signUpCheckBox());
     }
 
-    @Test  //failed without visible reason
+    @Test  //failed without visible reason.Question
     public void signUpCheckBoxClickAndSelected() throws InterruptedException {
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
@@ -956,6 +955,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         signInPage.inputValueFirstNameLetters();
         signInPage.inputValueLastNameLetters();
         signInPage.inputValuePassword("123456");
+        signInPage.inputValueNotAllowedCompany();
         signInPage.inputValueAllowedAddress();
         signInPage.inputValueAllowedCity();
         signInPage.statesDropDownOptionByValue();
@@ -963,7 +963,6 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         signInPage.inputValueAllowedPhone();
         signInPage.inputValueAllowedMobile();
 
-        signInPage.inputValueNotAllowedCompany();
         signInPage.clickRegisterButton();
         Assert.assertTrue(signInPage.errorInput());
         Assert.assertEquals(signInPage.errorInputIsInvalid(),
