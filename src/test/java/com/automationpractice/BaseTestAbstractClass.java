@@ -1,6 +1,7 @@
 package com.automationpractice;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import wrapper.Wrapper;
 
@@ -18,11 +19,11 @@ public class BaseTestAbstractClass {
         driver.get("http://automationpractice.com/");
     }
 
-//    @AfterTest
-//    public void tearDown() {
-//        //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-//        driver.quit();
-//    }
+    @AfterTest
+    public void tearDown() {
+        //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.quit();
+    }
 
     public static int generateRandomIntInRange(int min, int max) {
         Random r = new Random();
