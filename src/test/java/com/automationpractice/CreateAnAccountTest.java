@@ -551,14 +551,14 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         Assert.assertTrue(signInPage.signUpCheckBox());
     }
 
-    @Test  //failed without visible reason.Question
+    @Test  // passed
     public void signUpCheckBoxClickAndSelected() throws InterruptedException {
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
 
         signInPage.clickSignUpCheckBox();
         Thread.sleep(5000);
-        Assert.assertTrue(signInPage.selectedSignUpCheckBox());
+        Assert.assertTrue(signInPage.selectedSignUpCheckBox(), "not correct");
     }
 
     @Test //(enabled=false)
@@ -770,6 +770,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
 
     /**
      * Check if the system verifies the invalid input in the FirstName field
+     *
      * @throws InterruptedException
      * @throws AWTException
      */
@@ -778,21 +779,23 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
     public void firstNameFieldWithDigits() throws InterruptedException, AWTException {
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
-        if (signInPage.emptyFieldFirstName() == false) {
-            signInPage.deleteValueFirstName();
-        } else if (signInPage.emptyFieldLastName() != true) {
-            signInPage.deleteValueLastName();
-        } else if (signInPage.emptyFieldPassword() == false) {
-            signInPage.deleteValuePassword();
-        } else {
-            signInPage.inputValueFirstNameDigits();
-            signInPage.clickAnyWhere();
-            Assert.assertTrue(signInPage.redSign());
-        }
+//        if (signInPage.emptyFieldFirstName() == false) {
+//            signInPage.deleteValueFirstName();
+//        } else if (signInPage.emptyFieldLastName() != true) {
+//            signInPage.deleteValueLastName();
+//        } else if (signInPage.emptyFieldPassword() == false) {
+//            signInPage.deleteValuePassword();
+//        } else {
+        Assert.assertTrue(signInPage.cleanFieldFirstName(), "Verify that FirstName is empty");
+        signInPage.inputValueFirstNameDigits();
+        signInPage.clickAnyWhere();
+        Assert.assertTrue(signInPage.redSign());
     }
+
 
     /**
      * Check if the system verifies the correctness of input in the FirstName field
+     *
      * @throws InterruptedException
      * @throws AWTException
      */
@@ -815,6 +818,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
 
     /**
      * Check if the system verifies the invalid input in the LastName field
+     *
      * @throws InterruptedException
      * @throws AWTException
      */
@@ -837,6 +841,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
 
     /**
      * Check if the system verifies the correctness of input in the LastName field
+     *
      * @throws InterruptedException
      * @throws AWTException
      */
@@ -859,6 +864,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
 
     /**
      * Check if the system verifies the invalid input in the Email field
+     *
      * @throws InterruptedException
      * @throws AWTException
      */
@@ -908,9 +914,9 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
 
         signInPage.inputValueFirstNameLetters();
         Assert.assertEquals(signInPage.valueOfFirstNameOneField(),
-        signInPage.valueOfFirstNameTwoField());
-        System.out.println("first field" + "\n"  + (signInPage.valueOfFirstNameOneField()
-                + "\n" + "second field" + "\n"  + (signInPage.valueOfFirstNameOneField())));
+                signInPage.valueOfFirstNameTwoField());
+        System.out.println("first field" + "\n" + (signInPage.valueOfFirstNameOneField()
+                + "\n" + "second field" + "\n" + (signInPage.valueOfFirstNameOneField())));
     }
 
     @Test
@@ -921,11 +927,11 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         signInPage.inputValueLastNameLetters();
         Assert.assertEquals(signInPage.valueOfLastNameOneField(),
                 signInPage.valueOfLastNameTwoField());
-        System.out.println("first field" + "\n"  + (signInPage.valueOfLastNameOneField()
-                + "\n" + "second field" + "\n"  + (signInPage.valueOfLastNameOneField())));
+        System.out.println("first field" + "\n" + (signInPage.valueOfLastNameOneField()
+                + "\n" + "second field" + "\n" + (signInPage.valueOfLastNameOneField())));
     }
 
-    @Test //passed BUT failed due to xPath Question about xPath
+    @Test //passed
     public void companyFieldAllowed() throws InterruptedException {
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
@@ -942,12 +948,12 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
 
         signInPage.inputValueAllowedCompany();
         signInPage.clickRegisterButton();
-        Assert.assertEquals(signInPage.actualUrlFind(), signInPage.MY_ACCOUNT_URL );
+        Assert.assertEquals(signInPage.actualUrlFind(), signInPage.MY_ACCOUNT_URL);
 
-        System.out.println("result" + "\n"  + (signInPage.actualUrlFind()));
+        System.out.println("result" + "\n" + (signInPage.actualUrlFind()));
     }
 
-    @Test //passed BUT failed due to xPath Question about xPath
+    @Test //passed
     public void companyFieldNotAllowed() throws InterruptedException {
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
@@ -967,8 +973,27 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         Assert.assertTrue(signInPage.errorInput());
         Assert.assertEquals(signInPage.errorInputIsInvalid(),
                 "company is invalid.");
-        System.out.println("Company field" + "\n"  + (signInPage.errorInputIsInvalid()));
+        System.out.println("Company field" + "\n" + (signInPage.errorInputIsInvalid()));
     }
+
+    @Test // Question with stream
+    public void companyFieldNotAllowedOne() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+        signInPage.clickRegisterButton();
+        List<String> fullSetOfErrors = signInPage.getListOfOptions("//*[@id='center_column']/div/ol");
+        fullSetOfErrors.forEach(System.out::println);
+
+//        List<String> filteredList = new ArrayList<String>();
+//        for(String errors : fullSetOfErrors) {
+//            if(errors.contains("firstname");
+        }
+
+//        Assert.assertTrue(signInPage.errorInput());
+//        Assert.assertEquals(signInPage.errorInputIsInvalid(),
+//                "company is invalid.");
+//        System.out.println("Company field" + "\n" + (signInPage.errorInputIsInvalid()));
+
 
     @Test //passed
     public void addressFieldNotAllowed() throws InterruptedException {
@@ -990,7 +1015,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         Assert.assertTrue(signInPage.errorInput());
         Assert.assertEquals(signInPage.errorInputIsInvalid(),
                 "address1 is invalid.");
-        System.out.println("Address field" + "\n"  + (signInPage.errorInputIsInvalid()));
+        System.out.println("Address field" + "\n" + (signInPage.errorInputIsInvalid()));
     }
 
     @Test //passed
@@ -1013,7 +1038,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         Assert.assertTrue(signInPage.errorInput());
         Assert.assertEquals(signInPage.errorInputIsInvalid(),
                 "city is invalid.");
-        System.out.println("City field" + "\n"  + (signInPage.errorInputIsInvalid()));
+        System.out.println("City field" + "\n" + (signInPage.errorInputIsInvalid()));
     }
 
     @Test //passed
@@ -1036,7 +1061,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         Assert.assertTrue(signInPage.errorInputRequiresDisplayed());
         Assert.assertEquals(signInPage.errorInputRequires(),
                 "This country requires you to choose a State.");
-        System.out.println("City field" + "\n"  + (signInPage.errorInputRequires()));
+        System.out.println("City field" + "\n" + (signInPage.errorInputRequires()));
     }
 
     @Test //passed
@@ -1059,7 +1084,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         Assert.assertTrue(signInPage.errorInput());
         Assert.assertEquals(signInPage.errorInputIsInvalid(),
                 "phone is invalid.");
-        System.out.println("Phone field" + "\n"  + (signInPage.errorInputIsInvalid()));
+        System.out.println("Phone field" + "\n" + (signInPage.errorInputIsInvalid()));
     }
 
     @Test //passed
@@ -1080,7 +1105,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         Assert.assertTrue(signInPage.errorInputEmptyField());
         Assert.assertEquals(signInPage.errorInputEmptyFieldError(),
                 "You must register at least one phone number.");
-        System.out.println("Phone field" + "\n"  + (signInPage.errorInputEmptyFieldError()));
+        System.out.println("Phone field" + "\n" + (signInPage.errorInputEmptyFieldError()));
     }
 
     @Test //passed
@@ -1092,6 +1117,6 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         Assert.assertTrue(signInPage.errorInputEmptyPhoneTextDisplayed());
         Assert.assertEquals(signInPage.errorInputEmptyPhoneText(),
                 "You must register at least one phone number.");
-        System.out.println("Phone field text" + "\n"  + (signInPage.errorInputEmptyPhoneText()));
+        System.out.println("Phone field text" + "\n" + (signInPage.errorInputEmptyPhoneText()));
     }
 }

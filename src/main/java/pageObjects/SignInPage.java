@@ -509,7 +509,7 @@ public class SignInPage {
     }
 
     public boolean selectedSignUpCheckBox() {
-        return selectedStatus(driver.findElement(By.xpath("//*[@id='uniform-newsletter']")));
+        return selectedStatus(driver.findElement(By.xpath("//*[@id='newsletter']")));
     }
 
     public boolean selectedOffersCheckBox() {
@@ -595,6 +595,17 @@ public class SignInPage {
         return emptyField("//*[@id='passwd']");
     }
 
+    //General
+    public boolean cleanField(String xPath) {
+        WebElement field = driver.findElement(By.xpath(xPath));
+        field.clear();
+        return field.getText().isEmpty();
+    }
+
+    public boolean cleanFieldFirstName() {
+        return cleanField("//*[@id='customer_firstname']");
+    }
+
     public String valueOfEmailFieldHomePage() {
         return driver.findElement(By.xpath("//*[@id='email_create']"))
                 .getAttribute("value");
@@ -620,17 +631,38 @@ public class SignInPage {
         return driver.findElement(By.xpath("//*[@id='lastname']")).getAttribute("value");
     }
 
-    //General
-    public void deleteValue(String xPath) {
-        driver.findElement(By.xpath(xPath)).clear();
+    /**needs to move to Base Page object class
+     *
+     * @param xPath
+     * @return
+     */
+    public List<String> getListOfOptions(String xPath) {
+        List<WebElement> elementName = driver.findElements(By.xpath(xPath));
+        List<String> strings = new ArrayList<>();
+        for(WebElement eachElement : elementName){
+            strings.add(eachElement.getText());
+        }
+        return strings;
     }
 
-    public void deleteValueEmail() {
-        deleteValue("//*[@id='email']");
+    /**needs to move to Base Page object class
+     *
+     * @param xPath
+     * @return
+     */
+    //General update with check if field is cleaned
+    public boolean deleteValue(String xPath) {
+        WebElement field = driver.findElement(By.xpath(xPath));
+        field.clear();
+        return field.getText().isEmpty();
     }
 
-    public void deleteValueFirstName() {
-        deleteValue("//*[@id='customer_firstname']");
+    public boolean deleteValueEmail() {
+        return deleteValue("//*[@id='email']");
+    }
+
+    public boolean deleteValueFirstName() {
+        return deleteValue("//*[@id='customer_firstname']");
     }
 
     public void deleteValueLastName() {
