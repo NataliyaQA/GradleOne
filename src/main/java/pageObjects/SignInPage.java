@@ -571,39 +571,24 @@ public class SignInPage {
     }
 
     //General
-    public boolean emptyField(String xPath) {
-        if (driver.findElement(By.xpath(xPath)).getAttribute("value").isEmpty()) {
-            return true;
-        } else {
-            return false;
+    public boolean iFemptyField(String xPath) {
+        return (driver.findElement(By.xpath(xPath)).getAttribute("value").isEmpty()) ? true : false;
         }
-    }
 
     public boolean emptyFieldEmail() {
-        return emptyField("//*[@id='email']");
+        return iFemptyField("//*[@id='email']");
     }
 
     public boolean emptyFieldFirstName() {
-        return emptyField("//*[@id='customer_firstname']");
+        return iFemptyField("//*[@id='customer_firstname']");
     }
 
     public boolean emptyFieldLastName() {
-        return emptyField("//*[@id='customer_lastname']");
+        return iFemptyField("//*[@id='customer_lastname']");
     }
 
     public boolean emptyFieldPassword() {
-        return emptyField("//*[@id='passwd']");
-    }
-
-    //General
-    public boolean cleanField(String xPath) {
-        WebElement field = driver.findElement(By.xpath(xPath));
-        field.clear();
-        return field.getText().isEmpty();
-    }
-
-    public boolean cleanFieldFirstName() {
-        return cleanField("//*[@id='customer_firstname']");
+        return iFemptyField("//*[@id='passwd']");
     }
 
     public String valueOfEmailFieldHomePage() {
@@ -612,23 +597,28 @@ public class SignInPage {
     }
 
     public String valueOfEmailField() {
-        return driver.findElement(By.xpath("//*[@id='email']")).getAttribute("value");
+        return driver.findElement(By.xpath("//*[@id='email']"))
+                .getAttribute("value");
     }
 
     public String valueOfFirstNameOneField() {
-        return driver.findElement(By.xpath("//*[@id='customer_firstname']")).getAttribute("value");
+        return driver.findElement(By.xpath("//*[@id='customer_firstname']")).
+                getAttribute("value");
     }
 
     public String valueOfFirstNameTwoField() {
-        return driver.findElement(By.xpath("//*[@id='firstname']")).getAttribute("value");
+        return driver.findElement(By.xpath("//*[@id='firstname']")).
+                getAttribute("value");
     }
 
     public String valueOfLastNameOneField() {
-        return driver.findElement(By.xpath("//*[@id='customer_lastname']")).getAttribute("value");
+        return driver.findElement(By.xpath("//*[@id='customer_lastname']")).
+                getAttribute("value");
     }
 
     public String valueOfLastNameTwoField() {
-        return driver.findElement(By.xpath("//*[@id='lastname']")).getAttribute("value");
+        return driver.findElement(By.xpath("//*[@id='lastname']")).
+                getAttribute("value");
     }
 
     /**needs to move to Base Page object class
@@ -665,12 +655,12 @@ public class SignInPage {
         return deleteValue("//*[@id='customer_firstname']");
     }
 
-    public void deleteValueLastName() {
-        deleteValue("//*[@id='customer_lastname']");
+    public boolean deleteValueLastName() {
+        return deleteValue("//*[@id='customer_lastname']");
     }
 
-    public void deleteValuePassword() {
-        deleteValue("//*[@id='passwd']");
+    public boolean  deleteValuePassword() {
+        return deleteValue("//*[@id='passwd']");
     }
 
     public String countryDropDownFirstOption() {

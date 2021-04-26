@@ -786,7 +786,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
 //        } else if (signInPage.emptyFieldPassword() == false) {
 //            signInPage.deleteValuePassword();
 //        } else {
-        Assert.assertTrue(signInPage.cleanFieldFirstName(), "Verify that FirstName is empty");
+        Assert.assertTrue(signInPage.deleteValueFirstName(), "Verify that FirstName is empty");
         signInPage.inputValueFirstNameDigits();
         signInPage.clickAnyWhere();
         Assert.assertTrue(signInPage.redSign());
@@ -799,22 +799,15 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
      * @throws InterruptedException
      * @throws AWTException
      */
-    @Test //probably bad design
+    @Test //passed
     public void firstNameFieldWithLetters() throws InterruptedException, AWTException {
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
-        if (signInPage.emptyFieldFirstName() == false) {
-            signInPage.deleteValueFirstName();
-        } else if (signInPage.emptyFieldLastName() != true) {
-            signInPage.deleteValueLastName();
-        } else if (signInPage.emptyFieldPassword() == false) {
-            signInPage.deleteValuePassword();
-        } else {
+        Assert.assertTrue(signInPage.deleteValueFirstName(), "Verify that FirstName is empty");
             signInPage.inputValueFirstNameLetters();
             signInPage.clickAnyWhere();
             Assert.assertTrue(signInPage.greenSign());
         }
-    }
 
     /**
      * Check if the system verifies the invalid input in the LastName field
@@ -822,22 +815,15 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
      * @throws InterruptedException
      * @throws AWTException
      */
-    @Test //probably bad design
+    @Test //passed
     public void lastNameFieldWithDigits() throws InterruptedException, AWTException {
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
-        if (signInPage.emptyFieldFirstName() == false) {
-            signInPage.deleteValueFirstName();
-        } else if (signInPage.emptyFieldLastName() != true) {
-            signInPage.deleteValueLastName();
-        } else if (signInPage.emptyFieldPassword() == false) {
-            signInPage.deleteValuePassword();
-        } else {
+        Assert.assertTrue(signInPage.deleteValueLastName(), "Verify that LastName is empty");
             signInPage.inputValueLastNameDigits();
             signInPage.clickAnyWhere();
             Assert.assertTrue(signInPage.redSign());
         }
-    }
 
     /**
      * Check if the system verifies the correctness of input in the LastName field
@@ -845,22 +831,15 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
      * @throws InterruptedException
      * @throws AWTException
      */
-    @Test //probably bad design
+    @Test //passed
     public void lastNameFieldWithLetters() throws InterruptedException, AWTException {
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
-        if (signInPage.emptyFieldFirstName() == false) {
-            signInPage.deleteValueFirstName();
-        } else if (signInPage.emptyFieldLastName() != true) {
-            signInPage.deleteValueLastName();
-        } else if (signInPage.emptyFieldPassword() == false) {
-            signInPage.deleteValuePassword();
-        } else {
+        Assert.assertTrue(signInPage.deleteValueLastName(), "Verify that LastName is empty");
             signInPage.inputValueLastNameLetters();
             signInPage.clickAnyWhere();
             Assert.assertTrue(signInPage.greenSign());
         }
-    }
 
     /**
      * Check if the system verifies the invalid input in the Email field
@@ -868,7 +847,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
      * @throws InterruptedException
      * @throws AWTException
      */
-    @Test //probably bad design
+    @Test //passed
     public void emailFieldWithAlphaNumeric() throws InterruptedException, AWTException {
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
@@ -881,7 +860,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         Assert.assertTrue(signInPage.redSign());
     }
 
-    @Test //probably bad design
+    @Test //passed
     public void emailFieldWithLetters() throws InterruptedException, AWTException {
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
@@ -894,7 +873,7 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         Assert.assertTrue(signInPage.redSign());
     }
 
-    @Test //probably bad design
+    @Test //passed
     public void emailFieldWithCorrectEmail() throws InterruptedException, AWTException {
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
