@@ -1,69 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Test Suite">
-    <test verbose="2" preserve-order="true" name="C:/Data/Temp/GradleOne/src/test/java/com/automationpractice/CreateAnAccountTest.java">
-        <classes>
-            <class name="com.automationpractice.CreateAnAccountTest">
-                <methods>
-                    <include name="checkClickSignInMainPage"/>
-                    <include name="checkClickSignInAccountPage"/>
-                    <include name="signInButtonNameMainPage"/>
-                    <include name="signInButtonNameAccountPage"/>
-                    <include name="signInPageTitle"/>
-                    <include name="authenticationSectionName"/>
-                    <include name="createAnAccountSectionName"/>
-                    <include name="createAnAccountSectionText"/>
-                    <include name="emailFieldCreateAnAccountName"/>
-                    <include name="emailInputWithOneNew"/>
-                    <include name="emailInput"/>
-                    <include name="emailInputSameEmail"/>
-                    <include name="invalidEmailMessage"/>
-                    <include name="invalidEmailMessageWhenEmailEmpty"/>
-                    <include name="emailInputWithPut"/>
-                    <include name="createAnAccountButtonName"/>
-                    <include name="alreadyRegisteredSectionName"/>
-                    <include name="emailFieldAlreadyRegisteredName"/>
-                    <include name="passwordFieldAlreadyRegisteredName"/>
-                    <include name="signInButtonAlreadyRegisteredName"/>
-                    <include name="signInButtonClick"/>
-                    <include name="forgotYourPasswordButtonName"/>
-                    <include name="invalidEmailMessageAlreadyRegistered"/>
-                    <include name="invalidEmptyEmailMessageAlreadyRegistered"/>
-                    <include name="invalidPasswordMessageAlreadyRegistered"/>
-                    <include name="missedPasswordMessageAlreadyRegistered"/>
-                    <include name="mismatchedPasswordMessageAlreadyRegistered"/>
-                    <include name="createAnAccountPersonalInfoTitle"/>
-                    <include name="yourPersonalInfoSectionTitle"/>
-                    <include name="yourPersonalInfoTitle"/>
-                    <include name="mrRadioButtonDisplayed"/>
-                    <include name="mrRadioButtonEnabled"/>
-                    <include name="mrsRadioButtonDisplayed"/>
-                    <include name="mrsRadioButtonEnabled"/>
-                    <include name="selectedStatusMrRadioButton"/>
-                    <include name="selectedStatusMrsRadioButton"/>
-                    <include name="selectDropDown"/>
-                    <include name="selectDropDownDaysAll"/>
-                    <include name="selectDropDownDaysOption"/>
-                    <include name="selectDropDownDaysOptionOneByOne"/>
-                    <include name="selectDropDownDaysOptionByValue"/>
-                    <include name="selectDropDownMonthsAllOptions"/>
-                    <include name="selectDropDownMonthsOneOption"/>
-                    <include name="selectDropDownYearsAll"/>
-                    <include name="selectDropDownYearsOption"/>
-                    <include name="checkEmailFieldIfNotEmpty"/>
-                    <include name="checkEmailFieldValue"/>
-                    <include name="deleteValue"/>
-                    <include name="countryDropDownFirstOption"/>
-                    <include name="errorAlertIs"/>
-                    <include name="errorAlertText"/>
-                    <include name="signUpCheckBoxEnabled"/>
-                    <include name="signUpCheckBoxClickAndSelected"/>
-                    <include name="signUpCheckBoxName"/>
-                    <include name="offersCheckBoxEnabled"/>
-                    <include name="offersCheckBoxName"/>
-                    <include name="offersCheckBoxClickAndSelected"/>
-                </methods>
-            </class>
-        </classes>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite1" verbose="1" >
+    <test name="Regression1"   >
+        <packages>
+            <package name="com.automationpractice.CreateAnAccountTest" />
+        </packages>
     </test>
 </suite>
+
+

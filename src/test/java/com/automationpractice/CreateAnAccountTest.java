@@ -9,9 +9,10 @@ import org.testng.annotations.Test;
 import pageObjects.SignInPage;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
-//98 tests
+//100 tests
 public class CreateAnAccountTest extends BaseTestAbstractClass {
     String stringUrlMainPage = "http://automationpractice.com/index.php";
     String stringUrl = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
@@ -23,6 +24,11 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         driver.get(stringUrl);
         signInPage = new SignInPage(driver);
     }
+
+//    @AfterMethod
+//    void signOut() {
+//        signInPage.signOutButtonClick();
+//    }
 
     @Test  //passed
     public void checkClickSignInMainPage() {
@@ -933,6 +939,33 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
     }
 
     @Test //passed
+    public void customerAccountDisplayed() throws InterruptedException {
+        signInPage.inputEmail().createAnAccountButtonClick();
+        Thread.sleep(5000);
+
+        signInPage.inputValueFirstNameLetters();
+        signInPage.inputValueLastNameLetters();
+        signInPage.inputValueAllowedCompany();
+        signInPage.inputValuePassword("123456");
+        signInPage.inputValueAllowedAddress();
+        signInPage.inputValueAllowedCity();
+        Thread.sleep(5000);
+        signInPage.statesDropDownOptionByValue();
+        signInPage.inputValueAllowedZip();
+        signInPage.inputValueAllowedPhone();
+        signInPage.inputValueAllowedMobile();
+
+        String actual = signInPage.valueOfFirstNameOneField() + ' ' + signInPage.valueOfLastNameOneField();
+
+        signInPage.clickRegisterButton();
+        Thread.sleep(5000);
+        Assert.assertTrue(signInPage.customerAccount());
+        Assert.assertEquals(actual,
+                signInPage.customerAccountText());
+
+    }
+
+    @Test //passed
     public void companyFieldNotAllowed() throws InterruptedException {
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
@@ -955,24 +988,26 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
         System.out.println("Company field" + "\n" + (signInPage.errorInputIsInvalid()));
     }
 
-    @Test // Question with stream
-    public void companyFieldNotAllowedOne() throws InterruptedException {
+    @Test // Question with stream AQA#28
+    public void firstNameFieldNotAllowedError() throws InterruptedException {
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
         signInPage.clickRegisterButton();
         List<String> fullSetOfErrors = signInPage.getListOfOptions("//*[@id='center_column']/div/ol");
-        fullSetOfErrors.forEach(System.out::println);
+        //fullSetOfErrors.forEach(System.out::println);
 
-//        List<String> filteredList = new ArrayList<String>();
-//        for(String errors : fullSetOfErrors) {
-//            if(errors.contains("firstname");
+        List<String> filteredList = new ArrayList<>();
+        for(String errors : filteredList) {
+            if(errors.contains("firstname"));
+            System.out.println(filteredList);
         }
+
 
 //        Assert.assertTrue(signInPage.errorInput());
 //        Assert.assertEquals(signInPage.errorInputIsInvalid(),
 //                "company is invalid.");
 //        System.out.println("Company field" + "\n" + (signInPage.errorInputIsInvalid()));
-
+    }
 
     @Test //passed
     public void addressFieldNotAllowed() throws InterruptedException {

@@ -370,7 +370,7 @@ public class SignInPage {
         return getName("//div[@class='clearfix']/label");
     }
 
-    //General isDisplayed ***
+    //General isDisplayed
     public boolean isDisplayed(String xPath) {
         return (driver.findElement(By.xpath(xPath)).isDisplayed()) ? true : false;
     }
@@ -399,6 +399,10 @@ public class SignInPage {
         return isDisplayed("//li[contains(text(),'is invalid')]");
     }
 
+    public boolean customerAccount() {
+        return isDisplayed("//*[@id='header']/div[2]/div/div/nav/div[1]/a/span"); // will be re-written
+    }
+
     public String errorInputIsInvalid() {
         return getName("//li[contains(text(),'is invalid')]");
     }
@@ -425,6 +429,10 @@ public class SignInPage {
 
     public String errorInputEmptyFieldError() {
         return getName("//li[contains(text(),'phone number')]");
+    }
+
+    public String customerAccountText() {
+        return getName("//*[@id='header']/div[2]/div/div/nav/div[1]/a"); //will be re-written
     }
 
     //General isEnabled
@@ -493,6 +501,10 @@ public class SignInPage {
 
     public void clickOffersCheckBox() {
         clickAction("//*[@id='optin']");
+    }
+
+    public void signOutButtonClick() {
+        clickAction("//a[@class='logout']");
     }
 
     //General selectedStatus
@@ -640,7 +652,7 @@ public class SignInPage {
      * @param xPath
      * @return
      */
-    //General update with check if field is cleaned
+    //General including check if field is cleaned
     public boolean deleteValue(String xPath) {
         WebElement field = driver.findElement(By.xpath(xPath));
         field.clear();
@@ -829,5 +841,4 @@ public class SignInPage {
         robot.mouseMove(50,50);
         actions.click().build().perform();
     }
-
 }
