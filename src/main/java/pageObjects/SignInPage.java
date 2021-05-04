@@ -134,7 +134,6 @@ public class SignInPage {
     //constructor
     public SignInPage(WebDriver driver) {
         this.driver = driver;
-        //emailO = "Auto_" + RandomStringUtils.randomAlphabetic(5) + "@mail.com";
     }
 
     //methods

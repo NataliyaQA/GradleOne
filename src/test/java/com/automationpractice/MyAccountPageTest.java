@@ -15,7 +15,7 @@ public class MyAccountPageTest extends BaseTestAbstractClass {
     SignInPage signInPage;
 
     @BeforeMethod // Question: difference with BeforeTest
-    void SetUpMethod() throws InterruptedException {
+    void setUpMethod() throws InterruptedException {
         driver.get(stringUrl);
         myAccountPage = new MyAccountPage(driver);
 
