@@ -1,12 +1,17 @@
 package com.automationpractice;
 
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pageObjects.CartPage;
 import pageObjects.MyAccountPage;
+import pageObjects.SignInPage;
 
+import java.awt.*;
 import java.text.DecimalFormat;
+
+import static org.testng.Assert.assertTrue;
 
 //15 tests
 
@@ -14,6 +19,7 @@ public class AddProductToTheCartTest extends BaseTestAbstractClass {
     String stringUrlMainPage = "http://automationpractice.com/index.php";
     CartPage cartPage;
     MyAccountPage myAccountPage;
+    SignInPage signInPage;
     int quantity = 2;
 
     @BeforeMethod
@@ -22,44 +28,52 @@ public class AddProductToTheCartTest extends BaseTestAbstractClass {
         cartPage = new CartPage(driver);
     }
 
-//    @AfterMethod
-//    void signOut() {
-//        myAccountPage.signOutButtonClick();
-//    }
+    @AfterMethod
+    void cleanCart() throws InterruptedException, AWTException {
+        Thread.sleep(5000);
+        cartPage.clickAnyWhere();
+        Thread.sleep(5000);
+
+        while (cartPage.cartEmptyDisplayed() != true) {
+            cartPage.hoverCartDropDown();
+            cartPage.clickCrossIconCart();
+            Thread.sleep(2000);
+        }
+    }
 
     @Test
     public void findFadedShortSleeveTshirts() {
-        Assert.assertTrue(cartPage.fadedShortSleeveTshirtsDisplayed(), "product is not found");
+        assertTrue(cartPage.fadedShortSleeveTshirtsDisplayed(), "product is not found");
     }
 
     @Test
     public void findBlouse() {
-        Assert.assertTrue(cartPage.blouseDisplayed(), "product is not found");
+        assertTrue(cartPage.blouseDisplayed(), "product is not found");
     }
 
     @Test
     public void findPrintedDress() {
-        Assert.assertTrue(cartPage.printedDressDisplayed(), "product is not found");
+        assertTrue(cartPage.printedDressDisplayed(), "product is not found");
     }
 
     @Test
     public void findPrintedDressTwo() {
-        Assert.assertTrue(cartPage.printedDressTwoDisplayed(), "product is not found");
+        assertTrue(cartPage.printedDressTwoDisplayed(), "product is not found");
     }
 
     @Test
     public void findPrintedSummerDress() {
-        Assert.assertTrue(cartPage.printedSummerDressDisplayed(), "product is not found");
+        assertTrue(cartPage.printedSummerDressDisplayed(), "product is not found");
     }
 
     @Test
     public void findPrintedSummerDressTwo() {
-        Assert.assertTrue(cartPage.printedSummerDressTwoDisplayed(), "product is not found");
+        assertTrue(cartPage.printedSummerDressTwoDisplayed(), "product is not found");
     }
 
     @Test
     public void findPrintedChiffonDress() {
-        Assert.assertTrue(cartPage.printedChiffonDressDisplayed(), "product is not found");
+        assertTrue(cartPage.printedChiffonDressDisplayed(), "product is not found");
     }
 
     @Test
@@ -85,13 +99,13 @@ public class AddProductToTheCartTest extends BaseTestAbstractClass {
     @Test
     public void addToCartFromPdpSix() throws InterruptedException {
         cartPage.clickProductOne();
-        Thread.sleep(1000);
+        Thread.sleep(5000);
 
         cartPage.clickPlusFive();
 
         Thread.sleep(5000);
         cartPage.clickAddToCartFromPdp();
-        Thread.sleep(7000);
+        Thread.sleep(5000);
         Assert.assertEquals(cartPage.alertTextThereAreInTheCart(), cartPage.THERE_ARE_IN_THE_CART);
         System.out.println(cartPage.alertTextThereAreInTheCart());
     }
@@ -137,22 +151,22 @@ public class AddProductToTheCartTest extends BaseTestAbstractClass {
         cartPage.clickProductOne();
         Thread.sleep(1000);
         cartPage.clickPlus();
-        Thread.sleep(5000);
+        Thread.sleep(2000);
         float firstPrice = cartPage.textToDigitsPrice() * quantity;
         cartPage.clickAddToCartFromPdp();
-        Thread.sleep(5000);
+        Thread.sleep(2000);
         cartPage.clickCrossIcon();
 
         cartPage.clickLogo();
-        Thread.sleep(7000);
+        Thread.sleep(2000);
 
         cartPage.clickProductTwo();
         Thread.sleep(1000);
         cartPage.clickPlus();
-        Thread.sleep(5000);
+        Thread.sleep(2000);
         float secondPrice = cartPage.textToDigitsPrice() * quantity;
         cartPage.clickAddToCartFromPdp();
-        Thread.sleep(5000);
+        Thread.sleep(2000);
         //System.out.println(cartPage.textToDigitsTotalAddedProducts());
 
         Assert.assertEquals((Float.parseFloat(new DecimalFormat("0.00").
@@ -173,7 +187,7 @@ public class AddProductToTheCartTest extends BaseTestAbstractClass {
         Thread.sleep(5000);
         cartPage.clickCrossIconCart();
         Thread.sleep(5000);
-        Assert.assertTrue(cartPage.cartEmptyDisplayed());
+        assertTrue(cartPage.cartEmptyDisplayed());
     }
 
     @Test
@@ -187,12 +201,12 @@ public class AddProductToTheCartTest extends BaseTestAbstractClass {
         Thread.sleep(5000);
 
         cartPage.hoverPrintedDress();
-        Thread.sleep(1000);
+        Thread.sleep(5000);
         cartPage.clickAddToCartThirdProduct();
         Thread.sleep(5000);
 
         cartPage.clickCrossIcon();
-        Thread.sleep(5000);
+        Thread.sleep(7000);
 
         cartPage.hoverCartDropDown();
         Thread.sleep(5000);
@@ -201,6 +215,6 @@ public class AddProductToTheCartTest extends BaseTestAbstractClass {
         cartPage.clickCrossIconCart();
         Thread.sleep(5000);
 
-        Assert.assertTrue(cartPage.cartEmptyDisplayed());
+        assertTrue(cartPage.cartEmptyDisplayed());
     }
 }

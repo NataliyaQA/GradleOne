@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 
+import java.awt.*;
+
 public class CartPage {
     public WebDriver driver;
 
@@ -48,6 +50,7 @@ public class CartPage {
     public boolean printedDressTwoDisplayed() {
         return isDisplayed("//ul[@id='homefeatured']/li[4]/div/div[2]/h5/a");
     }
+
     public boolean printedSummerDressDisplayed() {
         return isDisplayed("//ul[@id='homefeatured']/li[5]/div/div[2]/h5/a");
     }
@@ -66,6 +69,10 @@ public class CartPage {
 
     public boolean cartEmptyDisplayed() {
         return isDisplayed("//span[text()='(empty)']");
+    }
+
+    public boolean crossIconDisplayed() {
+        return isDisplayed("//a[@class='ajax_cart_block_remove_link']");
     }
 
     //General hover
@@ -157,8 +164,16 @@ public class CartPage {
     public void clickPlus() {
         clickElement("//i[@class='icon-plus']");
     }
+
     public void clickCrossIconCart() {
         clickElement("//a[@class='ajax_cart_block_remove_link']");
+    }
+
+    public void clickAnyWhere() throws AWTException {
+        Actions actions = new Actions(driver);
+        Robot robot = new Robot();
+        robot.mouseMove(50,50);
+        actions.click().build().perform();
     }
 
     //General alert
