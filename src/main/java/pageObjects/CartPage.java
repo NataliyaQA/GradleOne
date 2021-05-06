@@ -64,6 +64,10 @@ public class CartPage {
         return isDisplayed("//*[@id='homefeatured']/li[1]/div/div[2]/div[2]/a[1]/span");
     }
 
+    public boolean cartEmptyDisplayed() {
+        return isDisplayed("//span[text()='(empty)']");
+    }
+
     //General hover
     public void hoverElement(String xPath) {
         Actions actions = new Actions(driver);
@@ -72,6 +76,14 @@ public class CartPage {
 
     public void hoverFadedShortSleeve() {
         hoverElement("//a[contains(text(),'Faded Short Sleeve T-shirts')]");
+    }
+
+    public void hoverPrintedDress() {
+        hoverElement("//ul[@id='homefeatured']/li[3]/div/div[2]/h5/a");
+    }
+
+    public void hoverCartDropDown() {
+        hoverElement("//a[@title='View my shopping cart']");
     }
 
     //General double click
@@ -103,9 +115,13 @@ public class CartPage {
         driver.findElement(By.xpath(xPath)).click();
     }
 
-    public void clickAddToCart() {
+    public void clickAddToCartFirstProduct() {
         clickElement("//*[@id='homefeatured']/li[1]/div/div[2]/div[2]/a[1]/span");
     }
+    public void clickAddToCartThirdProduct() {
+        clickElement("//*[@id='homefeatured']/li[3]/div/div[2]/div[2]/a[1]/span");
+    }
+
     public void clickAddToCartFromPdp() {
         clickElement("//span[text()='Add to cart']");
     }
@@ -141,6 +157,9 @@ public class CartPage {
     public void clickPlus() {
         clickElement("//i[@class='icon-plus']");
     }
+    public void clickCrossIconCart() {
+        clickElement("//a[@class='ajax_cart_block_remove_link']");
+    }
 
     //General alert
     public String getText(String xPath) {
@@ -161,6 +180,7 @@ public class CartPage {
         return Float.parseFloat(driver.findElement(By.xpath(xPath)).getText()
                 .replace("$", ""));
     }
+
     public float textToDigitsPrice() {
         return textToDigits("//*[@id='our_price_display']");
     }
@@ -168,6 +188,7 @@ public class CartPage {
     public float textToDigitsTotalAddedProduct() {
         return textToDigits("//span[@id='layer_cart_product_price']");
     }
+
     public float textToDigitsTotalAddedProducts() {
         return textToDigits("//*[@id='layer_cart']/div[1]/div[2]/div[1]/span");
     }

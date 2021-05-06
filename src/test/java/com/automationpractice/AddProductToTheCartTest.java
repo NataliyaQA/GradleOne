@@ -6,12 +6,15 @@ import org.testng.annotations.Test;
 import pageObjects.CartPage;
 import pageObjects.MyAccountPage;
 
+import java.text.DecimalFormat;
+
 //15 tests
 
 public class AddProductToTheCartTest extends BaseTestAbstractClass {
     String stringUrlMainPage = "http://automationpractice.com/index.php";
     CartPage cartPage;
     MyAccountPage myAccountPage;
+    int quantity = 2;
 
     @BeforeMethod
     void setUpMethod() throws InterruptedException {
@@ -60,11 +63,11 @@ public class AddProductToTheCartTest extends BaseTestAbstractClass {
     }
 
     @Test
-        public void addToCartProductFromPlp() throws InterruptedException {
+    public void addToCartProductFromPlp() throws InterruptedException {
         cartPage.hoverFadedShortSleeve();
         Thread.sleep(5000);
 
-        cartPage.clickAddToCart();
+        cartPage.clickAddToCartFirstProduct();
         Thread.sleep(5000);
         Assert.assertEquals(cartPage.alertTextAddToCart(), cartPage.ADD_TO_CART_MODAL);
     }
@@ -103,7 +106,7 @@ public class AddProductToTheCartTest extends BaseTestAbstractClass {
         cartPage.clickAddToCartFromPdp();
         Thread.sleep(7000);
 
-        Assert.assertEquals(cartPage.textToDigitsTotalAddedProduct(), cartPage.textToDigitsPrice() * 2);
+        Assert.assertEquals(cartPage.textToDigitsPrice() * quantity, cartPage.textToDigitsTotalAddedProduct());
     }
 
     @Test //The bug: "Continue Shopping" button does not work
@@ -112,7 +115,7 @@ public class AddProductToTheCartTest extends BaseTestAbstractClass {
         Thread.sleep(1000);
         cartPage.clickPlus();
         Thread.sleep(5000);
-        float firstPrice = cartPage.textToDigitsPrice() * 2;
+        float firstPrice = cartPage.textToDigitsPrice() * quantity;
         cartPage.clickAddToCartFromPdp();
         Thread.sleep(5000);
 
@@ -122,11 +125,11 @@ public class AddProductToTheCartTest extends BaseTestAbstractClass {
         Thread.sleep(1000);
         cartPage.clickPlus();
         Thread.sleep(5000);
-        float secondPrice = cartPage.textToDigitsPrice() * 2;
+        float secondPrice = cartPage.textToDigitsPrice() * quantity;
         cartPage.clickAddToCartFromPdp();
         Thread.sleep(5000);
 
-        Assert.assertEquals(cartPage.textToDigitsTotalAddedProduct(), (firstPrice + secondPrice));
+        Assert.assertEquals((firstPrice + secondPrice), cartPage.textToDigitsTotalAddedProduct());
     }
 
     @Test
@@ -135,7 +138,7 @@ public class AddProductToTheCartTest extends BaseTestAbstractClass {
         Thread.sleep(1000);
         cartPage.clickPlus();
         Thread.sleep(5000);
-        float firstPrice = cartPage.textToDigitsPrice() * 2;
+        float firstPrice = cartPage.textToDigitsPrice() * quantity;
         cartPage.clickAddToCartFromPdp();
         Thread.sleep(5000);
         cartPage.clickCrossIcon();
@@ -147,11 +150,57 @@ public class AddProductToTheCartTest extends BaseTestAbstractClass {
         Thread.sleep(1000);
         cartPage.clickPlus();
         Thread.sleep(5000);
-        float secondPrice = cartPage.textToDigitsPrice() * 2;
+        float secondPrice = cartPage.textToDigitsPrice() * quantity;
         cartPage.clickAddToCartFromPdp();
         Thread.sleep(5000);
         //System.out.println(cartPage.textToDigitsTotalAddedProducts());
 
-        Assert.assertEquals(cartPage.textToDigitsTotalAddedProducts(), (firstPrice + secondPrice));
+        Assert.assertEquals((Float.parseFloat(new DecimalFormat("0.00").
+                format(firstPrice + secondPrice))), Float.parseFloat(new DecimalFormat("0.00").
+                format(cartPage.textToDigitsTotalAddedProducts()))); //actual, expected
+    }
+
+    @Test
+    public void makeCartEmpty() throws InterruptedException {
+        cartPage.clickProductOne();
+        Thread.sleep(1000);
+
+        cartPage.clickAddToCartFromPdp();
+        Thread.sleep(5000);
+        cartPage.clickCrossIcon();
+
+        cartPage.hoverCartDropDown();
+        Thread.sleep(5000);
+        cartPage.clickCrossIconCart();
+        Thread.sleep(5000);
+        Assert.assertTrue(cartPage.cartEmptyDisplayed());
+    }
+
+    @Test
+    public void makeCartEmptySeveralProducts() throws InterruptedException {
+        cartPage.hoverFadedShortSleeve();
+        Thread.sleep(1000);
+        cartPage.clickAddToCartFirstProduct();
+        Thread.sleep(5000);
+
+        cartPage.clickCrossIcon();
+        Thread.sleep(5000);
+
+        cartPage.hoverPrintedDress();
+        Thread.sleep(1000);
+        cartPage.clickAddToCartThirdProduct();
+        Thread.sleep(5000);
+
+        cartPage.clickCrossIcon();
+        Thread.sleep(5000);
+
+        cartPage.hoverCartDropDown();
+        Thread.sleep(5000);
+        cartPage.clickCrossIconCart();
+        Thread.sleep(5000);
+        cartPage.clickCrossIconCart();
+        Thread.sleep(5000);
+
+        Assert.assertTrue(cartPage.cartEmptyDisplayed());
     }
 }
