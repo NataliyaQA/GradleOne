@@ -4,7 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import pageObjects.objects.Product;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -13,6 +17,7 @@ public class SortBy {
     public WebDriver driver;
 
     //Constants
+    List<Product> products = new ArrayList<>();
 
     //Constructor
     public SortBy(WebDriver driver) {
@@ -21,20 +26,56 @@ public class SortBy {
 
     //Methods
     // General create list of elements
-    public List<String> getListOfAllElements(String xPath) {
+    public List<Product> getListOfAllElementsInitial(String xPath) {
         List<WebElement> elementName = driver.findElements(By.xpath(xPath));
         List<String> texts = elementName
                 .stream()
                 .map(WebElement::getText)
                 .collect(toList());
-        return texts;
 
         //List<String> texts = sortBy.getListOfAllElements("//*[@id='center_column']/ul/li");
         //texts.forEach(System.out::println);
+
+        for (String takeTextOfEach : texts) {
+            List<String> separateItems = Arrays.asList(takeTextOfEach.split("\n"));
+            String getTitleString = separateItems.get(0);
+
+            products.add(new Product(getTitleString));
+        }
+        System.out.println("**********");
+        products.stream().sorted(Comparator.comparing(Product::getNameOfProduct))
+                .forEach(System.out::println);
+        return products;
     }
 
-    public List<String> getListOfAllElementsWomenPage() {
-        return getListOfAllElements("//*[@id='center_column']/ul/li");
+    public List<Product> getListOfAllElementsWomenPageInitial() {
+        return getListOfAllElementsInitial("//*[@id='center_column']/ul/li");
+    }
+
+    //General create a new list of elements after sorting
+    public List<Product> getListOfAllElementsSecond(String xPath) {
+        List<WebElement> elementName = driver.findElements(By.xpath(xPath));
+        List<String> texts = elementName
+                .stream()
+                .map(WebElement::getText)
+                .collect(toList());
+
+        //List<String> texts = sortBy.getListOfAllElements("//*[@id='center_column']/ul/li");
+        //texts.forEach(System.out::println);
+
+        for (String takeTextOfEach : texts) {
+            List<String> separateItems = Arrays.asList(takeTextOfEach.split("\n"));
+            String getTitleString = separateItems.get(0);
+
+            products.add(new Product(getTitleString));
+        }
+        System.out.println("**********");
+        products.stream().forEach(System.out::println);
+        return products;
+    }
+
+    public List<Product> getListOfAllElementsWomenPageSecond() {
+        return getListOfAllElementsSecond("//*[@id='center_column']/ul/li");
     }
 
     //General select sort option
