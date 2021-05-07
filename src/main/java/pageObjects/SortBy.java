@@ -78,6 +78,20 @@ public class SortBy {
         return getListOfAllElementsSecond("//*[@id='center_column']/ul/li");
     }
 
+    // General create list of elements Price
+    public List<String> getListOfAllElementsPrice(String xPath) {
+        List<WebElement> elementName = driver.findElements(By.xpath(xPath));
+        List<String> texts = elementName
+                .stream()
+                .map(WebElement::getText)
+                .collect(toList());
+        return texts;
+    }
+
+    public List<String> getListOfAllElementsWomenPage() {
+        return getListOfAllElementsPrice("//*[@id='center_column']/ul/li");
+    }
+
     //General select sort option
     public void selectValueFromDropDown(String xPath, String value) {
         Select dropDown = new Select(driver.findElement(By.xpath(xPath)));
