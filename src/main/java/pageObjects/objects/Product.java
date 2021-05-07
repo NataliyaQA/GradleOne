@@ -21,13 +21,20 @@ public class Product {
     }
 
     //Constructor (Alt + ins)
-    public Product(String nameOfProduct, float price) {
+    public Product(String nameOfProduct) {
         this.nameOfProduct = nameOfProduct;
+    }
+    public Product(float price) {
         this.price = price;
     }
 
     @Override
     public String toString() {
-        return nameOfProduct + "," + price;
+        return nameOfProduct;
     }
+
+//    @Override
+//    public String toString() {
+//        return String.valueOf(price);
+//    }
 }

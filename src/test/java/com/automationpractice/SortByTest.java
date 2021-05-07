@@ -21,16 +21,32 @@ public class SortByTest extends BaseTestAbstractClass {
     }
 
     @Test
-    public void sortTest() {
-        List<String> texts = sortBy.getListOfAllElements("//*[@id='center_column']/ul/li");
-        //texts.forEach(System.out::println);
-
+    public void sortProductsNames() throws InterruptedException {
         List<Product> products = new ArrayList<>();
-        //List<String> separateItems;
         //for (int i=0; i<=texts.length(); i++) //{text.get(i)}
-        for (String text : texts) {
-            List<String> separateItems = Arrays.asList(text.split("\n"));
+        for (String takeTextOfEach : sortBy.getListOfAllElementsWomenPage()) {
+            List<String> separateItems = Arrays.asList(takeTextOfEach.split("\n"));
             String getTitleString = separateItems.get(0);
+
+            products.add(new Product(getTitleString));
+        }
+        products.stream().sorted(Comparator.comparing(Product::getNameOfProduct))
+                .forEach(System.out::println);
+
+        sortBy.selectValueDropDownNameAZ();
+        Thread.sleep(5000);
+
+        List<Product> sortedProducts = new ArrayList<>();
+
+
+   }
+
+    @Test
+    public void sortProductsPrices() {
+        List<Product> products = new ArrayList<>();
+        //for (int i=0; i<=texts.length(); i++) //{text.get(i)}
+        for (String takeTextOfEach : sortBy.getListOfAllElements("//*[@id='center_column']/ul/li")) {
+            List<String> separateItems = Arrays.asList(takeTextOfEach.split("\n"));
             String getPriceString = separateItems.get(1);
 
             float price = Float.parseFloat(getPriceString
@@ -38,13 +54,14 @@ public class SortByTest extends BaseTestAbstractClass {
                     .replace("30.51 -5%", "")
                     .replace("20.50 -20%", ""));
 
-            products.add(new Product(getTitleString, price));
+            products.add(new Product(price));
         }
-        for (Product product : products) {
-            System.out.println(product);
-        }
-        System.out.println("**********");
         products.stream().sorted(Comparator.comparing(Product::getPrice))
                 .forEach(System.out::println);
+
+        //        sortBy.selectValueDropDownPriceLowest();
+//        Thread.sleep(5000);
+//        sortBy.selectValueDropDownPriceHighest();
+//        Thread.sleep(5000);
     }
 }
