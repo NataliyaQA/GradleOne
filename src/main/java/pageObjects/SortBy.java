@@ -17,7 +17,6 @@ public class SortBy {
     public WebDriver driver;
 
     //Constants
-    List<Product> products = new ArrayList<>();
 
     //Constructor
     public SortBy(WebDriver driver) {
@@ -27,14 +26,12 @@ public class SortBy {
     //Methods
     // General create list of elements
     public List<Product> getListOfAllElementsInitial(String xPath) {
+        List<Product> products = new ArrayList<>();
         List<WebElement> elementName = driver.findElements(By.xpath(xPath));
         List<String> texts = elementName
                 .stream()
                 .map(WebElement::getText)
                 .collect(toList());
-
-        //List<String> texts = sortBy.getListOfAllElements("//*[@id='center_column']/ul/li");
-        //texts.forEach(System.out::println);
 
         for (String takeTextOfEach : texts) {
             List<String> separateItems = Arrays.asList(takeTextOfEach.split("\n"));
@@ -54,24 +51,22 @@ public class SortBy {
 
     //General create a new list of elements after sorting
     public List<Product> getListOfAllElementsSecond(String xPath) {
+        List<Product> products2 = new ArrayList<>();
         List<WebElement> elementName = driver.findElements(By.xpath(xPath));
         List<String> texts = elementName
                 .stream()
                 .map(WebElement::getText)
                 .collect(toList());
 
-        //List<String> texts = sortBy.getListOfAllElements("//*[@id='center_column']/ul/li");
-        //texts.forEach(System.out::println);
-
         for (String takeTextOfEach : texts) {
             List<String> separateItems = Arrays.asList(takeTextOfEach.split("\n"));
             String getTitleString = separateItems.get(0);
 
-            products.add(new Product(getTitleString));
+            products2.add(new Product(getTitleString));
         }
         System.out.println("**********");
-        products.stream().forEach(System.out::println);
-        return products;
+        products2.stream().forEach(System.out::println);
+        return products2;
     }
 
     public List<Product> getListOfAllElementsWomenPageSecond() {
@@ -88,7 +83,7 @@ public class SortBy {
         return texts;
     }
 
-    public List<String> getListOfAllElementsWomenPage() {
+    public List<String> getListOfAllElementsWomenPagePrice() {
         return getListOfAllElementsPrice("//*[@id='center_column']/ul/li");
     }
 

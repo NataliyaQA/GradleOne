@@ -21,7 +21,10 @@ public class SortByTest extends BaseTestAbstractClass {
         sortBy = new SortBy(driver);
     }
 
-    @Test // does not work correctly, always Passed
+    @Test // does not work correctly, failed (real bug), but shows error as:
+//    java.lang.AssertionError: Lists differ at element [0]: Faded Short Sleeve T-shirts != Faded Short Sleeve T-shirts
+//    Expected :Faded Short Sleeve T-shirts
+//    Actual   :Faded Short Sleeve T-shirts
     public void sortProductsNames() throws InterruptedException {
         List<Product> expected = sortBy.getListOfAllElementsWomenPageInitial();
         sortBy.selectValueDropDownNameAZ();
@@ -36,7 +39,7 @@ public class SortByTest extends BaseTestAbstractClass {
     public void sortProductsPrices() throws InterruptedException {
         List<Product> products = new ArrayList<>();
         //for (int i=0; i<=texts.length(); i++) //{text.get(i)}
-        for (String takeTextOfEach : sortBy.getListOfAllElementsWomenPage()) {
+        for (String takeTextOfEach : sortBy.getListOfAllElementsWomenPagePrice()) {
             List<String> separateItems = Arrays.asList(takeTextOfEach.split("\n"));
             String getPriceString = separateItems.get(1);
 
@@ -54,7 +57,7 @@ public class SortByTest extends BaseTestAbstractClass {
         Thread.sleep(5000);
 
         List<Product> products2 = new ArrayList<>();
-        for (String takeTextOfEach : sortBy.getListOfAllElementsWomenPage()) {
+        for (String takeTextOfEach : sortBy.getListOfAllElementsWomenPagePrice()) {
             List<String> separateItems = Arrays.asList(takeTextOfEach.split("\n"));
             String getPriceString = separateItems.get(1);
 
@@ -65,7 +68,8 @@ public class SortByTest extends BaseTestAbstractClass {
 
             products2.add(new Product(price));
         }
-
+        System.out.println("**********");
+        products2.stream().forEach(System.out::println);
         Assert.assertEquals(products, products2);
     }
 }
