@@ -15,7 +15,7 @@ import static org.testng.Assert.assertTrue;
 
 //15 tests
 
-public class AddProductToTheCartTest extends BaseTestAbstractClass {
+public class CartAddProductTest extends BaseTestAbstractClass {
     String stringUrlMainPage = "http://automationpractice.com/index.php";
     CartPage cartPage;
     MyAccountPage myAccountPage;
