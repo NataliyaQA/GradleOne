@@ -3,8 +3,9 @@ package pageObjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
-import pageObjects.objects.Product;
+import pageObjects.objects.ProductObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +18,8 @@ public class SortBy {
     public WebDriver driver;
 
     //Constants
+    public static final String ALERT_ADD_TO_WISHLIST= "You must be logged in to manage your wishlist.";
+    public static final String ALERT_ADDED_TO_WISHLIST= "Added to your wishlist.";
 
     //Constructor
     public SortBy(WebDriver driver) {
@@ -25,8 +28,8 @@ public class SortBy {
 
     //Methods
     // General create list of elements
-    public List<Product> getListOfAllElementsInitial(String xPath) {
-        List<Product> products = new ArrayList<>();
+    public List<ProductObject> getListOfAllElementsInitial(String xPath) {
+        List<ProductObject> products = new ArrayList<>();
         List<WebElement> elementName = driver.findElements(By.xpath(xPath));
         List<String> texts = elementName
                 .stream()
@@ -37,21 +40,21 @@ public class SortBy {
             List<String> separateItems = Arrays.asList(takeTextOfEach.split("\n"));
             String getTitleString = separateItems.get(0);
 
-            products.add(new Product(getTitleString));
+            products.add(new ProductObject(getTitleString));
         }
         System.out.println("**********");
-        products.stream().sorted(Comparator.comparing(Product::getNameOfProduct))
+        products.stream().sorted(Comparator.comparing(ProductObject::getNameOfProduct))
                 .forEach(System.out::println);
         return products;
     }
 
-    public List<Product> getListOfAllElementsWomenPageInitial() {
+    public List<ProductObject> getListOfAllElementsWomenPageInitial() {
         return getListOfAllElementsInitial("//*[@id='center_column']/ul/li");
     }
 
     //General create a new list of elements after sorting
-    public List<Product> getListOfAllElementsSecond(String xPath) {
-        List<Product> products2 = new ArrayList<>();
+    public List<ProductObject> getListOfAllElementsSecond(String xPath) {
+        List<ProductObject> products2 = new ArrayList<>();
         List<WebElement> elementName = driver.findElements(By.xpath(xPath));
         List<String> texts = elementName
                 .stream()
@@ -62,14 +65,14 @@ public class SortBy {
             List<String> separateItems = Arrays.asList(takeTextOfEach.split("\n"));
             String getTitleString = separateItems.get(0);
 
-            products2.add(new Product(getTitleString));
+            products2.add(new ProductObject(getTitleString));
         }
         System.out.println("**********");
         products2.stream().forEach(System.out::println);
         return products2;
     }
 
-    public List<Product> getListOfAllElementsWomenPageSecond() {
+    public List<ProductObject> getListOfAllElementsWomenPageSecond() {
         return getListOfAllElementsSecond("//*[@id='center_column']/ul/li");
     }
 
@@ -119,5 +122,92 @@ public class SortBy {
 
     public void selectValueDropDownReferenceTwo() {
         selectValueFromDropDown("//*[@id='selectProductSort']", "Reference: Highest first");
+    }
+
+    //General is enabled
+    public boolean elementIsEnabled(String xPath) {
+        return driver.findElement(By.xpath(xPath)).isEnabled();
+    }
+
+    public boolean viewGridIconIsEnabled() {
+       return elementIsEnabled("//i[@class='icon-th-large']");
+    }
+
+    public boolean viewListIconIsEnabled() {
+       return elementIsEnabled("//i[@class='icon-th-list']");
+    }
+
+    public boolean alertAddToWishListIsEnabled() {
+       return elementIsEnabled("//p[contains(text(),'You must')]");
+    }
+
+    public boolean alertAddedToWishListIsEnabled() {
+       return elementIsEnabled("//p[contains(text(),'Added to your wishlist.')]");
+    }
+
+    //General is Displayed
+    public boolean elementIsDisplayed(String xPath) {
+       return driver.findElement(By.xpath(xPath)).isDisplayed();
+    }
+    public boolean alertAddToWishListIsDisplayed() {
+       return elementIsDisplayed("//p[contains(text(),'You must')]");
+    }
+
+    //General hover
+    public void hoverElement1(String xPath) {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(driver.findElement(By.xpath(xPath))).perform();
+    }
+
+    public void hoverFirstProduct() {
+        hoverElement1("//a[contains(text(),'Faded Short Sleeve T-shirts')]");
+    }
+
+    public void hoverThirdProduct() {
+        hoverElement1("//ul[@id='homefeatured']/li[3]/div/div[2]/h5/a");
+    }
+
+    //General click
+    public void elementClick(String xPath) {
+        driver.findElement(By.xpath(xPath)).click();
+    }
+
+    public void addToWishListOneClick() {
+        elementClick("//a[@class='addToWishlist wishlistProd_1']");
+    }
+
+    public void addToWishListThreeClick() {
+        elementClick("//a[@class='addToWishlist wishlistProd_3']");
+    }
+
+    public void addToCompareOneClick() {
+        elementClick("//a[@class='add_to_compare' and @data-id-product='1']");
+    }
+    public void addToCompareThreeClick() {
+        elementClick("//a[@class='add_to_compare' and @data-id-product='3']");
+    }
+
+    public void closeAlertAddToWishListClick() {
+        elementClick("//a[@title='Close']");
+    }
+
+    public void womenButtonClick() {
+        elementClick("//a[@title='Women']/parent::li");
+    }
+    //General alert
+    public String getText(String xPath) {
+        return driver.findElement(By.xpath(xPath)).getText();
+    }
+
+    public String alertTextWishList() {
+        return getText("//p[contains(text(),'You must')]");
+    }
+
+    public String alertTextWishListAdded() {
+        return getText("//p[contains(text(),'Added to your wishlist.')]");
+    }
+
+    public String gerUrl() {
+       return driver.getCurrentUrl();
     }
 }

@@ -1,6 +1,6 @@
 package pageObjects.objects;
 
-public class Product {
+public class ProductObject {
     String nameOfProduct;
     float price;
 
@@ -21,10 +21,10 @@ public class Product {
     }
 
     //Constructor (Alt + ins)
-    public Product(String nameOfProduct) {
+    public ProductObject(String nameOfProduct) {
         this.nameOfProduct = nameOfProduct;
     }
-    public Product(float price) {
+    public ProductObject(float price) {
         this.price = price;
     }
 

@@ -221,9 +221,8 @@ public class SearchHomePageElements {
         return this;
     }
 
-    public SearchHomePageElements clickOnWomenMenuButton() {
+    public void clickOnWomenMenuButton() {
         clickAction(womenButton);
-        return this;
     }
 
     public SearchHomePageElements clickOnWomenMenuTshirsOption() {

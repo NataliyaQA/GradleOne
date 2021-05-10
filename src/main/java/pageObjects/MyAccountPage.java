@@ -146,6 +146,10 @@ public class MyAccountPage {
     public void signInButtonClick() {
         clickElement("//button[@id='SubmitLogin']");
     }
+
+    public void signInButtonHeaderClick() {
+        clickElement("//a[@class='login']");
+    }
     public void signOutButtonClick() {
         clickElement("//a[@class='logout']");
     }
