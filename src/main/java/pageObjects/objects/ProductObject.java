@@ -21,20 +21,17 @@ public class ProductObject {
     }
 
     //Constructor (Alt + ins)
-    public ProductObject(String nameOfProduct) {
+
+    public ProductObject(String nameOfProduct, float price) {
         this.nameOfProduct = nameOfProduct;
-    }
-    public ProductObject(float price) {
         this.price = price;
     }
-
-    @Override
-    public String toString() {
-        return nameOfProduct;
-    }
-
+//
 //    @Override
 //    public String toString() {
-//        return String.valueOf(price);
+//        return "ProductObject{" +
+//                "nameOfProduct='" + nameOfProduct + '\'' +
+//                ", price=" + price +
+//                '}';
 //    }
 }

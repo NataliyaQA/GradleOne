@@ -7,8 +7,6 @@ import pageObjects.MyAccountPage;
 import pageObjects.SortBy;
 import pageObjects.objects.ProductObject;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -97,47 +95,50 @@ public class SortByTest extends BaseTestAbstractClass {
         sortBy.selectValueDropDownNameAZ();
         Thread.sleep(5000);
 
+//        expected.sort();
+//        expected.stream().sorted(Comparator.comparing(ProductObject::getNameOfProduct)).forEach(System.out::println);
+
         List<ProductObject> actual = sortBy.getListOfAllElementsWomenPageSecond();
-        Assert.assertEquals(actual, expected);
+        Assert.assertEquals(actual.get(0).getNameOfProduct(), expected.stream().sorted(Comparator.comparing(ProductObject::getNameOfProduct)));
    }
 
-   @Test // test is executed only if one of the @Override of "Product" class is commented.
-    // There are one for "nameOfProduct" and one for "price"
-    public void sortProductsPrices() throws InterruptedException {
-        List<ProductObject> products = new ArrayList<>();
-        //for (int i=0; i<=texts.length(); i++) //{text.get(i)}
-        for (String takeTextOfEach : sortBy.getListOfAllElementsWomenPagePrice()) {
-            List<String> separateItems = Arrays.asList(takeTextOfEach.split("\n"));
-            String getPriceString = separateItems.get(1);
-
-            float price = Float.parseFloat(getPriceString
-                    .replace("$", "")
-                    .replace("30.51 -5%", "")
-                    .replace("20.50 -20%", ""));
-
-            products.add(new ProductObject(price));
-        }
-        products.stream().sorted(Comparator.comparing(ProductObject::getPrice))
-                .forEach(System.out::println);
-
-        sortBy.selectValueDropDownPriceLowest();
-        Thread.sleep(5000);
-
-        List<ProductObject> products2 = new ArrayList<>();
-        for (String takeTextOfEach : sortBy.getListOfAllElementsWomenPagePrice()) {
-            List<String> separateItems = Arrays.asList(takeTextOfEach.split("\n"));
-            String getPriceString = separateItems.get(1);
-
-            float price = Float.parseFloat(getPriceString
-                    .replace("$", "")
-                    .replace("30.51 -5%", "")
-                    .replace("20.50 -20%", ""));
-
-            products2.add(new ProductObject(price));
-        }
-        System.out.println("**********");
-        products2.stream().forEach(System.out::println);
-        Assert.assertEquals(products, products2);
-    }
+//   @Test // test is executed only if one of the @Override of "Product" class is commented.
+//    // There are one for "nameOfProduct" and one for "price"
+//    public void sortProductsPrices() throws InterruptedException {
+//        List<ProductObject> products = new ArrayList<>();
+//        //for (int i=0; i<=texts.length(); i++) //{text.get(i)}
+//        for (String takeTextOfEach : sortBy.getListOfAllElementsWomenPagePrice()) {
+//            List<String> separateItems = Arrays.asList(takeTextOfEach.split("\n"));
+//            String getPriceString = separateItems.get(1);
+//
+//            float price = Float.parseFloat(getPriceString
+//                    .replace("$", "")
+//                    .replace("30.51 -5%", "")
+//                    .replace("20.50 -20%", ""));
+//
+//            products.add(new ProductObject(price));
+//        }
+//        products.stream().sorted(Comparator.comparing(ProductObject::getPrice))
+//                .forEach(System.out::println);
+//
+//        sortBy.selectValueDropDownPriceLowest();
+//        Thread.sleep(5000);
+//
+//        List<ProductObject> products2 = new ArrayList<>();
+//        for (String takeTextOfEach : sortBy.getListOfAllElementsWomenPagePrice()) {
+//            List<String> separateItems = Arrays.asList(takeTextOfEach.split("\n"));
+//            String getPriceString = separateItems.get(1);
+//
+//            float price = Float.parseFloat(getPriceString
+//                    .replace("$", "")
+//                    .replace("30.51 -5%", "")
+//                    .replace("20.50 -20%", ""));
+//
+//            products2.add(new ProductObject(price));
+//        }
+//        System.out.println("**********");
+//        products2.stream().forEach(System.out::println);
+//        Assert.assertEquals(products, products2);
+//    }
 }
 
