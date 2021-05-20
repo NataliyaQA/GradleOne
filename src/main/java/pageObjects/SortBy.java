@@ -46,10 +46,10 @@ public class SortBy {
     }
 
     public float convertToFloatPrice(String price) {
-        return Float.parseFloat(price
-                .replace("$", "")
-                .replace("30.51 -5%", "")
-                .replace("20.50 -20%", ""));
+        // get price example $30.25 20.50 -20%
+        int getActualPrice = 0;
+        return Float.parseFloat(price.split(" ")[getActualPrice]
+                .replace("$", ""));
     }
 
 

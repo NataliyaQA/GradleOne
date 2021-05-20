@@ -418,12 +418,13 @@ public class CreateAnAccountTest extends BaseTestAbstractClass {
 
     @Test  //passed
     public void selectDropDownDaysOptionOneByOne() throws InterruptedException {
+        int amountOfDays = 31;
         signInPage.inputEmail().createAnAccountButtonClick();
         Thread.sleep(5000);
 
         int[] actual = signInPage.dropDownDaysAllOptions();
 
-        for (int i = 0; i < 31; i++) {
+        for (int i = 0; i < amountOfDays; i++) {
             int tmp = i;
             Assert.assertEquals(actual[i], tmp + 1);
         }

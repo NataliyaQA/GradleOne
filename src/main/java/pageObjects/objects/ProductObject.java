@@ -4,6 +4,11 @@ public class ProductObject {
     String nameOfProduct;
     float price;
 
+    @Override
+    public String toString() {
+        return nameOfProduct + price;
+    }
+
     public String getNameOfProduct() {
         return nameOfProduct;
     }
@@ -26,12 +31,5 @@ public class ProductObject {
         this.nameOfProduct = nameOfProduct;
         this.price = price;
     }
-//
-//    @Override
-//    public String toString() {
-//        return "ProductObject{" +
-//                "nameOfProduct='" + nameOfProduct + '\'' +
-//                ", price=" + price +
-//                '}';
-//    }
+
 }

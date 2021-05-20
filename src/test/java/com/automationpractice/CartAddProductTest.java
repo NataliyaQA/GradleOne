@@ -7,6 +7,8 @@ import org.testng.annotations.Test;
 import pageObjects.CartPage;
 import pageObjects.MyAccountPage;
 import pageObjects.SignInPage;
+import utils.AutomationWait;
+import wrapper.Wrapper;
 
 import java.awt.*;
 import java.text.DecimalFormat;
@@ -20,12 +22,15 @@ public class CartAddProductTest extends BaseTestAbstractClass {
     CartPage cartPage;
     MyAccountPage myAccountPage;
     SignInPage signInPage;
+    AutomationWait automationWait;
     int quantity = 2;
 
     @BeforeMethod
     void setUpMethod() throws InterruptedException {
         driver.get(stringUrlMainPage);
         cartPage = new CartPage(driver);
+
+        Wrapper.getFindFluentWait();
     }
 
     @AfterMethod
@@ -76,13 +81,11 @@ public class CartAddProductTest extends BaseTestAbstractClass {
         assertTrue(cartPage.printedChiffonDressDisplayed(), "product is not found");
     }
 
-    @Test
+    @Test //attempt to avoid Thread.sleep
     public void addToCartProductFromPlp() throws InterruptedException {
         cartPage.hoverFadedShortSleeve();
-        Thread.sleep(5000);
 
         cartPage.clickAddToCartFirstProduct();
-        Thread.sleep(5000);
         Assert.assertEquals(cartPage.alertTextAddToCart(), cartPage.ADD_TO_CART_MODAL);
     }
 

@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import pageObjects.MyAccountPage;
 import pageObjects.SortBy;
 import pageObjects.objects.ProductObject;
+import wrapper.Wrapper;
 
 import java.util.Comparator;
 import java.util.List;
@@ -90,24 +91,29 @@ public class SortByTest extends BaseTestAbstractClass {
 //    java.lang.AssertionError: Lists differ at element [0]: Faded Short Sleeve T-shirts != Faded Short Sleeve T-shirts
 //    Expected :Faded Short Sleeve T-shirts
 //    Actual   :Faded Short Sleeve T-shirts
-    public void sortProductsNames() throws InterruptedException {
+    public void sortProductsNames(){
         List<ProductObject> expected = sortBy.getListOfAllElementsWomenPageInitial();
         sortBy.selectValueDropDownNameAZ();
-        Thread.sleep(5000);
 
-//        expected.sort();
-//        expected.stream().sorted(Comparator.comparing(ProductObject::getNameOfProduct)).forEach(System.out::println);
+        Wrapper.getFindFluentWait();
+
+        //expected.sort();
+        //expected.stream().sorted(Comparator.comparing(ProductObject::getNameOfProduct)).forEach(System.out::println);
 
         List<ProductObject> actual = sortBy.getListOfAllElementsWomenPageSecond();
-        Assert.assertEquals(actual.get(0).getNameOfProduct(), expected.stream().sorted(Comparator.comparing(ProductObject::getNameOfProduct)));
-   }
+
+        int getFirstProduct = 0;
+        Assert.assertEquals(actual.get(getFirstProduct)
+                .getNameOfProduct(), expected.stream()
+                .sorted(Comparator.comparing(ProductObject::getNameOfProduct)));
+    }
 
 //   @Test // test is executed only if one of the @Override of "Product" class is commented.
 //    // There are one for "nameOfProduct" and one for "price"
 //    public void sortProductsPrices() throws InterruptedException {
 //        List<ProductObject> products = new ArrayList<>();
 //        //for (int i=0; i<=texts.length(); i++) //{text.get(i)}
-//        for (String takeTextOfEach : sortBy.getListOfAllElementsWomenPagePrice()) {
+//        for (ProductObject takeTextOfEach : sortBy.getListOfAllElementsWomenPagePrice()) {
 //            List<String> separateItems = Arrays.asList(takeTextOfEach.split("\n"));
 //            String getPriceString = separateItems.get(1);
 //
@@ -125,7 +131,7 @@ public class SortByTest extends BaseTestAbstractClass {
 //        Thread.sleep(5000);
 //
 //        List<ProductObject> products2 = new ArrayList<>();
-//        for (String takeTextOfEach : sortBy.getListOfAllElementsWomenPagePrice()) {
+//        for (ProductObject takeTextOfEach : sortBy.getListOfAllElementsWomenPagePrice()) {
 //            List<String> separateItems = Arrays.asList(takeTextOfEach.split("\n"));
 //            String getPriceString = separateItems.get(1);
 //

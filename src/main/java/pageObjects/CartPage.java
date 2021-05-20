@@ -2,7 +2,9 @@ package pageObjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import utils.ThreadSleep;
 
 import java.awt.*;
 
@@ -29,6 +31,15 @@ public class CartPage {
         this.driver = driver;
     }
     //Methods
+
+    public void waiterWrapper(String xPath) {
+        ThreadSleep.waitForElementLocatedBy(driver, By.xpath(xPath));
+    }
+
+    public void waiterWrapperForElement(String xPath) {
+        WebElement button = driver.findElement(By.xpath(xPath));
+        ThreadSleep.waitForElement(driver, button);
+    }
 
     //General isDisplayed
     public boolean isDisplayed(String xPath) {
@@ -99,7 +110,7 @@ public class CartPage {
         actions.doubleClick(driver.findElement(By.xpath(xPath))).perform();
     }
 
-    public void doubleClickElement() {
+    public void doubleClickElementFound() {
         doubleClickElement("//i[@class='icon-plus']");
     }
 
@@ -182,7 +193,9 @@ public class CartPage {
     }
 
     public String alertTextAddToCart() {
-        return getText("//*[@id='layer_cart']/div[1]");
+        String xPath = "//*[@id='layer_cart']/div[1]";
+        waiterWrapperForElement(xPath);
+        return getText(xPath);
     }
 
     public String alertTextThereAreInTheCart() {

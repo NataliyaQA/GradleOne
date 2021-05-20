@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import wrapper.Wrapper;
 
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class BaseTestAbstractClass {
     public WebDriver driver = Wrapper.getDriver();
@@ -13,7 +14,7 @@ public class BaseTestAbstractClass {
     public void setUp() {
         //System.setProperty("webdriver.chrome.driver", "src/main/resources/Drivers/chromedriver.exe"); // moved to Wrapper
 
-        //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         //driver.manage().window().maximize();
         driver.get("http://automationpractice.com/");
     }
