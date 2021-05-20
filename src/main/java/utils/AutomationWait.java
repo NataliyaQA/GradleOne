@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 public class AutomationWait {
 
     public static void waitPageLoad() {
-        Wrapper.getDriver().manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
+        Wrapper.getDriver().manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
     }
 
     public static WebElement waitForElementClickable(WebElement element) {

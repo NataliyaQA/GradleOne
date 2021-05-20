@@ -35,14 +35,13 @@ public class CartAddProductTest extends BaseTestAbstractClass {
 
     @AfterMethod
     void cleanCart() throws InterruptedException, AWTException {
-        Thread.sleep(5000);
+//        Thread.sleep(5000);
         cartPage.clickAnyWhere();
-        Thread.sleep(5000);
+//        Thread.sleep(5000);
 
         while (cartPage.cartEmptyDisplayed() != true) {
             cartPage.hoverCartDropDown();
             cartPage.clickCrossIconCart();
-            Thread.sleep(2000);
         }
     }
 
@@ -81,10 +80,9 @@ public class CartAddProductTest extends BaseTestAbstractClass {
         assertTrue(cartPage.printedChiffonDressDisplayed(), "product is not found");
     }
 
-    @Test //attempt to avoid Thread.sleep
+    @Test
     public void addToCartProductFromPlp() throws InterruptedException {
         cartPage.hoverFadedShortSleeve();
-
         cartPage.clickAddToCartFirstProduct();
         Assert.assertEquals(cartPage.alertTextAddToCart(), cartPage.ADD_TO_CART_MODAL);
     }
@@ -92,23 +90,16 @@ public class CartAddProductTest extends BaseTestAbstractClass {
     @Test
     public void addToCartFromPdp() throws InterruptedException {
         cartPage.clickProductOne();
-        Thread.sleep(1000);
-
         cartPage.clickAddToCartFromPdp();
-        Thread.sleep(5000);
         Assert.assertEquals(cartPage.alertTextAddToCart(), cartPage.ADD_TO_CART_MODAL);
     }
 
-    @Test
+    @Test //passed with issue
     public void addToCartFromPdpSix() throws InterruptedException {
         cartPage.clickProductOne();
-        Thread.sleep(5000);
-
         cartPage.clickPlusFive();
-
-        Thread.sleep(5000);
         cartPage.clickAddToCartFromPdp();
-        Thread.sleep(5000);
+        Thread.sleep(15000);
         Assert.assertEquals(cartPage.alertTextThereAreInTheCart(), cartPage.THERE_ARE_IN_THE_CART);
         System.out.println(cartPage.alertTextThereAreInTheCart());
     }
@@ -116,26 +107,17 @@ public class CartAddProductTest extends BaseTestAbstractClass {
     @Test
     public void priceTwoProducts() throws InterruptedException {
         cartPage.clickProductOne();
-        Thread.sleep(1000);
-
         cartPage.clickPlus();
-        Thread.sleep(5000);
         cartPage.clickAddToCartFromPdp();
-        Thread.sleep(7000);
-
         Assert.assertEquals(cartPage.textToDigitsPrice() * quantity, cartPage.textToDigitsTotalAddedProduct());
     }
 
     @Test //The bug: "Continue Shopping" button does not work
     public void priceTwoDifferentProducts() throws InterruptedException {
         cartPage.clickProductOne();
-        Thread.sleep(1000);
         cartPage.clickPlus();
-        Thread.sleep(5000);
         float firstPrice = cartPage.textToDigitsPrice() * quantity;
         cartPage.clickAddToCartFromPdp();
-        Thread.sleep(5000);
-
         cartPage.clickContinueShopping();
         Thread.sleep(7000);
         cartPage.clickProductTwo();

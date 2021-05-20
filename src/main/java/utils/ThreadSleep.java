@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ThreadSleep {
 
-    public static final int WAIT_TIMEOUT_SECONDS = 10;
+    public static final int WAIT_TIMEOUT_SECONDS = 20;
 
     public static WebElement waitForElementLocatedBy(WebDriver driver, By by) {
         return new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)

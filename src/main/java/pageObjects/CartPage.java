@@ -32,7 +32,7 @@ public class CartPage {
     }
     //Methods
 
-    public void waiterWrapper(String xPath) {
+    public void waiterWrapperLocatedBy(String xPath) {
         ThreadSleep.waitForElementLocatedBy(driver, By.xpath(xPath));
     }
 
@@ -79,7 +79,9 @@ public class CartPage {
     }
 
     public boolean cartEmptyDisplayed() {
-        return isDisplayed("//span[text()='(empty)']");
+        String xPath = "//span[text()='(empty)']";
+        //waiterWrapperForElement(xPath);
+        return isDisplayed(xPath);
     }
 
     public boolean crossIconDisplayed() {
@@ -125,7 +127,9 @@ public class CartPage {
     }
 
     public void clickPlusFive() {
-        clickPlusSeveralTimes("//i[@class='icon-plus']");
+        String xPath = "//i[@class='icon-plus']";
+        waiterWrapperForElement(xPath);
+        clickPlusSeveralTimes(xPath);
     }
 
     //General click
@@ -141,7 +145,9 @@ public class CartPage {
     }
 
     public void clickAddToCartFromPdp() {
-        clickElement("//span[text()='Add to cart']");
+        String xPath = "//span[text()='Add to cart']";
+        waiterWrapperForElement(xPath);
+        clickElement(xPath);
     }
 
     public void clickProductOne() {
@@ -153,7 +159,9 @@ public class CartPage {
     }
 
     public void clickContinueShopping() {
-        clickElement("//span[@class='continue btn btn-default button exclusive-medium']");
+        String xPath = "//span[@class='continue btn btn-default button exclusive-medium']";
+        waiterWrapperForElement(xPath);
+        clickElement(xPath);
     }
 
     public void clickProceedToCheckout() {
@@ -173,11 +181,15 @@ public class CartPage {
     }
 
     public void clickPlus() {
-        clickElement("//i[@class='icon-plus']");
+        String xPath = "//i[@class='icon-plus']";
+        waiterWrapperForElement(xPath);
+        clickElement(xPath);
     }
 
     public void clickCrossIconCart() {
-        clickElement("//a[@class='ajax_cart_block_remove_link']");
+        String xPath = "//a[@class='ajax_cart_block_remove_link']";
+        waiterWrapperForElement(xPath);
+        clickElement(xPath);
     }
 
     public void clickAnyWhere() throws AWTException {
@@ -197,10 +209,23 @@ public class CartPage {
         waiterWrapperForElement(xPath);
         return getText(xPath);
     }
-
+//
+//    public String alertTextThereAreInTheCart() {
+//        //String xPath = "//span[@class='ajax_cart_product_txt ']";
+//        waiterWrapperForElement("//span[@class='ajax_cart_product_txt ']");
+//        return getText("//span[@class='ajax_cart_product_txt ']");
+//    }
     public String alertTextThereAreInTheCart() {
-        return getText("//span[@class='ajax_cart_product_txt_s  unvisible']");
+        String xPath = "//*[@id='layer_cart']/div[1]/div[2]/h2/span[1]";
+        waiterWrapperLocatedBy(xPath);
+        return getText(xPath);
     }
+
+//    public String alertTextThereAreInTheCart() {
+//        String xPath = "//span[@class='ajax_cart_product_txt ']";
+//        AutomationWait.waitVisibleClickable(driver.findElement(By.xpath(xPath)));
+//        return getText(xPath);
+//    }
 
     //General
     public float textToDigits(String xPath) {
@@ -210,11 +235,15 @@ public class CartPage {
     }
 
     public float textToDigitsPrice() {
-        return textToDigits("//*[@id='our_price_display']");
+        String xPath = "//*[@id='our_price_display']";
+        waiterWrapperForElement(xPath);
+        return textToDigits(xPath);
     }
 
     public float textToDigitsTotalAddedProduct() {
-        return textToDigits("//span[@id='layer_cart_product_price']");
+        String xPath = "//span[@id='layer_cart_product_price']";
+        waiterWrapperForElement(xPath);
+        return textToDigits(xPath);
     }
 
     public float textToDigitsTotalAddedProducts() {
