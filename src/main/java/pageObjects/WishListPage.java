@@ -18,6 +18,7 @@ public class WishListPage {
     //Constants
     public static final String NAME_OF_WISHLIST_ONE = "Name Of WishList One";
     public static final String NAME_OF_WISHLIST_TWO = "Name Of WishList Two";
+    
     //Constructor
     public WishListPage(WebDriver driver){
         this.driver = driver;
